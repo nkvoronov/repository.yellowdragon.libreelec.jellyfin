@@ -1,0 +1,1293 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MediaBrowser.Providers</name>
+    </assembly>
+    <members>
+        <member name="M:MediaBrowser.Providers.Books.AudioBookMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.AudioBook},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.AudioBook},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Books.BookMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Book},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Book},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.BoxSets.BoxSetMetadataService.EnableUpdatingGenresFromChildren">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.BoxSets.BoxSetMetadataService.EnableUpdatingOfficialRatingFromChildren">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.BoxSets.BoxSetMetadataService.EnableUpdatingStudiosFromChildren">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.BoxSets.BoxSetMetadataService.EnableUpdatingPremiereDateFromChildren">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.BoxSets.BoxSetMetadataService.GetChildrenForMetadataUpdates(MediaBrowser.Controller.Entities.Movies.BoxSet)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.BoxSets.BoxSetMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Movies.BoxSet},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Movies.BoxSet},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.BoxSets.BoxSetMetadataService.BeforeSaveInternal(MediaBrowser.Controller.Entities.Movies.BoxSet,System.Boolean,MediaBrowser.Controller.Library.ItemUpdateType)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Channels.ChannelMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Channels.Channel},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Channels.Channel},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Chapters.ChapterManager.SaveChapters(System.Guid,System.Collections.Generic.IReadOnlyList{MediaBrowser.Model.Entities.ChapterInfo})">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Folders.CollectionFolderMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.CollectionFolder},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.CollectionFolder},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Folders.FolderMetadataService.Order">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Folders.FolderMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Folder},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Folder},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Folders.UserViewMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.UserView},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.UserView},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Genres.GenreMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Genre},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Genre},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.LiveTv.LiveTvMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.LiveTv.LiveTvChannel},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.LiveTv.LiveTvChannel},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:MediaBrowser.Providers.Manager.ImageSaver">
+            <summary>
+            Class ImageSaver.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Providers.Manager.ImageSaver._config">
+            <summary>
+            The _config.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Providers.Manager.ImageSaver._libraryMonitor">
+            <summary>
+            The _directory watchers.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ImageSaver.#ctor(MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.Library.ILibraryMonitor,MediaBrowser.Model.IO.IFileSystem,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MediaBrowser.Providers.Manager.ImageSaver" /> class.
+            </summary>
+            <param name="config">The config.</param>
+            <param name="libraryMonitor">The directory watchers.</param>
+            <param name="fileSystem">The file system.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ImageSaver.SaveImage(MediaBrowser.Controller.Entities.BaseItem,System.IO.Stream,System.String,MediaBrowser.Model.Entities.ImageType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Saves the image.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="source">The source.</param>
+            <param name="mimeType">Type of the MIME.</param>
+            <param name="type">The type.</param>
+            <param name="imageIndex">Index of the image.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>Task.</returns>
+            <exception cref="T:System.ArgumentNullException">mimeType.</exception>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ImageSaver.SaveImageToLocation(System.IO.Stream,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Saves the image to location.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="path">The path.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>Task.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ImageSaver.GetSavePaths(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Entities.ImageType,System.Nullable{System.Int32},System.String,System.Boolean)">
+            <summary>
+            Gets the save paths.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="type">The type.</param>
+            <param name="imageIndex">Index of the image.</param>
+            <param name="mimeType">Type of the MIME.</param>
+            <param name="saveLocally">if set to <c>true</c> [save locally].</param>
+            <returns>IEnumerable{System.String}.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ImageSaver.GetCurrentImage(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Entities.ImageType,System.Int32)">
+            <summary>
+            Gets the current image path.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="type">The type.</param>
+            <param name="imageIndex">Index of the image.</param>
+            <returns>System.String.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            imageIndex
+            or
+            imageIndex.
+            </exception>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ImageSaver.SetImagePath(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Entities.ImageType,System.Nullable{System.Int32},System.String)">
+            <summary>
+            Sets the image path.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="type">The type.</param>
+            <param name="imageIndex">Index of the image.</param>
+            <param name="path">The path.</param>
+            <exception cref="T:System.ArgumentNullException">imageIndex
+            or
+            imageIndex.
+            </exception>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ImageSaver.GetStandardSavePath(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Entities.ImageType,System.Nullable{System.Int32},System.String,System.Boolean)">
+            <summary>
+            Gets the save path.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="type">The type.</param>
+            <param name="imageIndex">Index of the image.</param>
+            <param name="mimeType">Type of the MIME.</param>
+            <param name="saveLocally">if set to <c>true</c> [save locally].</param>
+            <returns>System.String.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            imageIndex
+            or
+            imageIndex.
+            </exception>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ImageSaver.GetCompatibleSavePaths(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Entities.ImageType,System.Nullable{System.Int32},System.String)">
+            <summary>
+            Gets the compatible save paths.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="type">The type.</param>
+            <param name="imageIndex">Index of the image.</param>
+            <param name="mimeType">Type of the MIME.</param>
+            <returns>IEnumerable{System.String}.</returns>
+            <exception cref="T:System.ArgumentNullException">imageIndex.</exception>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ImageSaver.GetSavePathForItemInMixedFolder(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Entities.ImageType,System.String,System.String)">
+            <summary>
+            Gets the save path for item in mixed folder.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="type">The type.</param>
+            <param name="imageFilename">The image filename.</param>
+            <param name="extension">The extension.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="F:MediaBrowser.Providers.Manager.ItemImageProvider._singularImages">
+            <summary>
+            Image types that are only one per item.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ItemImageProvider.RefreshFromProvider(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Providers.IDynamicImageProvider,MediaBrowser.Controller.Providers.ImageRefreshOptions,MediaBrowser.Model.Configuration.TypeOptions,System.Collections.Generic.ICollection{MediaBrowser.Model.Entities.ImageType},MediaBrowser.Providers.Manager.RefreshResult,System.Threading.CancellationToken)">
+            <summary>
+            Refreshes from provider.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ItemImageProvider.ContainsImages(MediaBrowser.Controller.Entities.BaseItem,System.Collections.Generic.List{MediaBrowser.Model.Entities.ImageType},MediaBrowser.Model.Configuration.TypeOptions,System.Int32,System.Int32)">
+            <summary>
+            Determines if an item already contains the given images.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="images">The images.</param>
+            <param name="savedOptions">The saved options.</param>
+            <param name="backdropLimit">The backdrop limit.</param>
+            <param name="screenshotLimit">The screenshot limit.</param>
+            <returns><c>true</c> if the specified item contains images; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ItemImageProvider.RefreshFromProvider(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Configuration.LibraryOptions,MediaBrowser.Controller.Providers.IRemoteImageProvider,MediaBrowser.Controller.Providers.ImageRefreshOptions,MediaBrowser.Model.Configuration.TypeOptions,System.Int32,System.Int32,System.Collections.Generic.ICollection{MediaBrowser.Model.Entities.ImageType},MediaBrowser.Providers.Manager.RefreshResult,System.Threading.CancellationToken)">
+            <summary>
+            Refreshes from provider.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="libraryOptions">The library options.</param>
+            <param name="provider">The provider.</param>
+            <param name="refreshOptions">The refresh options.</param>
+            <param name="savedOptions">The saved options.</param>
+            <param name="backdropLimit">The backdrop limit.</param>
+            <param name="screenshotLimit">The screenshot limit.</param>
+            <param name="downloadedImages">The downloaded images.</param>
+            <param name="result">The result.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>Task.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.MetadataService`2.BeforeSave(`0,System.Boolean,MediaBrowser.Controller.Library.ItemUpdateType)">
+            <summary>
+            Before the save.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="isFullRefresh">if set to <c>true</c> [is full refresh].</param>
+            <param name="currentUpdateType">Type of the current update.</param>
+            <returns>ItemUpdateType.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.MetadataService`2.GetProviders(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Configuration.LibraryOptions,MediaBrowser.Controller.Providers.MetadataRefreshOptions,System.Boolean,System.Boolean)">
+            <summary>
+            Gets the providers.
+            </summary>
+            <returns>IEnumerable{`0}.</returns>
+        </member>
+        <member name="T:MediaBrowser.Providers.Manager.ProviderManager">
+            <summary>
+            Class ProviderManager.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.#ctor(System.Net.Http.IHttpClientFactory,MediaBrowser.Controller.Subtitles.ISubtitleManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.Library.ILibraryMonitor,Microsoft.Extensions.Logging.ILogger{MediaBrowser.Providers.Manager.ProviderManager},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.IServerApplicationPaths,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.BaseItemManager.IBaseItemManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MediaBrowser.Providers.Manager.ProviderManager"/> class.
+            </summary>
+            <param name="httpClientFactory">The Http client factory.</param>
+            <param name="subtitleManager">The subtitle manager.</param>
+            <param name="configurationManager">The configuration manager.</param>
+            <param name="libraryMonitor">The library monitor.</param>
+            <param name="logger">The logger.</param>
+            <param name="fileSystem">The filesystem.</param>
+            <param name="appPaths">The server application paths.</param>
+            <param name="libraryManager">The library manager.</param>
+            <param name="baseItemManager">The BaseItem manager.</param>
+        </member>
+        <member name="E:MediaBrowser.Providers.Manager.ProviderManager.RefreshStarted">
+            <inheritdoc/>
+        </member>
+        <member name="E:MediaBrowser.Providers.Manager.ProviderManager.RefreshCompleted">
+            <inheritdoc/>
+        </member>
+        <member name="E:MediaBrowser.Providers.Manager.ProviderManager.RefreshProgress">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.AddParts(System.Collections.Generic.IEnumerable{MediaBrowser.Controller.Providers.IImageProvider},System.Collections.Generic.IEnumerable{MediaBrowser.Controller.Providers.IMetadataService},System.Collections.Generic.IEnumerable{MediaBrowser.Controller.Providers.IMetadataProvider},System.Collections.Generic.IEnumerable{MediaBrowser.Controller.Library.IMetadataSaver},System.Collections.Generic.IEnumerable{MediaBrowser.Controller.Providers.IExternalId})">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.RefreshSingleItem(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Providers.MetadataRefreshOptions,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.SaveImage(MediaBrowser.Controller.Entities.BaseItem,System.String,MediaBrowser.Model.Entities.ImageType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.SaveImage(MediaBrowser.Controller.Entities.BaseItem,System.IO.Stream,System.String,MediaBrowser.Model.Entities.ImageType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.SaveImage(MediaBrowser.Controller.Entities.BaseItem,System.String,System.String,MediaBrowser.Model.Entities.ImageType,System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.SaveImage(System.IO.Stream,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetAvailableRemoteImages(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Providers.RemoteImageQuery,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetImages(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Providers.IRemoteImageProvider,System.Collections.Generic.IReadOnlyCollection{System.String},System.Threading.CancellationToken,System.Nullable{MediaBrowser.Model.Entities.ImageType})">
+            <summary>
+            Gets the images.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="provider">The provider.</param>
+            <param name="preferredLanguages">The preferred languages.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <param name="type">The type.</param>
+            <returns>Task{IEnumerable{RemoteImageInfo}}.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetRemoteImageProviderInfo(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetImageProviders(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Providers.ImageRefreshOptions)">
+            <summary>
+            Gets the image providers for the provided item.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="refreshOptions">The image refresh options.</param>
+            <returns>The image providers for the item.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetMetadataProviders``1(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Configuration.LibraryOptions)">
+            <summary>
+            Gets the metadata providers for the provided item.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="libraryOptions">The library options.</param>
+            <typeparam name="T">The type of metadata provider.</typeparam>
+            <returns>The metadata providers.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetOrder(MediaBrowser.Controller.Providers.IImageProvider)">
+            <summary>
+            Gets the order.
+            </summary>
+            <param name="provider">The provider.</param>
+            <returns>System.Int32.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetAllMetadataPlugins">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetMetadataOptions(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.SaveMetadata(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Library.ItemUpdateType)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.SaveMetadata(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Library.ItemUpdateType,System.Collections.Generic.IEnumerable{System.String})">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.SaveMetadata(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Library.ItemUpdateType,System.Collections.Generic.IEnumerable{MediaBrowser.Controller.Library.IMetadataSaver})">
+            <summary>
+            Saves the metadata.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="updateType">Type of the update.</param>
+            <param name="savers">The savers.</param>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.IsSaverEnabledForItem(MediaBrowser.Controller.Library.IMetadataSaver,MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Configuration.LibraryOptions,MediaBrowser.Controller.Library.ItemUpdateType,System.Boolean)">
+            <summary>
+            Determines whether [is saver enabled for item] [the specified saver].
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetRemoteSearchResults``2(MediaBrowser.Controller.Providers.RemoteSearchQuery{``1},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetSearchImage(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetExternalUrls(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetExternalIdInfos(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetRefreshQueue">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.OnRefreshStart(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.OnRefreshComplete(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.GetRefreshProgress(System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.OnRefreshProgress(MediaBrowser.Controller.Entities.BaseItem,System.Double)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.QueueRefresh(System.Guid,MediaBrowser.Controller.Providers.MetadataRefreshOptions,MediaBrowser.Controller.Providers.RefreshPriority)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.RefreshFullItem(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Providers.MetadataRefreshOptions,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.RunMetadataRefresh(System.Func{System.Threading.Tasks.Task},System.Threading.CancellationToken)">
+            <summary>
+            Runs multiple metadata refreshes concurrently.
+            </summary>
+            <param name="action">The action to run.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:MediaBrowser.Providers.Manager.ProviderManager.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and optionally managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="T:MediaBrowser.Providers.MediaInfo.AudioImageProvider">
+            <summary>
+            Uses ffmpeg to create video images.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.Providers.MediaInfo.FFProbeAudioInfo.Fetch(MediaBrowser.Controller.Entities.Audio.Audio,MediaBrowser.Model.MediaInfo.MediaInfo,System.Threading.CancellationToken)">
+            <summary>
+            Fetches the specified audio.
+            </summary>
+            <param name="audio">The audio.</param>
+            <param name="mediaInfo">The media information.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+        </member>
+        <member name="M:MediaBrowser.Providers.MediaInfo.FFProbeAudioInfo.FetchDataFromTags(MediaBrowser.Controller.Entities.Audio.Audio,MediaBrowser.Model.MediaInfo.MediaInfo)">
+            <summary>
+            Fetches data from the tags dictionary.
+            </summary>
+            <param name="audio">The audio.</param>
+            <param name="data">The data.</param>
+        </member>
+        <member name="M:MediaBrowser.Providers.MediaInfo.FFProbeVideoInfo.GetBDInfo(System.String)">
+            <summary>
+            Gets information about the longest playlist on a bdrom.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>VideoStream.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.MediaInfo.FFProbeVideoInfo.AddExternalSubtitles(MediaBrowser.Controller.Entities.Video,System.Collections.Generic.List{MediaBrowser.Model.Entities.MediaStream},MediaBrowser.Controller.Providers.MetadataRefreshOptions,System.Threading.CancellationToken)">
+            <summary>
+            Adds the external subtitles.
+            </summary>
+            <param name="video">The video.</param>
+            <param name="currentStreams">The current streams.</param>
+            <param name="options">The refreshOptions.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>Task.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.MediaInfo.FFProbeVideoInfo.CreateDummyChapters(MediaBrowser.Controller.Entities.Video)">
+            <summary>
+            Creates dummy chapters.
+            </summary>
+            <param name="video">The video.</param>
+            <returns>An array of dummy chapters.</returns>
+        </member>
+        <member name="P:MediaBrowser.Providers.Movies.ImdbExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Movies.ImdbExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Movies.ImdbExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Movies.ImdbExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Movies.ImdbExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Movies.ImdbPersonExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Movies.ImdbPersonExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Movies.ImdbPersonExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Movies.ImdbPersonExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Movies.ImdbPersonExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Movies.MovieMetadataService.IsFullLocalMetadata(MediaBrowser.Controller.Entities.Movies.Movie)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Movies.MovieMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Movies.Movie},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Movies.Movie},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Movies.TrailerMetadataService.IsFullLocalMetadata(MediaBrowser.Controller.Entities.Trailer)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Movies.TrailerMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Trailer},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Trailer},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.AlbumMetadataService.EnableUpdatingPremiereDateFromChildren">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.AlbumMetadataService.EnableUpdatingGenresFromChildren">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.AlbumMetadataService.EnableUpdatingStudiosFromChildren">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.AlbumMetadataService.GetChildrenForMetadataUpdates(MediaBrowser.Controller.Entities.Audio.MusicAlbum)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.AlbumMetadataService.UpdateMetadataFromChildren(MediaBrowser.Controller.Entities.Audio.MusicAlbum,System.Collections.Generic.IList{MediaBrowser.Controller.Entities.BaseItem},System.Boolean,MediaBrowser.Controller.Library.ItemUpdateType)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.AlbumMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Audio.MusicAlbum},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Audio.MusicAlbum},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.ArtistMetadataService.EnableUpdatingGenresFromChildren">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.ArtistMetadataService.GetChildrenForMetadataUpdates(MediaBrowser.Controller.Entities.Audio.MusicArtist)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.ArtistMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Audio.MusicArtist},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Audio.MusicArtist},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.AudioMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Audio.Audio},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Audio.Audio},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.ImvdbId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.ImvdbId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.ImvdbId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.ImvdbId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.ImvdbId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicVideoMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.MusicVideo},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.MusicVideo},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzArtistProvider.GetSearchResults(MediaBrowser.Controller.Providers.ArtistInfo,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzArtistProvider.HasDiacritics(System.String)">
+            <summary>
+            Determines whether the specified text has diacritics.
+            </summary>
+            <param name="text">The text.</param>
+            <returns><c>true</c> if the specified text has diacritics; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzArtistProvider.UrlEncode(System.String)">
+            <summary>
+            Encodes an URL.
+            </summary>
+            <param name="name">The name.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzReleaseGroupExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzReleaseGroupExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzReleaseGroupExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzReleaseGroupExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzReleaseGroupExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzAlbumArtistExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzAlbumArtistExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzAlbumArtistExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzAlbumArtistExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzAlbumArtistExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzAlbumExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzAlbumExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzAlbumExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzAlbumExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzAlbumExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzArtistExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzArtistExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzArtistExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzArtistExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzArtistExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzOtherArtistExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzOtherArtistExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzOtherArtistExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzOtherArtistExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzOtherArtistExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzTrackId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzTrackId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzTrackId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzTrackId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzTrackId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="F:MediaBrowser.Providers.Music.MusicBrainzAlbumProvider.MusicBrainzQueryAttempts">
+            <summary>
+            For each single MB lookup/search, this is the maximum number of
+            attempts that shall be made whilst receiving a 503 Server
+            Unavailable (indicating throttled) response.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Providers.Music.MusicBrainzAlbumProvider._musicBrainzQueryIntervalMs">
+            <summary>
+            The Jellyfin user-agent is unrestricted but source IP must not exceed
+            one request per second, therefore we rate limit to avoid throttling.
+            Be prudent, use a value slightly above the minimun required.
+            https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting
+            </summary>
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzAlbumProvider.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Music.MusicBrainzAlbumProvider.Order">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzAlbumProvider.GetSearchResults(MediaBrowser.Controller.Providers.AlbumInfo,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzAlbumProvider.GetMetadata(MediaBrowser.Controller.Providers.AlbumInfo,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzAlbumProvider.GetReleaseGroupFromReleaseId(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the release group id internal.
+            </summary>
+            <param name="releaseEntryId">The release entry id.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>Task{System.String}.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzAlbumProvider.GetMusicBrainzResponse(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Makes request to MusicBrainz server and awaits a response.
+            A 503 Service Unavailable response indicates throttling to maintain a rate limit.
+            A number of retries shall be made in order to try and satisfy the request before
+            giving up and returning null.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.Providers.Music.MusicBrainzAlbumProvider.GetImageResponse(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.MusicGenres.MusicGenreMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Audio.MusicGenre},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Audio.MusicGenre},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.People.PersonMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Person},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Person},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Photos.PhotoAlbumMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.PhotoAlbum},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.PhotoAlbum},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Photos.PhotoMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Photo},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Photo},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Playlists.PlaylistMetadataService.EnableUpdatingGenresFromChildren">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Playlists.PlaylistMetadataService.EnableUpdatingOfficialRatingFromChildren">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Playlists.PlaylistMetadataService.EnableUpdatingStudiosFromChildren">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Playlists.PlaylistMetadataService.GetChildrenForMetadataUpdates(MediaBrowser.Controller.Playlists.Playlist)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Playlists.PlaylistMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Playlists.Playlist},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Playlists.Playlist},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumImageProvider.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumImageProvider.Order">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumImageProvider.GetSupportedImages(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumImageProvider.GetImages(MediaBrowser.Controller.Entities.BaseItem,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumImageProvider.GetImageResponse(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumImageProvider.Supports(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumProvider.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumProvider.Order">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumProvider.GetSearchResults(MediaBrowser.Controller.Providers.AlbumInfo,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumProvider.GetMetadata(MediaBrowser.Controller.Providers.AlbumInfo,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumProvider.GetImageResponse(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistImageProvider.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistImageProvider.Order">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistImageProvider.GetSupportedImages(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistImageProvider.GetImages(MediaBrowser.Controller.Entities.BaseItem,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistImageProvider.Supports(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistProvider.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistProvider.Order">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistProvider.GetSearchResults(MediaBrowser.Controller.Providers.ArtistInfo,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistProvider.GetMetadata(MediaBrowser.Controller.Providers.ArtistInfo,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistProvider.GetArtistDataPath(MediaBrowser.Common.Configuration.IApplicationPaths,System.String)">
+            <summary>
+            Gets the artist data path.
+            </summary>
+            <param name="appPaths">The application paths.</param>
+            <param name="musicBrainzArtistId">The music brainz artist identifier.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistProvider.GetArtistDataPath(MediaBrowser.Common.Configuration.IApplicationPaths)">
+            <summary>
+            Gets the artist data path.
+            </summary>
+            <param name="appPaths">The application paths.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistProvider.GetImageResponse(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbAlbumExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbArtistExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbOtherAlbumExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbOtherAlbumExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbOtherAlbumExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbOtherAlbumExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbOtherAlbumExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbOtherArtistExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbOtherArtistExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbOtherArtistExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.AudioDb.AudioDbOtherArtistExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.AudioDb.AudioDbOtherArtistExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Omdb.OmdbItemProvider.SearchResultList.Search">
+            <summary>
+            Gets or sets the results.
+            </summary>
+            <value>The results.</value>
+        </member>
+        <member name="T:MediaBrowser.Providers.Plugins.Tmdb.BoxSets.TmdbBoxSetExternalId">
+            <summary>
+            External ID for a TMDB box set.
+            </summary>
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.BoxSets.TmdbBoxSetExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.BoxSets.TmdbBoxSetExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.BoxSets.TmdbBoxSetExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.BoxSets.TmdbBoxSetExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.BoxSets.TmdbBoxSetExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="T:MediaBrowser.Providers.Plugins.Tmdb.Movies.TmdbMovieExternalId">
+            <summary>
+            External ID for a TMBD movie.
+            </summary>
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.Movies.TmdbMovieExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.Movies.TmdbMovieExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.Movies.TmdbMovieExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.Movies.TmdbMovieExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.Movies.TmdbMovieExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="T:MediaBrowser.Providers.Plugins.Tmdb.Movies.TmdbMovieProvider">
+            <summary>
+            Class MovieDbProvider.
+            </summary>
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.Movies.TmdbMovieProvider.Order">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.Movies.TmdbMovieProvider.GetImageResponse(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:MediaBrowser.Providers.Plugins.Tmdb.People.TmdbPersonExternalId">
+            <summary>
+            External ID for a TMDB person.
+            </summary>
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.People.TmdbPersonExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.People.TmdbPersonExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.People.TmdbPersonExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.People.TmdbPersonExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.People.TmdbPersonExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.People.TmdbPersonImageProvider.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.People.TmdbPersonImageProvider.Order">
+            <inheritdoc />
+        </member>
+        <member name="T:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager">
+            <summary>
+            Manager class for abstracting the TMDb API client library.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager"/> class.
+            </summary>
+            <param name="memoryCache">An instance of <see cref="T:Microsoft.Extensions.Caching.Memory.IMemoryCache"/>.</param>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.GetMovieAsync(System.Int32,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets a movie from the TMDb API based on its TMDb id.
+            </summary>
+            <param name="tmdbId">The movie's TMDb id.</param>
+            <param name="language">The movie's language.</param>
+            <param name="imageLanguages">A comma-separated list of image languages.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The TMDb movie or null if not found.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.GetCollectionAsync(System.Int32,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets a collection from the TMDb API based on its TMDb id.
+            </summary>
+            <param name="tmdbId">The collection's TMDb id.</param>
+            <param name="language">The collection's language.</param>
+            <param name="imageLanguages">A comma-separated list of image languages.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The TMDb collection or null if not found.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.GetSeriesAsync(System.Int32,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets a tv show from the TMDb API based on its TMDb id.
+            </summary>
+            <param name="tmdbId">The tv show's TMDb id.</param>
+            <param name="language">The tv show's language.</param>
+            <param name="imageLanguages">A comma-separated list of image languages.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The TMDb tv show information or null if not found.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.GetSeasonAsync(System.Int32,System.Int32,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets a tv season from the TMDb API based on the tv show's TMDb id.
+            </summary>
+            <param name="tvShowId">The tv season's TMDb id.</param>
+            <param name="seasonNumber">The season number.</param>
+            <param name="language">The tv season's language.</param>
+            <param name="imageLanguages">A comma-separated list of image languages.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The TMDb tv season information or null if not found.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.GetEpisodeAsync(System.Int32,System.Int32,System.Int32,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets a movie from the TMDb API based on the tv show's TMDb id.
+            </summary>
+            <param name="tvShowId">The tv show's TMDb id.</param>
+            <param name="seasonNumber">The season number.</param>
+            <param name="episodeNumber">The episode number.</param>
+            <param name="language">The episode's language.</param>
+            <param name="imageLanguages">A comma-separated list of image languages.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The TMDb tv episode information or null if not found.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.GetPersonAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Gets a person eg. cast or crew member from the TMDb API based on its TMDb id.
+            </summary>
+            <param name="personTmdbId">The person's TMDb id.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The TMDb person information or null if not found.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.FindByExternalIdAsync(System.String,TMDbLib.Objects.Find.FindExternalSource,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets an item from the TMDb API based on its id from an external service eg. IMDb id, TvDb id.
+            </summary>
+            <param name="externalId">The item's external id.</param>
+            <param name="source">The source of the id eg. IMDb.</param>
+            <param name="language">The item's language.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The TMDb item or null if not found.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.SearchSeriesAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Searches for a tv show using the TMDb API based on its name.
+            </summary>
+            <param name="name">The name of the tv show.</param>
+            <param name="language">The tv show's language.</param>
+            <param name="year">The year the tv show first aired.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The TMDb tv show information.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.SearchPersonAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Searches for a person based on their name using the TMDb API.
+            </summary>
+            <param name="name">The name of the person.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The TMDb person information.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.SearchMovieAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Searches for a movie based on its name using the TMDb API.
+            </summary>
+            <param name="name">The name of the movie.</param>
+            <param name="language">The movie's language.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The TMDb movie information.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.SearchMovieAsync(System.String,System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Searches for a movie based on its name using the TMDb API.
+            </summary>
+            <param name="name">The name of the movie.</param>
+            <param name="year">The release year of the movie.</param>
+            <param name="language">The movie's language.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The TMDb movie information.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.SearchCollectionAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Searches for a collection based on its name using the TMDb API.
+            </summary>
+            <param name="name">The name of the collection.</param>
+            <param name="language">The collection's language.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The TMDb collection information.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.GetPosterUrl(System.String)">
+            <summary>
+            Gets the absolute URL of the poster.
+            </summary>
+            <param name="posterPath">The relative URL of the poster.</param>
+            <returns>The absolute URL.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.GetBackdropUrl(System.String)">
+            <summary>
+            Gets the absolute URL of the backdrop image.
+            </summary>
+            <param name="posterPath">The relative URL of the backdrop image.</param>
+            <returns>The absolute URL.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.GetProfileUrl(System.String)">
+            <summary>
+            Gets the absolute URL of the profile image.
+            </summary>
+            <param name="actorProfilePath">The relative URL of the profile image.</param>
+            <returns>The absolute URL.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbClientManager.GetStillUrl(System.String)">
+            <summary>
+            Gets the absolute URL of the still image.
+            </summary>
+            <param name="filePath">The relative URL of the still image.</param>
+            <returns>The absolute URL.</returns>
+        </member>
+        <member name="T:MediaBrowser.Providers.Plugins.Tmdb.TmdbUtils">
+            <summary>
+            Utilities for the TMDb provider.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Providers.Plugins.Tmdb.TmdbUtils.BaseTmdbUrl">
+            <summary>
+            URL of the TMDB instance to use.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Providers.Plugins.Tmdb.TmdbUtils.ProviderName">
+            <summary>
+            Name of the provider.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Providers.Plugins.Tmdb.TmdbUtils.ApiKey">
+            <summary>
+            API key to use when performing an API call.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Providers.Plugins.Tmdb.TmdbUtils.MaxCastMembers">
+            <summary>
+            Maximum number of cast members to pull.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Providers.Plugins.Tmdb.TmdbUtils.WantedCrewTypes">
+            <summary>
+            The crew types to keep.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbUtils.CleanName(System.String)">
+            <summary>
+            Cleans the name according to TMDb requirements.
+            </summary>
+            <param name="name">The name of the entity.</param>
+            <returns>The cleaned name.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbUtils.MapCrewToPersonType(TMDbLib.Objects.General.Crew)">
+            <summary>
+            Maps the TMDB provided roles for crew members to Jellyfin roles.
+            </summary>
+            <param name="crew">Crew member to map against the Jellyfin person types.</param>
+            <returns>The Jellyfin person type.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbUtils.IsTrailerType(TMDbLib.Objects.General.Video)">
+            <summary>
+            Determines whether a video is a trailer.
+            </summary>
+            <param name="video">The TMDb video.</param>
+            <returns>A boolean indicating whether the video is a trailer.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbUtils.GetImageLanguagesParam(System.String)">
+            <summary>
+            Normalizes a language string for use with TMDb's include image language parameter.
+            </summary>
+            <param name="preferredLanguage">The preferred language as either a 2 letter code with or without country code.</param>
+            <returns>The comma separated language string.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbUtils.NormalizeLanguage(System.String)">
+            <summary>
+            Normalizes a language string for use with TMDb's language parameter.
+            </summary>
+            <param name="language">The language code.</param>
+            <returns>The normalized language code.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TmdbUtils.AdjustImageLanguage(System.String,System.String)">
+            <summary>
+            Adjusts the image's language code preferring the 5 letter language code eg. en-US.
+            </summary>
+            <param name="imageLanguage">The image's actual language code.</param>
+            <param name="requestLanguage">The requested language code.</param>
+            <returns>The language code.</returns>
+        </member>
+        <member name="T:MediaBrowser.Providers.Plugins.Tmdb.TV.TmdbSeriesExternalId">
+            <summary>
+            External ID for a TMDB series.
+            </summary>
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.TV.TmdbSeriesExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.TV.TmdbSeriesExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.TV.TmdbSeriesExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Plugins.Tmdb.TV.TmdbSeriesExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Plugins.Tmdb.TV.TmdbSeriesExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Studios.StudioMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Studio},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Studio},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Studios.StudiosImageProvider.EnsureList(System.String,System.String,MediaBrowser.Model.IO.IFileSystem,System.Threading.CancellationToken)">
+            <summary>
+            Ensures the list.
+            </summary>
+            <param name="url">The URL.</param>
+            <param name="file">The file.</param>
+            <param name="fileSystem">The file system.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>Task.</returns>
+        </member>
+        <member name="E:MediaBrowser.Providers.Subtitles.SubtitleManager.SubtitleDownloadFailure">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Subtitles.SubtitleManager.AddParts(System.Collections.Generic.IEnumerable{MediaBrowser.Controller.Subtitles.ISubtitleProvider})">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Subtitles.SubtitleManager.SearchSubtitles(MediaBrowser.Controller.Subtitles.SubtitleSearchRequest,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Subtitles.SubtitleManager.DownloadSubtitles(MediaBrowser.Controller.Entities.Video,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Subtitles.SubtitleManager.DownloadSubtitles(MediaBrowser.Controller.Entities.Video,MediaBrowser.Model.Configuration.LibraryOptions,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Subtitles.SubtitleManager.UploadSubtitle(MediaBrowser.Controller.Entities.Video,MediaBrowser.Controller.Subtitles.SubtitleResponse)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Subtitles.SubtitleManager.SearchSubtitles(MediaBrowser.Controller.Entities.Video,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Subtitles.SubtitleManager.DeleteSubtitles(MediaBrowser.Controller.Entities.BaseItem,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Subtitles.SubtitleManager.GetRemoteSubtitles(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Subtitles.SubtitleManager.GetSupportedProviders(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.TV.EpisodeMetadataService.BeforeSaveInternal(MediaBrowser.Controller.Entities.TV.Episode,System.Boolean,MediaBrowser.Controller.Library.ItemUpdateType)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.TV.EpisodeMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.TV.Episode},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.TV.Episode},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.TV.SeasonMetadataService.EnableUpdatingPremiereDateFromChildren">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.TV.SeasonMetadataService.BeforeSaveInternal(MediaBrowser.Controller.Entities.TV.Season,System.Boolean,MediaBrowser.Controller.Library.ItemUpdateType)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.TV.SeasonMetadataService.GetChildrenForMetadataUpdates(MediaBrowser.Controller.Entities.TV.Season)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.TV.SeasonMetadataService.UpdateMetadataFromChildren(MediaBrowser.Controller.Entities.TV.Season,System.Collections.Generic.IList{MediaBrowser.Controller.Entities.BaseItem},System.Boolean,MediaBrowser.Controller.Library.ItemUpdateType)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.TV.SeasonMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.TV.Season},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.TV.Season},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.TV.SeriesMetadataService.AfterMetadataRefresh(MediaBrowser.Controller.Entities.TV.Series,MediaBrowser.Controller.Providers.MetadataRefreshOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.TV.SeriesMetadataService.IsFullLocalMetadata(MediaBrowser.Controller.Entities.TV.Series)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.TV.SeriesMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.TV.Series},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.TV.Series},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.TV.SeriesMetadataService.FillInMissingSeasonsAsync(MediaBrowser.Controller.Entities.TV.Series,System.Threading.CancellationToken)">
+            <summary>
+            Creates seasons for all episodes that aren't in a season folder.
+            If no season number can be determined, a dummy season will be created.
+            </summary>
+            <param name="series">The series.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The async task.</returns>
+        </member>
+        <member name="M:MediaBrowser.Providers.TV.SeriesMetadataService.CreateSeasonAsync(MediaBrowser.Controller.Entities.TV.Series,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Creates a new season, adds it to the database by linking it to the [series] and refreshes the metadata.
+            </summary>
+            <param name="series">The series.</param>
+            <param name="seasonNumber">The season number.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The newly created season.</returns>
+        </member>
+        <member name="P:MediaBrowser.Providers.TV.Zap2ItExternalId.ProviderName">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.TV.Zap2ItExternalId.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.TV.Zap2ItExternalId.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.TV.Zap2ItExternalId.UrlFormatString">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.TV.Zap2ItExternalId.Supports(MediaBrowser.Model.Entities.IHasProviderIds)">
+            <inheritdoc />
+        </member>
+        <member name="P:MediaBrowser.Providers.Videos.VideoMetadataService.Order">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Videos.VideoMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Video},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Video},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:MediaBrowser.Providers.Years.YearMetadataService.MergeData(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Year},MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Year},MediaBrowser.Model.Entities.MetadataField[],System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
