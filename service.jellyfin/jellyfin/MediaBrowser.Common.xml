@@ -1063,6 +1063,13 @@
             <param name="filter">Optional filter for the list.</param>
             <returns>Returns a filtered list of LAN addresses.</returns>
         </member>
+        <member name="M:MediaBrowser.Common.Net.INetworkManager.HasRemoteAccess(System.Net.IPAddress)">
+            <summary>
+            Checks to see if <paramref name="remoteIp"/> has access.
+            </summary>
+            <param name="remoteIp">IP Address of client.</param>
+            <returns><b>True</b> if has access, otherwise <b>false</b>.</returns>
+        </member>
         <member name="T:MediaBrowser.Common.Net.IPHost">
             <summary>
             Object that holds a host name.
@@ -1488,12 +1495,14 @@
             <param name="source">The <see cref="T:System.Collections.ObjectModel.Collection`1"/>.</param>
             <param name="ip">Item to add.</param>
         </member>
-        <member name="M:MediaBrowser.Common.Net.NetworkExtensions.AddItem(System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject},MediaBrowser.Common.Net.IPObject)">
+        <member name="M:MediaBrowser.Common.Net.NetworkExtensions.AddItem(System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject},MediaBrowser.Common.Net.IPObject,System.Boolean)">
             <summary>
             Adds a network to the collection.
             </summary>
             <param name="source">The <see cref="T:System.Collections.ObjectModel.Collection`1"/>.</param>
             <param name="item">Item to add.</param>
+            <param name="itemsAreNetworks">If <c>true</c> the values are treated as subnets.
+            If <b>false</b> items are addresses.</param>
         </member>
         <member name="M:MediaBrowser.Common.Net.NetworkExtensions.AsString(System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject})">
             <summary>
@@ -1535,12 +1544,13 @@
             <param name="source">The <see cref="T:System.Collections.ObjectModel.Collection`1"/>.</param>
             <returns>Collection{IPObject} object containing the subnets.</returns>
         </member>
-        <member name="M:MediaBrowser.Common.Net.NetworkExtensions.Exclude(System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject},System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject})">
+        <member name="M:MediaBrowser.Common.Net.NetworkExtensions.Exclude(System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject},System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject},System.Boolean)">
             <summary>
             Excludes all the items from this list that are found in excludeList.
             </summary>
             <param name="source">The <see cref="T:System.Collections.ObjectModel.Collection`1"/>.</param>
             <param name="excludeList">Items to exclude.</param>
+            <param name="isNetwork">Collection is a network collection.</param>
             <returns>A new collection, with the items excluded.</returns>
         </member>
         <member name="M:MediaBrowser.Common.Net.NetworkExtensions.Union(System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject},System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject})">
@@ -1820,13 +1830,14 @@
             <param name="path">The path where to save the manifest.</param>
             <returns>True if successful.</returns>
         </member>
-        <member name="M:MediaBrowser.Common.Plugins.IPluginManager.GenerateManifest(MediaBrowser.Model.Updates.PackageInfo,System.Version,System.String)">
+        <member name="M:MediaBrowser.Common.Plugins.IPluginManager.GenerateManifest(MediaBrowser.Model.Updates.PackageInfo,System.Version,System.String,MediaBrowser.Model.Plugins.PluginStatus)">
             <summary>
             Generates a manifest from repository data.
             </summary>
             <param name="packageInfo">The <see cref="T:MediaBrowser.Model.Updates.PackageInfo"/> used to generate a manifest.</param>
             <param name="version">Version to be installed.</param>
             <param name="path">The path where to save the manifest.</param>
+            <param name="status">Initial status of the plugin.</param>
             <returns>True if successful.</returns>
         </member>
         <member name="M:MediaBrowser.Common.Plugins.IPluginManager.ImportPluginFrom(System.String)">

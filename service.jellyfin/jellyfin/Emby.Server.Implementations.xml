@@ -3380,7 +3380,7 @@
         <member name="M:Emby.Server.Implementations.Plugins.PluginManager.SaveManifest(MediaBrowser.Common.Plugins.PluginManifest,System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:Emby.Server.Implementations.Plugins.PluginManager.GenerateManifest(MediaBrowser.Model.Updates.PackageInfo,System.Version,System.String)">
+        <member name="M:Emby.Server.Implementations.Plugins.PluginManager.GenerateManifest(MediaBrowser.Model.Updates.PackageInfo,System.Version,System.String,MediaBrowser.Model.Plugins.PluginStatus)">
             <inheritdoc/>
         </member>
         <member name="M:Emby.Server.Implementations.Plugins.PluginManager.ChangePluginState(MediaBrowser.Common.Plugins.LocalPlugin,MediaBrowser.Model.Plugins.PluginStatus)">

@@ -37,7 +37,7 @@
         <member name="M:Emby.Drawing.ImageProcessor.ProcessImage(MediaBrowser.Controller.Drawing.ImageProcessingOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Emby.Drawing.ImageProcessor.GetCacheFilePath(System.String,MediaBrowser.Model.Drawing.ImageDimensions,System.Int32,System.DateTime,MediaBrowser.Model.Drawing.ImageFormat,System.Boolean,System.Double,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String)">
+        <member name="M:Emby.Drawing.ImageProcessor.GetCacheFilePath(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Int32,System.DateTime,MediaBrowser.Model.Drawing.ImageFormat,System.Boolean,System.Double,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String)">
             <summary>
             Gets the cache file path based on a set of parameters.
             </summary>

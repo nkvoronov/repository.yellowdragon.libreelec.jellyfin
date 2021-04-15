@@ -154,6 +154,14 @@
             <param name="allowedProxies">The string array to parse.</param>
             <param name="options">The <see cref="T:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions"/> instance.</param>
         </member>
+        <member name="T:Jellyfin.Server.Filters.AdditionalModelFilter">
+            <summary>
+            Add models not directly used by the API, but used for discovery and websockets.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Server.Filters.AdditionalModelFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <inheritdoc />
+        </member>
         <member name="T:Jellyfin.Server.Filters.FileRequestFilter">
             <inheritdoc />
         </member>
@@ -180,14 +188,6 @@
             </summary>
         </member>
         <member name="M:Jellyfin.Server.Filters.SecurityRequirementsOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
-            <inheritdoc />
-        </member>
-        <member name="T:Jellyfin.Server.Filters.WebsocketModelFilter">
-            <summary>
-            Add models used in websocket messaging.
-            </summary>
-        </member>
-        <member name="M:Jellyfin.Server.Filters.WebsocketModelFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
             <inheritdoc />
         </member>
         <member name="T:Jellyfin.Server.Formatters.CamelCaseJsonProfileFormatter">
@@ -294,13 +294,12 @@
             </summary>
             <param name="next">The next delegate in the pipeline.</param>
         </member>
-        <member name="M:Jellyfin.Server.Middleware.IpBasedAccessValidationMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext,MediaBrowser.Common.Net.INetworkManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager)">
+        <member name="M:Jellyfin.Server.Middleware.IpBasedAccessValidationMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext,MediaBrowser.Common.Net.INetworkManager)">
             <summary>
             Executes the middleware action.
             </summary>
             <param name="httpContext">The current HTTP context.</param>
             <param name="networkManager">The network manager.</param>
-            <param name="serverConfigurationManager">The server configuration manager.</param>
             <returns>The async task.</returns>
         </member>
         <member name="T:Jellyfin.Server.Middleware.LanFilteringMiddleware">

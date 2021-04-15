@@ -405,6 +405,9 @@
         <member name="M:Jellyfin.Networking.Manager.NetworkManager.TryParseInterface(System.String,System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject}@)">
             <inheritdoc/>
         </member>
+        <member name="M:Jellyfin.Networking.Manager.NetworkManager.HasRemoteAccess(System.Net.IPAddress)">
+            <inheritdoc/>
+        </member>
         <member name="M:Jellyfin.Networking.Manager.NetworkManager.UpdateSettings(System.Object)">
             <summary>
             Reloads all settings and re-initialises the instance.

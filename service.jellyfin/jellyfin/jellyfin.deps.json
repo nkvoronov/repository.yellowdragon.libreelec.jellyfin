@@ -2744,9 +2744,9 @@
       },
       "Emby.Dlna/1.0.0": {
         "dependencies": {
-          "Jellyfin.Common": "10.7.1",
-          "Jellyfin.Controller": "10.7.1",
-          "Jellyfin.Model": "10.7.1",
+          "Jellyfin.Common": "10.7.2",
+          "Jellyfin.Controller": "10.7.2",
+          "Jellyfin.Model": "10.7.2",
           "Microsoft.AspNetCore.Http": "2.2.2",
           "Microsoft.AspNetCore.WebUtilities": "2.2.0",
           "Microsoft.Extensions.Http": "5.0.0",
@@ -2761,9 +2761,9 @@
       },
       "Emby.Drawing/1.0.0": {
         "dependencies": {
-          "Jellyfin.Common": "10.7.1",
-          "Jellyfin.Controller": "10.7.1",
-          "Jellyfin.Model": "10.7.1"
+          "Jellyfin.Common": "10.7.2",
+          "Jellyfin.Controller": "10.7.2",
+          "Jellyfin.Model": "10.7.2"
         },
         "runtime": {
           "Emby.Drawing.dll": {}
@@ -2774,9 +2774,9 @@
       },
       "Emby.Notifications/1.0.0": {
         "dependencies": {
-          "Jellyfin.Common": "10.7.1",
-          "Jellyfin.Controller": "10.7.1",
-          "Jellyfin.Model": "10.7.1"
+          "Jellyfin.Common": "10.7.2",
+          "Jellyfin.Controller": "10.7.2",
+          "Jellyfin.Model": "10.7.2"
         },
         "runtime": {
           "Emby.Notifications.dll": {}
@@ -2787,8 +2787,8 @@
       },
       "Emby.Photos/1.0.0": {
         "dependencies": {
-          "Jellyfin.Controller": "10.7.1",
-          "Jellyfin.Model": "10.7.1",
+          "Jellyfin.Controller": "10.7.2",
+          "Jellyfin.Model": "10.7.2",
           "TagLibSharp": "2.2.0"
         },
         "runtime": {
@@ -2806,10 +2806,10 @@
           "Emby.Notifications": "1.0.0",
           "Emby.Photos": "1.0.0",
           "Jellyfin.Api": "1.0.0",
-          "Jellyfin.Common": "10.7.1",
-          "Jellyfin.Controller": "10.7.1",
-          "Jellyfin.Model": "10.7.1",
-          "Jellyfin.Naming": "10.7.1",
+          "Jellyfin.Common": "10.7.2",
+          "Jellyfin.Controller": "10.7.2",
+          "Jellyfin.Model": "10.7.2",
+          "Jellyfin.Naming": "10.7.2",
           "Jellyfin.XmlTv": "10.6.2",
           "MediaBrowser.LocalMetadata": "1.0.0",
           "MediaBrowser.MediaEncoding": "1.0.0",
@@ -2843,7 +2843,7 @@
       "Jellyfin.Api/1.0.0": {
         "dependencies": {
           "Emby.Dlna": "1.0.0",
-          "Jellyfin.Controller": "10.7.1",
+          "Jellyfin.Controller": "10.7.2",
           "Microsoft.AspNetCore.Authentication": "2.2.0",
           "Microsoft.AspNetCore.Authorization": "5.0.3",
           "Microsoft.AspNetCore.Mvc": "2.2.0",
@@ -2858,9 +2858,9 @@
           "Jellyfin.Api.dll": {}
         }
       },
-      "Jellyfin.Common/10.7.1": {
+      "Jellyfin.Common/10.7.2": {
         "dependencies": {
-          "Jellyfin.Model": "10.7.1",
+          "Jellyfin.Model": "10.7.2",
           "Microsoft.Extensions.Configuration.Abstractions": "5.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
           "Microsoft.Net.Http.Headers": "2.2.8"
@@ -2872,10 +2872,10 @@
           "MediaBrowser.Common.dll": {}
         }
       },
-      "Jellyfin.Controller/10.7.1": {
+      "Jellyfin.Controller/10.7.2": {
         "dependencies": {
-          "Jellyfin.Common": "10.7.1",
-          "Jellyfin.Model": "10.7.1",
+          "Jellyfin.Common": "10.7.2",
+          "Jellyfin.Model": "10.7.2",
           "Microsoft.Extensions.Configuration.Abstractions": "5.0.0",
           "Microsoft.Extensions.Configuration.Binder": "5.0.0",
           "System.Threading.Tasks.Dataflow": "5.0.0"
@@ -2887,7 +2887,7 @@
           "MediaBrowser.Controller.dll": {}
         }
       },
-      "Jellyfin.Data/10.7.1": {
+      "Jellyfin.Data/10.7.2": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "5.0.3",
           "Microsoft.EntityFrameworkCore.Sqlite": "5.0.3"
@@ -2903,9 +2903,9 @@
         "dependencies": {
           "BlurHashSharp": "1.1.1",
           "BlurHashSharp.SkiaSharp": "1.1.1",
-          "Jellyfin.Common": "10.7.1",
-          "Jellyfin.Controller": "10.7.1",
-          "Jellyfin.Model": "10.7.1",
+          "Jellyfin.Common": "10.7.2",
+          "Jellyfin.Controller": "10.7.2",
+          "Jellyfin.Model": "10.7.2",
           "SkiaSharp": "2.80.2",
           "SkiaSharp.NativeAssets.Linux": "2.80.2"
         },
@@ -2916,9 +2916,9 @@
           "Jellyfin.Drawing.Skia.dll": {}
         }
       },
-      "Jellyfin.Model/10.7.1": {
+      "Jellyfin.Model/10.7.2": {
         "dependencies": {
-          "Jellyfin.Data": "10.7.1",
+          "Jellyfin.Data": "10.7.2",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
           "System.Globalization": "4.3.0",
@@ -2931,9 +2931,9 @@
           "MediaBrowser.Model.dll": {}
         }
       },
-      "Jellyfin.Naming/10.7.1": {
+      "Jellyfin.Naming/10.7.2": {
         "dependencies": {
-          "Jellyfin.Model": "10.7.1"
+          "Jellyfin.Model": "10.7.2"
         },
         "runtime": {
           "Emby.Naming.dll": {}
@@ -2944,8 +2944,8 @@
       },
       "Jellyfin.Networking/1.0.0": {
         "dependencies": {
-          "Jellyfin.Common": "10.7.1",
-          "Jellyfin.Controller": "10.7.1"
+          "Jellyfin.Common": "10.7.2",
+          "Jellyfin.Controller": "10.7.2"
         },
         "runtime": {
           "Jellyfin.Networking.dll": {}
@@ -2956,9 +2956,9 @@
       },
       "Jellyfin.Server.Implementations/1.0.0": {
         "dependencies": {
-          "Jellyfin.Controller": "10.7.1",
-          "Jellyfin.Data": "10.7.1",
-          "Jellyfin.Model": "10.7.1",
+          "Jellyfin.Controller": "10.7.2",
+          "Jellyfin.Data": "10.7.2",
+          "Jellyfin.Model": "10.7.2",
           "System.Linq.Async": "5.0.0"
         },
         "runtime": {
@@ -2970,8 +2970,8 @@
       },
       "MediaBrowser.LocalMetadata/1.0.0": {
         "dependencies": {
-          "Jellyfin.Controller": "10.7.1",
-          "Jellyfin.Model": "10.7.1"
+          "Jellyfin.Controller": "10.7.2",
+          "Jellyfin.Model": "10.7.2"
         },
         "runtime": {
           "MediaBrowser.LocalMetadata.dll": {}
@@ -2983,9 +2983,9 @@
       "MediaBrowser.MediaEncoding/1.0.0": {
         "dependencies": {
           "BDInfo": "0.7.6.1",
-          "Jellyfin.Common": "10.7.1",
-          "Jellyfin.Controller": "10.7.1",
-          "Jellyfin.Model": "10.7.1",
+          "Jellyfin.Common": "10.7.2",
+          "Jellyfin.Controller": "10.7.2",
+          "Jellyfin.Model": "10.7.2",
           "Microsoft.Extensions.Http": "5.0.0",
           "System.Text.Encoding.CodePages": "5.0.0",
           "UTF.Unknown": "2.3.0"
@@ -3000,8 +3000,8 @@
       "MediaBrowser.Providers/1.0.0": {
         "dependencies": {
           "DvdLib": "1.0.0",
-          "Jellyfin.Controller": "10.7.1",
-          "Jellyfin.Model": "10.7.1",
+          "Jellyfin.Controller": "10.7.2",
+          "Jellyfin.Model": "10.7.2",
           "Microsoft.Extensions.Caching.Abstractions": "5.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "5.0.0",
           "Microsoft.Extensions.Http": "5.0.0",
@@ -3019,8 +3019,8 @@
       },
       "MediaBrowser.XbmcMetadata/1.0.0": {
         "dependencies": {
-          "Jellyfin.Controller": "10.7.1",
-          "Jellyfin.Model": "10.7.1"
+          "Jellyfin.Controller": "10.7.2",
+          "Jellyfin.Model": "10.7.2"
         },
         "runtime": {
           "MediaBrowser.XbmcMetadata.dll": {}
@@ -3031,7 +3031,7 @@
       },
       "RSSDP/1.0.0": {
         "dependencies": {
-          "Jellyfin.Common": "10.7.1",
+          "Jellyfin.Common": "10.7.2",
           "Jellyfin.Networking": "1.0.0"
         },
         "runtime": {
@@ -6448,17 +6448,17 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Jellyfin.Common/10.7.1": {
+    "Jellyfin.Common/10.7.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Jellyfin.Controller/10.7.1": {
+    "Jellyfin.Controller/10.7.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Jellyfin.Data/10.7.1": {
+    "Jellyfin.Data/10.7.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -6468,12 +6468,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Jellyfin.Model/10.7.1": {
+    "Jellyfin.Model/10.7.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Jellyfin.Naming/10.7.1": {
+    "Jellyfin.Naming/10.7.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
