@@ -2294,6 +2294,9 @@
         <member name="M:Emby.Server.Implementations.Library.LibraryManager.FillMissingEpisodeNumbersFromPath(MediaBrowser.Controller.Entities.TV.Episode,System.Boolean)">
             <inheritdoc />
         </member>
+        <member name="M:Emby.Server.Implementations.Library.LibraryManager.UpdatePeopleAsync(MediaBrowser.Controller.Entities.BaseItem,System.Collections.Generic.List{MediaBrowser.Controller.Entities.PersonInfo},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Emby.Server.Implementations.Library.MediaSourceManager.GetMediaAttachments(MediaBrowser.Controller.Persistence.MediaAttachmentQuery)">
             <inheritdoc />
         </member>

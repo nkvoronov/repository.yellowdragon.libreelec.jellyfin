@@ -3081,6 +3081,15 @@
             <param name="item">The item.</param>
             <param name="people">The people.</param>
         </member>
+        <member name="M:MediaBrowser.Controller.Library.ILibraryManager.UpdatePeopleAsync(MediaBrowser.Controller.Entities.BaseItem,System.Collections.Generic.List{MediaBrowser.Controller.Entities.PersonInfo},System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously updates the people.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="people">The people.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The async task.</returns>
+        </member>
         <member name="M:MediaBrowser.Controller.Library.ILibraryManager.GetItemIds(MediaBrowser.Controller.Entities.InternalItemsQuery)">
             <summary>
             Gets the item ids.

@@ -28,7 +28,7 @@
 
 <addon id="tools.dotnet5-runtime"
        name=".Net Core Runtime 5"
-       version="10.0.113"
+       version="10.0.114"
        provider-name="Anton Voyl (awiouy)">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -40,7 +40,7 @@
   <extension point="xbmc.addon.metadata">
     <summary>.NET Core Runtime 5</summary>
     <description>
-.NET Core Runtime (5.0.5) runs applications built with .NET Core, a cross-platform .NET implementation.
+.NET Core Runtime (5.0.6) runs applications built with .NET Core, a cross-platform .NET implementation.
     </description>
     <disclaimer>
 
@@ -99,7 +99,7 @@
 
 <addon id="service.jellyfin"
        name="Jellyfin Server"
-       version="10.0.33"
+       version="10.0.34"
        provider-name="Team LibreELEC">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -112,7 +112,7 @@
   <extension point="xbmc.addon.metadata">
     <summary>Jellyfin Server: The Free Software Media System</summary>
     <description>
-Jellyfin Server (10.7.2) is the Free Software Media System that puts you in control of managing and streaming your media.There are no strings attached, no premium licenses or features, and no hidden agendas.
+Jellyfin Server (10.7.5) is the Free Software Media System that puts you in control of managing and streaming your media.There are no strings attached, no premium licenses or features, and no hidden agendas.
     </description>
     <disclaimer>
 
