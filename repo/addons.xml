@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="repository.yellowdragon.libreelec.jellyfin" name="LibreELEC Jellyfin Yellow Dragon Repository" version="10.0" provider-name="YLLOW_DRAGON">
+<addon id="repository.yellowdragon.libreelec.jellyfin" name="LibreELEC Jellyfin Yellow Dragon Repository" version="10.0.0" provider-name="YLLOW_DRAGON">
 	<requires>
 		<import addon="xbmc.addon" version="12.0.0"/>
 	</requires>
 	<extension point="xbmc.addon.repository" name="LibreELEC Jellyfin Yellow Dragon Repository">
-		<info compressed="false">https://raw.githubusercontent.com/nkvoronov/repository.yellowdragon.libreelec.jellyfin/10.0/repo/addons.xml</info>
-		<checksum>https://raw.githubusercontent.com/nkvoronov/repository.yellowdragon.libreelec.jellyfin/10.0/repo/addons.xml.md5</checksum>
-		<datadir zip="true">https://raw.githubusercontent.com/nkvoronov/repository.yellowdragon.libreelec.jellyfin/10.0/repo/</datadir>
+		<info compressed="false">https://raw.githubusercontent.com/nkvoronov/repository.yellowdragon.libreelec.jellyfin/10.0.0/repo/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/nkvoronov/repository.yellowdragon.libreelec.jellyfin/10.0.0/repo/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/nkvoronov/repository.yellowdragon.libreelec.jellyfin/10.0.0/repo/</datadir>
 		<hashes>false</hashes>
 	</extension>
 	<extension point="xbmc.addon.metadata">
@@ -28,7 +28,7 @@
 
 <addon id="tools.dotnet5-runtime"
        name=".Net Core Runtime 5"
-       version="10.0.115"
+       version="10.0.0.115"
        provider-name="Anton Voyl (awiouy)">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -99,7 +99,7 @@
 
 <addon id="service.jellyfin"
        name="Jellyfin Server"
-       version="10.0.35"
+       version="10.0.0.35"
        provider-name="Team LibreELEC">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
