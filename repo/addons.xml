@@ -28,7 +28,7 @@
 
 <addon id="tools.dotnet5-runtime"
        name=".Net Core Runtime 5"
-       version="10.0.0.115"
+       version="10.0.0.116"
        provider-name="Anton Voyl (awiouy)">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -40,7 +40,7 @@
   <extension point="xbmc.addon.metadata">
     <summary>.NET Core Runtime 5</summary>
     <description>
-.NET Core Runtime (5.0.7) runs applications built with .NET Core, a cross-platform .NET implementation.
+.NET Core Runtime (5.0.8) runs applications built with .NET Core, a cross-platform .NET implementation.
     </description>
     <disclaimer>
 
