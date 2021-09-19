@@ -225,9 +225,6 @@
             <summary>
             Gets or sets the preference value.
             </summary>
-            <remarks>
-            Required.
-            </remarks>
         </member>
         <member name="T:Jellyfin.Data.Entities.DisplayPreferences">
             <summary>
