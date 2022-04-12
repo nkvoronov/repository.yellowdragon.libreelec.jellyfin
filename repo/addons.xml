@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="service.jellyfin"
-       name="Jellyfin Server"
-       version="10.0.0.141"
+<addon id="tools.jellyfin-ffmpeg"
+       name="Jellyfin ffmpeg addon"
+       version="10.0.0.142"
        provider-name="Team LibreELEC">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
 
-    <import addon="tools.jellyfin-ffmpeg" version="0.0.0" />
-    <import addon="tools.dotnet5-runtime" version="0.0.0" />
   </requires>
-  <extension point="xbmc.service" library="default.py">
+  <extension point="xbmc.python.script" library="default.py">
     <provides></provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>Jellyfin Server: The Free Software Media System</summary>
+    <summary>Jellyfin Server: FFMPEG addon</summary>
     <description>
-Jellyfin Server (10.7.7) is the Free Software Media System that puts you in control of managing and streaming your media.There are no strings attached, no premium licenses or features, and no hidden agendas.
+Jellyfin Server (10.7.7): FFmpeg binary for transcoding and audio/video manipulating.
     </description>
     <disclaimer>
 
@@ -104,6 +102,39 @@ Jellyfin Server (10.7.7) is the Free Software Media System that puts you in cont
   </extension>
 </addon>
 
+<addon id="service.jellyfin"
+       name="Jellyfin Server"
+       version="10.0.0.142"
+       provider-name="Team LibreELEC">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+
+    <import addon="tools.jellyfin-ffmpeg" version="10.0.0.142" />
+    <import addon="tools.dotnet5-runtime" version="10.0.0.116" />
+  </requires>
+  <extension point="xbmc.service" library="default.py">
+    <provides></provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Jellyfin Server: The Free Software Media System</summary>
+    <description>
+Jellyfin Server (10.7.7) is the Free Software Media System that puts you in control of managing and streaming your media.There are no strings attached, no premium licenses or features, and no hidden agendas.
+    </description>
+    <disclaimer>
+
+    </disclaimer>
+    <platform>all</platform>
+    <news>
+
+    </news>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.png</fanart>
+
+    </assets>
+  </extension>
+</addon>
+
 <addon id="repository.yellowdragon.libreelec.jellyfin" name="LibreELEC Jellyfin Yellow Dragon Repository" version="10.0.0" provider-name="YLLOW_DRAGON">
 	<requires>
 		<import addon="xbmc.addon" version="12.0.0"/>
@@ -128,36 +159,5 @@ Jellyfin Server (10.7.7) is the Free Software Media System that puts you in cont
 		</assets>
 		<news></news>
 	</extension>
-</addon>
-
-<addon id="tools.jellyfin-ffmpeg"
-       name="Jellyfin ffmpeg addon"
-       version="10.0.0.140"
-       provider-name="Team LibreELEC">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0"/>
-
-  </requires>
-  <extension point="xbmc.python.script" library="default.py">
-    <provides></provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>Jellyfin Server: FFMPEG addon</summary>
-    <description>
-Jellyfin Server (10.7.7): FFmpeg binary for transcoding and audio/video manipulating.
-    </description>
-    <disclaimer>
-
-    </disclaimer>
-    <platform>all</platform>
-    <news>
-
-    </news>
-    <assets>
-      <icon>resources/icon.png</icon>
-      <fanart>resources/fanart.png</fanart>
-
-    </assets>
-  </extension>
 </addon>
 </addons>
