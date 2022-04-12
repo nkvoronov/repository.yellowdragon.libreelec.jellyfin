@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="tools.jellyfin-ffmpeg"
        name="Jellyfin ffmpeg addon"
-       version="10.0.0.142"
+       version="10.0.0.143"
        provider-name="Team LibreELEC">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -11,9 +11,9 @@
     <provides></provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>Jellyfin Server: FFMPEG addon</summary>
+    <summary>Jellyfin FFMPEG addon</summary>
     <description>
-Jellyfin Server (10.7.7): FFmpeg binary for transcoding and audio/video manipulating.
+Jellyfin FFMPEG (4.4.1): FFmpeg binary for transcoding and audio/video manipulating.
     </description>
     <disclaimer>
 

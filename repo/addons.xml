@@ -2,7 +2,7 @@
 <addons>
 <addon id="tools.jellyfin-ffmpeg"
        name="Jellyfin ffmpeg addon"
-       version="10.0.0.142"
+       version="10.0.0.143"
        provider-name="Team LibreELEC">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -12,9 +12,9 @@
     <provides></provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>Jellyfin Server: FFMPEG addon</summary>
+    <summary>Jellyfin FFMPEG addon</summary>
     <description>
-Jellyfin Server (10.7.7): FFmpeg binary for transcoding and audio/video manipulating.
+Jellyfin FFMPEG (4.4.1): FFmpeg binary for transcoding and audio/video manipulating.
     </description>
     <disclaimer>
 
@@ -104,12 +104,12 @@ Jellyfin Server (10.7.7): FFmpeg binary for transcoding and audio/video manipula
 
 <addon id="service.jellyfin"
        name="Jellyfin Server"
-       version="10.0.0.142"
+       version="10.0.0.143"
        provider-name="Team LibreELEC">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
 
-    <import addon="tools.jellyfin-ffmpeg" version="10.0.0.142" />
+    <import addon="tools.jellyfin-ffmpeg" version="10.0.0.143" />
     <import addon="tools.dotnet5-runtime" version="10.0.0.116" />
   </requires>
   <extension point="xbmc.service" library="default.py">
