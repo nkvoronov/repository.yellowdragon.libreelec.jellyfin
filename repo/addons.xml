@@ -33,13 +33,13 @@ Jellyfin FFMPEG (4.4.1): FFmpeg binary for transcoding and audio/video manipulat
 
 <addon id="service.jellyfin"
        name="Jellyfin Server"
-       version="10.0.0.144"
+       version="10.0.0.146"
        provider-name="Team LibreELEC">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
 
-    <import addon="tools.jellyfin-ffmpeg" version="10.0.0.143" />
-    <import addon="tools.dotnet5-runtime" version="10.0.0.116" />
+    <import addon="tools.ffmpeg-tools" version="10.0.0.118" />
+    <import addon="tools.dotnet-runtime" version="10.0.0.116" />
   </requires>
   <extension point="xbmc.service" library="default.py">
     <provides></provides>
