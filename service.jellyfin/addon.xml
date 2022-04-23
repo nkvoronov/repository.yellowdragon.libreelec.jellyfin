@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="service.jellyfin"
        name="Jellyfin Server"
-       version="10.0.0.146"
+       version="10.0.0.148"
        provider-name="Team LibreELEC">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
 
-    <import addon="tools.ffmpeg-tools" version="10.0.0.118" />
-    <import addon="tools.dotnet-runtime" version="10.0.0.116" />
+    <import addon="tools.ffmpeg-tools" version="10.0.0.0" />
+    <import addon="tools.dotnet-runtime" version="10.0.0.0" />
   </requires>
   <extension point="xbmc.service" library="default.py">
     <provides></provides>
@@ -22,7 +22,14 @@ Jellyfin Server (10.7.7) is the Free Software Media System that puts you in cont
     </disclaimer>
     <platform>all</platform>
     <news>
+148
+- Update build server 10.7.7
 
+140
+- Update to deb version 10.7.7
+
+100
+- Initial addon
     </news>
     <assets>
       <icon>resources/icon.png</icon>
