@@ -33,7 +33,7 @@ Jellyfin FFMPEG (4.4.1): FFmpeg binary for transcoding and audio/video manipulat
 
 <addon id="service.jellyfin"
        name="Jellyfin Server"
-       version="10.0.0.148"
+       version="10.0.0.149"
        provider-name="Team LibreELEC">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -54,7 +54,7 @@ Jellyfin Server (10.7.7) is the Free Software Media System that puts you in cont
     </disclaimer>
     <platform>all</platform>
     <news>
-148
+149
 - Update build server 10.7.7
 
 140
