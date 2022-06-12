@@ -13,13 +13,16 @@
         <member name="M:MediaBrowser.XbmcMetadata.EntryPoint.Dispose">
             <inheritdoc />
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Parsers.BaseNfoParser`1.#ctor(Microsoft.Extensions.Logging.ILogger,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Parsers.BaseNfoParser`1.#ctor(Microsoft.Extensions.Logging.ILogger,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Parsers.BaseNfoParser`1" /> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IDirectoryService"/> interface.</param>
         </member>
         <member name="P:MediaBrowser.XbmcMetadata.Parsers.BaseNfoParser`1.Logger">
             <summary>
@@ -59,18 +62,28 @@
             <param name="value">The value.</param>
             <returns>IEnumerable{System.String}.</returns>
         </member>
+        <member name="M:MediaBrowser.XbmcMetadata.Parsers.BaseNfoParser`1.GetImageType(System.String)">
+            <summary>
+            Parses the ImageType from the nfo aspect property.
+            </summary>
+            <param name="aspect">The nfo aspect property.</param>
+            <returns>The image type.</returns>
+        </member>
         <member name="T:MediaBrowser.XbmcMetadata.Parsers.EpisodeNfoParser">
             <summary>
             Nfo parser for episodes.
             </summary>
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Parsers.EpisodeNfoParser.#ctor(Microsoft.Extensions.Logging.ILogger,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Parsers.EpisodeNfoParser.#ctor(Microsoft.Extensions.Logging.ILogger,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Parsers.EpisodeNfoParser"/> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IDirectoryService"/> interface.</param>
         </member>
         <member name="M:MediaBrowser.XbmcMetadata.Parsers.EpisodeNfoParser.Fetch(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.TV.Episode},System.String,System.Xml.XmlReaderSettings,System.Threading.CancellationToken)">
             <inheritdoc />
@@ -83,13 +96,16 @@
             Nfo parser for movies.
             </summary>
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Parsers.MovieNfoParser.#ctor(Microsoft.Extensions.Logging.ILogger,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Parsers.MovieNfoParser.#ctor(Microsoft.Extensions.Logging.ILogger,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Parsers.MovieNfoParser"/> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.DirectoryService"/> interface.</param>
         </member>
         <member name="P:MediaBrowser.XbmcMetadata.Parsers.MovieNfoParser.SupportsUrlAfterClosingXmlTag">
             <inheritdoc />
@@ -102,13 +118,16 @@
             Nfo parser for seasons.
             </summary>
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Parsers.SeasonNfoParser.#ctor(Microsoft.Extensions.Logging.ILogger,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Parsers.SeasonNfoParser.#ctor(Microsoft.Extensions.Logging.ILogger,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Parsers.SeasonNfoParser"/> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.DirectoryService"/> interface.</param>
         </member>
         <member name="M:MediaBrowser.XbmcMetadata.Parsers.SeasonNfoParser.FetchDataFromXmlNode(System.Xml.XmlReader,MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.TV.Season})">
             <inheritdoc />
@@ -118,18 +137,18 @@
             Nfo parser for series.
             </summary>
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Parsers.SeriesNfoParser.#ctor(Microsoft.Extensions.Logging.ILogger,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Parsers.SeriesNfoParser.#ctor(Microsoft.Extensions.Logging.ILogger,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Parsers.SeriesNfoParser"/> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IDirectoryService"/> interface.</param>
         </member>
         <member name="P:MediaBrowser.XbmcMetadata.Parsers.SeriesNfoParser.SupportsUrlAfterClosingXmlTag">
-            <inheritdoc />
-        </member>
-        <member name="P:MediaBrowser.XbmcMetadata.Parsers.SeriesNfoParser.MovieDbParserSearchString">
             <inheritdoc />
         </member>
         <member name="M:MediaBrowser.XbmcMetadata.Parsers.SeriesNfoParser.FetchDataFromXmlNode(System.Xml.XmlReader,MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.TV.Series})">
@@ -140,14 +159,17 @@
             Nfo provider for albums.
             </summary>
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Providers.AlbumNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.AlbumNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Providers.AlbumNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.AlbumNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Providers.AlbumNfoProvider"/> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="fileSystem">The file system.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
+            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IDirectoryService"/> interface.</param>
         </member>
         <member name="M:MediaBrowser.XbmcMetadata.Providers.AlbumNfoProvider.Fetch(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Audio.MusicAlbum},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
@@ -160,14 +182,17 @@
             Nfo provider for artists.
             </summary>
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Providers.ArtistNfoProvider.#ctor(MediaBrowser.Model.IO.IFileSystem,Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.ArtistNfoProvider},MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Providers.ArtistNfoProvider.#ctor(MediaBrowser.Model.IO.IFileSystem,Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.ArtistNfoProvider},MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Providers.ArtistNfoProvider"/> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="fileSystem">The file system.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
+            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IDirectoryService"/> interface.</param>
         </member>
         <member name="M:MediaBrowser.XbmcMetadata.Providers.ArtistNfoProvider.Fetch(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.Audio.MusicArtist},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
@@ -195,14 +220,17 @@
             Nfo provider for episodes.
             </summary>
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Providers.EpisodeNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.EpisodeNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Providers.EpisodeNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.EpisodeNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Providers.EpisodeNfoProvider"/> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="fileSystem">The file system.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
+            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IDirectoryService"/> interface.</param>
         </member>
         <member name="M:MediaBrowser.XbmcMetadata.Providers.EpisodeNfoProvider.Fetch(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.TV.Episode},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
@@ -215,42 +243,51 @@
             Nfo provider for movies.
             </summary>
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Providers.MovieNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.MovieNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Providers.MovieNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.MovieNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Providers.MovieNfoProvider"/> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="fileSystem">The file system.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
+            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IDirectoryService"/> interface.</param>
         </member>
         <member name="T:MediaBrowser.XbmcMetadata.Providers.MusicVideoNfoProvider">
             <summary>
             Nfo provider for music videos.
             </summary>
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Providers.MusicVideoNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.MusicVideoNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Providers.MusicVideoNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.MusicVideoNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Providers.MusicVideoNfoProvider"/> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="fileSystem">The file system.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
+            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IDirectoryService"/> interface.</param>
         </member>
         <member name="T:MediaBrowser.XbmcMetadata.Providers.SeasonNfoProvider">
             <summary>
             Nfo provider for seasons.
             </summary>
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Providers.SeasonNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.SeasonNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Providers.SeasonNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.SeasonNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Providers.SeasonNfoProvider"/> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="fileSystem">The file system.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
+            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IDirectoryService"/> interface.</param>
         </member>
         <member name="M:MediaBrowser.XbmcMetadata.Providers.SeasonNfoProvider.Fetch(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.TV.Season},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
@@ -263,14 +300,17 @@
             Nfo provider for series.
             </summary>
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Providers.SeriesNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.SeriesNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Providers.SeriesNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.SeriesNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Providers.SeriesNfoProvider"/> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="fileSystem">The file system.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
+            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IDirectoryService"/> interface.</param>
         </member>
         <member name="M:MediaBrowser.XbmcMetadata.Providers.SeriesNfoProvider.Fetch(MediaBrowser.Controller.Providers.MetadataResult{MediaBrowser.Controller.Entities.TV.Series},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
@@ -283,14 +323,17 @@
             Nfo provider for videos.
             </summary>
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Providers.VideoNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.VideoNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager)">
+        <member name="M:MediaBrowser.XbmcMetadata.Providers.VideoNfoProvider.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.XbmcMetadata.Providers.VideoNfoProvider},MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Providers.IDirectoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.XbmcMetadata.Providers.VideoNfoProvider"/> class.
             </summary>
-            <param name="logger">The logger.</param>
-            <param name="fileSystem">The file system.</param>
-            <param name="config">the configuration manager.</param>
-            <param name="providerManager">The provider manager.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
+            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
+            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
+            <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+            <param name="directoryService">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IDirectoryService"/> interface.</param>
         </member>
         <member name="T:MediaBrowser.XbmcMetadata.Savers.AlbumNfoSaver">
             <summary>
@@ -377,7 +420,7 @@
         <member name="M:MediaBrowser.XbmcMetadata.Savers.BaseNfoSaver.IsEnabledFor(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Library.ItemUpdateType)">
             <inheritdoc />
         </member>
-        <member name="M:MediaBrowser.XbmcMetadata.Savers.BaseNfoSaver.Save(MediaBrowser.Controller.Entities.BaseItem,System.Threading.CancellationToken)">
+        <member name="M:MediaBrowser.XbmcMetadata.Savers.BaseNfoSaver.SaveAsync(MediaBrowser.Controller.Entities.BaseItem,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:MediaBrowser.XbmcMetadata.Savers.BaseNfoSaver.AddCommonNodes(MediaBrowser.Controller.Entities.BaseItem,System.Xml.XmlWriter,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager)">

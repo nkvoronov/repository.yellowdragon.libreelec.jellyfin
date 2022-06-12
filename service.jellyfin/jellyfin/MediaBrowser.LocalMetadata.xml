@@ -85,12 +85,6 @@
             Episode local image provider.
             </summary>
         </member>
-        <member name="M:MediaBrowser.LocalMetadata.Images.EpisodeLocalImageProvider.#ctor(MediaBrowser.Model.IO.IFileSystem)">
-            <summary>
-            Initializes a new instance of the <see cref="T:MediaBrowser.LocalMetadata.Images.EpisodeLocalImageProvider"/> class.
-            </summary>
-            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
-        </member>
         <member name="P:MediaBrowser.LocalMetadata.Images.EpisodeLocalImageProvider.Name">
             <inheritdoc />
         </member>
@@ -108,11 +102,10 @@
             Internal metadata folder image provider.
             </summary>
         </member>
-        <member name="M:MediaBrowser.LocalMetadata.Images.InternalMetadataFolderImageProvider.#ctor(MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Model.IO.IFileSystem,Microsoft.Extensions.Logging.ILogger{MediaBrowser.LocalMetadata.Images.InternalMetadataFolderImageProvider})">
+        <member name="M:MediaBrowser.LocalMetadata.Images.InternalMetadataFolderImageProvider.#ctor(MediaBrowser.Model.IO.IFileSystem,Microsoft.Extensions.Logging.ILogger{MediaBrowser.LocalMetadata.Images.InternalMetadataFolderImageProvider})">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.LocalMetadata.Images.InternalMetadataFolderImageProvider"/> class.
             </summary>
-            <param name="config">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
             <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
             <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
         </member>
@@ -355,20 +348,13 @@
         <member name="T:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver">
             <inheritdoc />
         </member>
-        <member name="F:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.DateAddedFormat">
-            <summary>
-            Gets the date added format.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.#ctor(MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,Microsoft.Extensions.Logging.ILogger{MediaBrowser.LocalMetadata.Savers.BaseXmlSaver})">
+        <member name="M:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.#ctor(MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.Library.ILibraryManager,Microsoft.Extensions.Logging.ILogger{MediaBrowser.LocalMetadata.Savers.BaseXmlSaver})">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver"/> class.
             </summary>
             <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
             <param name="configurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
             <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
-            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
-            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
             <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
         </member>
         <member name="P:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.FileSystem">
@@ -384,16 +370,6 @@
         <member name="P:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.LibraryManager">
             <summary>
             Gets the library manager.
-            </summary>
-        </member>
-        <member name="P:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.UserManager">
-            <summary>
-            Gets the user manager.
-            </summary>
-        </member>
-        <member name="P:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.UserDataManager">
-            <summary>
-            Gets the user data manager.
             </summary>
         </member>
         <member name="P:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.Logger">
@@ -429,30 +405,32 @@
             <param name="updateType">Type of the update.</param>
             <returns><c>true</c> if [is enabled for] [the specified item]; otherwise, <c>false</c>.</returns>
         </member>
-        <member name="M:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.Save(MediaBrowser.Controller.Entities.BaseItem,System.Threading.CancellationToken)">
+        <member name="M:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.SaveAsync(MediaBrowser.Controller.Entities.BaseItem,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.WriteCustomElements(MediaBrowser.Controller.Entities.BaseItem,System.Xml.XmlWriter)">
+        <member name="M:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.WriteCustomElementsAsync(MediaBrowser.Controller.Entities.BaseItem,System.Xml.XmlWriter)">
             <summary>
             Write custom elements.
             </summary>
             <param name="item">The item.</param>
             <param name="writer">The xml writer.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
-        <member name="M:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.AddCommonNodes(MediaBrowser.Controller.Entities.BaseItem,System.Xml.XmlWriter,MediaBrowser.Controller.Library.ILibraryManager)">
+        <member name="M:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.AddCommonNodesAsync(MediaBrowser.Controller.Entities.BaseItem,System.Xml.XmlWriter)">
             <summary>
             Adds the common nodes.
             </summary>
             <param name="item">The item.</param>
             <param name="writer">The xml writer.</param>
-            <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
-        <member name="M:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.AddShares(MediaBrowser.Controller.Entities.IHasShares,System.Xml.XmlWriter)">
+        <member name="M:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.AddSharesAsync(MediaBrowser.Controller.Entities.IHasShares,System.Xml.XmlWriter)">
             <summary>
             Add shares.
             </summary>
             <param name="item">The item.</param>
             <param name="writer">The xml writer.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.AddMediaInfo``1(``0,System.Xml.XmlWriter)">
             <summary>
@@ -461,6 +439,7 @@
             <param name="item">The item.</param>
             <param name="writer">The xml writer.</param>
             <typeparam name="T">Type of item.</typeparam>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="M:MediaBrowser.LocalMetadata.Savers.BaseXmlSaver.AddLinkedChildren(MediaBrowser.Controller.Entities.Folder,System.Xml.XmlWriter,System.String,System.String)">
             <summary>
@@ -470,27 +449,26 @@
             <param name="writer">The xml writer.</param>
             <param name="pluralNodeName">The plural node name.</param>
             <param name="singularNodeName">The singular node name.</param>
+            <returns>The task object representing the asynchronous operation.</returns>
         </member>
         <member name="T:MediaBrowser.LocalMetadata.Savers.BoxSetXmlSaver">
             <summary>
             Box set xml saver.
             </summary>
         </member>
-        <member name="M:MediaBrowser.LocalMetadata.Savers.BoxSetXmlSaver.#ctor(MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,Microsoft.Extensions.Logging.ILogger{MediaBrowser.LocalMetadata.Savers.BoxSetXmlSaver})">
+        <member name="M:MediaBrowser.LocalMetadata.Savers.BoxSetXmlSaver.#ctor(MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.Library.ILibraryManager,Microsoft.Extensions.Logging.ILogger{MediaBrowser.LocalMetadata.Savers.BoxSetXmlSaver})">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.LocalMetadata.Savers.BoxSetXmlSaver"/> class.
             </summary>
             <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
             <param name="configurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
             <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
-            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
-            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
             <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
         </member>
         <member name="M:MediaBrowser.LocalMetadata.Savers.BoxSetXmlSaver.IsEnabledFor(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Library.ItemUpdateType)">
             <inheritdoc />
         </member>
-        <member name="M:MediaBrowser.LocalMetadata.Savers.BoxSetXmlSaver.WriteCustomElements(MediaBrowser.Controller.Entities.BaseItem,System.Xml.XmlWriter)">
+        <member name="M:MediaBrowser.LocalMetadata.Savers.BoxSetXmlSaver.WriteCustomElementsAsync(MediaBrowser.Controller.Entities.BaseItem,System.Xml.XmlWriter)">
             <inheritdoc />
         </member>
         <member name="M:MediaBrowser.LocalMetadata.Savers.BoxSetXmlSaver.GetLocalSavePath(MediaBrowser.Controller.Entities.BaseItem)">
@@ -506,21 +484,19 @@
             The default file name to use when creating a new playlist.
             </summary>
         </member>
-        <member name="M:MediaBrowser.LocalMetadata.Savers.PlaylistXmlSaver.#ctor(MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager,Microsoft.Extensions.Logging.ILogger{MediaBrowser.LocalMetadata.Savers.PlaylistXmlSaver})">
+        <member name="M:MediaBrowser.LocalMetadata.Savers.PlaylistXmlSaver.#ctor(MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.Library.ILibraryManager,Microsoft.Extensions.Logging.ILogger{MediaBrowser.LocalMetadata.Savers.PlaylistXmlSaver})">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.LocalMetadata.Savers.PlaylistXmlSaver"/> class.
             </summary>
             <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
             <param name="configurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
             <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
-            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
-            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
             <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
         </member>
         <member name="M:MediaBrowser.LocalMetadata.Savers.PlaylistXmlSaver.IsEnabledFor(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Library.ItemUpdateType)">
             <inheritdoc />
         </member>
-        <member name="M:MediaBrowser.LocalMetadata.Savers.PlaylistXmlSaver.WriteCustomElements(MediaBrowser.Controller.Entities.BaseItem,System.Xml.XmlWriter)">
+        <member name="M:MediaBrowser.LocalMetadata.Savers.PlaylistXmlSaver.WriteCustomElementsAsync(MediaBrowser.Controller.Entities.BaseItem,System.Xml.XmlWriter)">
             <inheritdoc />
         </member>
         <member name="M:MediaBrowser.LocalMetadata.Savers.PlaylistXmlSaver.GetLocalSavePath(MediaBrowser.Controller.Entities.BaseItem)">

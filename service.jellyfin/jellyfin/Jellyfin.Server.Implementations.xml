@@ -27,6 +27,54 @@
         <member name="M:Jellyfin.Server.Implementations.Activity.ActivityManager.CleanAsync(System.DateTime)">
             <inheritdoc />
         </member>
+        <member name="T:Jellyfin.Server.Implementations.Devices.DeviceManager">
+            <summary>
+            Manages the creation, updating, and retrieval of devices.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Devices.DeviceManager.#ctor(Jellyfin.Server.Implementations.JellyfinDbProvider,MediaBrowser.Controller.Library.IUserManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Server.Implementations.Devices.DeviceManager"/> class.
+            </summary>
+            <param name="dbProvider">The database provider.</param>
+            <param name="userManager">The user manager.</param>
+        </member>
+        <member name="E:Jellyfin.Server.Implementations.Devices.DeviceManager.DeviceOptionsUpdated">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Devices.DeviceManager.SaveCapabilities(System.String,MediaBrowser.Model.Session.ClientCapabilities)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Devices.DeviceManager.UpdateDeviceOptions(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Devices.DeviceManager.CreateDevice(Jellyfin.Data.Entities.Security.Device)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Devices.DeviceManager.GetDeviceOptions(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Devices.DeviceManager.GetCapabilities(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Devices.DeviceManager.GetDevice(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Devices.DeviceManager.GetDevices(Jellyfin.Data.Queries.DeviceQuery)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Devices.DeviceManager.GetDeviceInfos(Jellyfin.Data.Queries.DeviceQuery)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Devices.DeviceManager.GetDevicesForUser(System.Nullable{System.Guid},System.Nullable{System.Boolean})">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Devices.DeviceManager.DeleteDevice(Jellyfin.Data.Entities.Security.Device)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Devices.DeviceManager.CanAccessDevice(Jellyfin.Data.Entities.User,System.String)">
+            <inheritdoc />
+        </member>
         <member name="T:Jellyfin.Server.Implementations.Events.Consumers.Library.SubtitleDownloadFailureLogger">
             <summary>
             Creates an entry in the activity log whenever a subtitle download fails.
@@ -457,12 +505,13 @@
             Factory class for generating new <see cref="T:Jellyfin.Server.Implementations.JellyfinDb"/> instances.
             </summary>
         </member>
-        <member name="M:Jellyfin.Server.Implementations.JellyfinDbProvider.#ctor(System.IServiceProvider,MediaBrowser.Common.Configuration.IApplicationPaths)">
+        <member name="M:Jellyfin.Server.Implementations.JellyfinDbProvider.#ctor(System.IServiceProvider,MediaBrowser.Common.Configuration.IApplicationPaths,Microsoft.Extensions.Logging.ILogger{Jellyfin.Server.Implementations.JellyfinDbProvider})">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Server.Implementations.JellyfinDbProvider"/> class.
             </summary>
             <param name="serviceProvider">The application's service provider.</param>
             <param name="appPaths">The application paths.</param>
+            <param name="logger">The logger.</param>
         </member>
         <member name="M:Jellyfin.Server.Implementations.JellyfinDbProvider.CreateContext">
             <summary>
@@ -496,6 +545,123 @@
             </summary>
             <param name="modelBuilder">The model builder to extend.</param>
             <param name="kind">The <see cref="T:System.DateTimeKind"/> to specify.</param>
+        </member>
+        <member name="T:Jellyfin.Server.Implementations.ModelConfiguration.ApiKeyConfiguration">
+            <summary>
+            FluentAPI configuration for the ApiKey entity.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.ModelConfiguration.ApiKeyConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Jellyfin.Data.Entities.Security.ApiKey})">
+            <inheritdoc/>
+        </member>
+        <member name="T:Jellyfin.Server.Implementations.ModelConfiguration.CustomItemDisplayPreferencesConfiguration">
+            <summary>
+            FluentAPI configuration for the CustomItemDisplayPreferences entity.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.ModelConfiguration.CustomItemDisplayPreferencesConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Jellyfin.Data.Entities.CustomItemDisplayPreferences})">
+            <inheritdoc/>
+        </member>
+        <member name="T:Jellyfin.Server.Implementations.ModelConfiguration.DeviceConfiguration">
+            <summary>
+            FluentAPI configuration for the Device entity.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.ModelConfiguration.DeviceConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Jellyfin.Data.Entities.Security.Device})">
+            <inheritdoc/>
+        </member>
+        <member name="T:Jellyfin.Server.Implementations.ModelConfiguration.DeviceOptionsConfiguration">
+            <summary>
+            FluentAPI configuration for the DeviceOptions entity.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.ModelConfiguration.DeviceOptionsConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Jellyfin.Data.Entities.Security.DeviceOptions})">
+            <inheritdoc/>
+        </member>
+        <member name="T:Jellyfin.Server.Implementations.ModelConfiguration.DisplayPreferencesConfiguration">
+            <summary>
+            FluentAPI configuration for the DisplayPreferencesConfiguration entity.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.ModelConfiguration.DisplayPreferencesConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Jellyfin.Data.Entities.DisplayPreferences})">
+            <inheritdoc/>
+        </member>
+        <member name="T:Jellyfin.Server.Implementations.ModelConfiguration.PermissionConfiguration">
+            <summary>
+            FluentAPI configuration for the Permission entity.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.ModelConfiguration.PermissionConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Jellyfin.Data.Entities.Permission})">
+            <inheritdoc/>
+        </member>
+        <member name="T:Jellyfin.Server.Implementations.ModelConfiguration.PreferenceConfiguration">
+            <summary>
+            FluentAPI configuration for the Permission entity.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.ModelConfiguration.PreferenceConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Jellyfin.Data.Entities.Preference})">
+            <inheritdoc/>
+        </member>
+        <member name="T:Jellyfin.Server.Implementations.ModelConfiguration.UserConfiguration">
+            <summary>
+            FluentAPI configuration for the User entity.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.ModelConfiguration.UserConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Jellyfin.Data.Entities.User})">
+            <inheritdoc/>
+        </member>
+        <member name="T:Jellyfin.Server.Implementations.Security.AuthenticationManager">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Security.AuthenticationManager.#ctor(Jellyfin.Server.Implementations.JellyfinDbProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Server.Implementations.Security.AuthenticationManager"/> class.
+            </summary>
+            <param name="dbProvider">The database provider.</param>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Security.AuthenticationManager.CreateApiKey(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Security.AuthenticationManager.GetApiKeys">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Security.AuthenticationManager.DeleteApiKey(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Security.AuthorizationContext.GetAuthorization(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Gets the authorization.
+            </summary>
+            <param name="httpReq">The HTTP req.</param>
+            <returns>Dictionary{System.StringSystem.String}.</returns>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Security.AuthorizationContext.GetAuthorizationDictionary(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Gets the auth.
+            </summary>
+            <param name="httpReq">The HTTP req.</param>
+            <returns>Dictionary{System.StringSystem.String}.</returns>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Security.AuthorizationContext.GetAuthorizationDictionary(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Gets the auth.
+            </summary>
+            <param name="httpReq">The HTTP req.</param>
+            <returns>Dictionary{System.StringSystem.String}.</returns>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Security.AuthorizationContext.GetAuthorization(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Gets the authorization.
+            </summary>
+            <param name="authorizationHeader">The authorization header.</param>
+            <returns>Dictionary{System.StringSystem.String}.</returns>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.Security.AuthorizationContext.GetParts(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Get the authorization header components.
+            </summary>
+            <param name="authorizationHeader">The authorization header.</param>
+            <returns>Dictionary{System.StringSystem.String}.</returns>
         </member>
         <member name="T:Jellyfin.Server.Implementations.Users.DefaultAuthenticationProvider">
             <summary>
@@ -634,16 +800,13 @@
         <member name="M:Jellyfin.Server.Implementations.Users.UserManager.RenameUser(Jellyfin.Data.Entities.User,System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:Jellyfin.Server.Implementations.Users.UserManager.UpdateUser(Jellyfin.Data.Entities.User)">
-            <inheritdoc/>
-        </member>
         <member name="M:Jellyfin.Server.Implementations.Users.UserManager.UpdateUserAsync(Jellyfin.Data.Entities.User)">
             <inheritdoc/>
         </member>
         <member name="M:Jellyfin.Server.Implementations.Users.UserManager.CreateUserAsync(System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:Jellyfin.Server.Implementations.Users.UserManager.DeleteUser(System.Guid)">
+        <member name="M:Jellyfin.Server.Implementations.Users.UserManager.DeleteUserAsync(System.Guid)">
             <inheritdoc/>
         </member>
         <member name="M:Jellyfin.Server.Implementations.Users.UserManager.ResetPassword(Jellyfin.Data.Entities.User)">

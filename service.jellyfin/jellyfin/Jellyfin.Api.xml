@@ -31,6 +31,12 @@
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Attributes.AcceptsImageFileAttribute"/> class.
             </summary>
         </member>
+        <member name="T:Jellyfin.Api.Attributes.DlnaEnabledAttribute">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Api.Attributes.DlnaEnabledAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <inheritdoc />
+        </member>
         <member name="T:Jellyfin.Api.Attributes.HttpSubscribeAttribute">
             <summary>
             Identifies an action that supports the HTTP GET method.
@@ -123,6 +129,26 @@
         <member name="M:Jellyfin.Api.Attributes.ProducesVideoFileAttribute.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Attributes.ProducesVideoFileAttribute"/> class.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Api.Auth.AnonymousLanAccessPolicy.AnonymousLanAccessHandler">
+            <summary>
+            LAN access handler. Allows anonymous users.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Api.Auth.AnonymousLanAccessPolicy.AnonymousLanAccessHandler.#ctor(MediaBrowser.Common.Net.INetworkManager,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Api.Auth.AnonymousLanAccessPolicy.AnonymousLanAccessHandler"/> class.
+            </summary>
+            <param name="networkManager">Instance of the <see cref="T:MediaBrowser.Common.Net.INetworkManager"/> interface.</param>
+            <param name="httpContextAccessor">Instance of the <see cref="T:Microsoft.AspNetCore.Http.IHttpContextAccessor"/> interface.</param>
+        </member>
+        <member name="M:Jellyfin.Api.Auth.AnonymousLanAccessPolicy.AnonymousLanAccessHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Jellyfin.Api.Auth.AnonymousLanAccessPolicy.AnonymousLanAccessRequirement)">
+            <inheritdoc />
+        </member>
+        <member name="T:Jellyfin.Api.Auth.AnonymousLanAccessPolicy.AnonymousLanAccessRequirement">
+            <summary>
+            The local network authorization requirement. Allows anonymous users.
             </summary>
         </member>
         <member name="T:Jellyfin.Api.Auth.BaseAuthorizationHandler`1">
@@ -492,6 +518,11 @@
             Policy name for requiring local access or elevated privileges.
             </summary>
         </member>
+        <member name="F:Jellyfin.Api.Constants.Policies.AnonymousLanAccessPolicy">
+            <summary>
+            Policy name for requiring (anonymous) LAN access.
+            </summary>
+        </member>
         <member name="F:Jellyfin.Api.Constants.Policies.FirstTimeSetupOrIgnoreParentalControl">
             <summary>
             Policy name for escaping schedule controls or requiring first time setup.
@@ -564,13 +595,11 @@
             Authentication controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.ApiKeyController.#ctor(MediaBrowser.Controller.Session.ISessionManager,MediaBrowser.Controller.IServerApplicationHost,MediaBrowser.Controller.Security.IAuthenticationRepository)">
+        <member name="M:Jellyfin.Api.Controllers.ApiKeyController.#ctor(MediaBrowser.Controller.Security.IAuthenticationManager)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.ApiKeyController"/> class.
             </summary>
-            <param name="sessionManager">Instance of <see cref="T:MediaBrowser.Controller.Session.ISessionManager"/> interface.</param>
-            <param name="appHost">Instance of <see cref="T:MediaBrowser.Controller.IServerApplicationHost"/> interface.</param>
-            <param name="authRepo">Instance of <see cref="T:MediaBrowser.Controller.Security.IAuthenticationRepository"/> interface.</param>
+            <param name="authenticationManager">Instance of <see cref="T:MediaBrowser.Controller.Security.IAuthenticationManager"/> interface.</param>
         </member>
         <member name="M:Jellyfin.Api.Controllers.ApiKeyController.GetKeys">
             <summary>
@@ -608,7 +637,7 @@
             <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
             <param name="dtoService">Instance of the <see cref="T:MediaBrowser.Controller.Dto.IDtoService"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.ArtistsController.GetArtists(System.Nullable{System.Double},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],System.String[],System.String[],MediaBrowser.Model.Querying.ItemFilter[],System.Nullable{System.Boolean},System.String[],System.String[],System.Guid[],System.String[],System.String[],System.Int32[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.String,System.Guid[],System.String[],System.String[],System.Guid[],System.Nullable{System.Guid},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Boolean)">
+        <member name="M:Jellyfin.Api.Controllers.ArtistsController.GetArtists(System.Nullable{System.Double},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],Jellyfin.Data.Enums.BaseItemKind[],Jellyfin.Data.Enums.BaseItemKind[],MediaBrowser.Model.Querying.ItemFilter[],System.Nullable{System.Boolean},System.String[],System.String[],System.Guid[],System.String[],System.String[],System.Int32[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.String,System.Guid[],System.String[],System.String[],System.Guid[],System.Nullable{System.Guid},System.String,System.String,System.String,System.String[],Jellyfin.Data.Enums.SortOrder[],System.Nullable{System.Boolean},System.Boolean)">
             <summary>
             Gets all artists from a given item, folder, or the entire library.
             </summary>
@@ -640,12 +669,14 @@
             <param name="nameStartsWithOrGreater">Optional filter by items whose name is sorted equally or greater than a given input string.</param>
             <param name="nameStartsWith">Optional filter by items whose name is sorted equally than a given input string.</param>
             <param name="nameLessThan">Optional filter by items whose name is equally or lesser than a given input string.</param>
+            <param name="sortBy">Optional. Specify one or more sort orders, comma delimited.</param>
+            <param name="sortOrder">Sort Order - Ascending,Descending.</param>
             <param name="enableImages">Optional, include image information in output.</param>
             <param name="enableTotalRecordCount">Total record count.</param>
             <response code="200">Artists returned.</response>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.OkResult"/> containing the artists.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.ArtistsController.GetAlbumArtists(System.Nullable{System.Double},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],System.String[],System.String[],MediaBrowser.Model.Querying.ItemFilter[],System.Nullable{System.Boolean},System.String[],System.String[],System.Guid[],System.String[],System.String[],System.Int32[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.String,System.Guid[],System.String[],System.String[],System.Guid[],System.Nullable{System.Guid},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Boolean)">
+        <member name="M:Jellyfin.Api.Controllers.ArtistsController.GetAlbumArtists(System.Nullable{System.Double},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],Jellyfin.Data.Enums.BaseItemKind[],Jellyfin.Data.Enums.BaseItemKind[],MediaBrowser.Model.Querying.ItemFilter[],System.Nullable{System.Boolean},System.String[],System.String[],System.Guid[],System.String[],System.String[],System.Int32[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.String,System.Guid[],System.String[],System.String[],System.Guid[],System.Nullable{System.Guid},System.String,System.String,System.String,System.String[],Jellyfin.Data.Enums.SortOrder[],System.Nullable{System.Boolean},System.Boolean)">
             <summary>
             Gets all album artists from a given item, folder, or the entire library.
             </summary>
@@ -677,6 +708,8 @@
             <param name="nameStartsWithOrGreater">Optional filter by items whose name is sorted equally or greater than a given input string.</param>
             <param name="nameStartsWith">Optional filter by items whose name is sorted equally than a given input string.</param>
             <param name="nameLessThan">Optional filter by items whose name is equally or lesser than a given input string.</param>
+            <param name="sortBy">Optional. Specify one or more sort orders, comma delimited.</param>
+            <param name="sortOrder">Sort Order - Ascending,Descending.</param>
             <param name="enableImages">Optional, include image information in output.</param>
             <param name="enableTotalRecordCount">Total record count.</param>
             <response code="200">Album artists returned.</response>
@@ -748,7 +781,7 @@
             <param name="cpuCoreLimit">Optional. The limit of how many cpu cores to use.</param>
             <param name="liveStreamId">The live stream id.</param>
             <param name="enableMpegtsM2TsMode">Optional. Whether to enable the MpegtsM2Ts mode.</param>
-            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vpx, wmv.</param>
+            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vp8, vp9, vpx (deprecated), wmv.</param>
             <param name="subtitleCodec">Optional. Specify a subtitle codec to encode to.</param>
             <param name="transcodeReasons">Optional. The transcoding reason.</param>
             <param name="audioStreamIndex">Optional. The index of the audio stream to use. If omitted the first audio stream will be used.</param>
@@ -804,7 +837,7 @@
             <param name="cpuCoreLimit">Optional. The limit of how many cpu cores to use.</param>
             <param name="liveStreamId">The live stream id.</param>
             <param name="enableMpegtsM2TsMode">Optional. Whether to enable the MpegtsM2Ts mode.</param>
-            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vpx, wmv.</param>
+            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vp8, vp9, vpx (deprecated), wmv.</param>
             <param name="subtitleCodec">Optional. Specify a subtitle codec to encode to.</param>
             <param name="transcodeReasons">Optional. The transcoding reason.</param>
             <param name="audioStreamIndex">Optional. The index of the audio stream to use. If omitted the first audio stream will be used.</param>
@@ -918,6 +951,27 @@
             The task result contains an <see cref="T:Microsoft.AspNetCore.Mvc.OkResult"/> containing the latest channel items.
             </returns>
         </member>
+        <member name="T:Jellyfin.Api.Controllers.ClientLogController">
+            <summary>
+            Client log controller.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Api.Controllers.ClientLogController.#ctor(MediaBrowser.Controller.ClientEvent.IClientEventLogger,MediaBrowser.Controller.Configuration.IServerConfigurationManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.ClientLogController"/> class.
+            </summary>
+            <param name="clientEventLogger">Instance of the <see cref="T:MediaBrowser.Controller.ClientEvent.IClientEventLogger"/> interface.</param>
+            <param name="serverConfigurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
+        </member>
+        <member name="M:Jellyfin.Api.Controllers.ClientLogController.LogFile">
+            <summary>
+            Upload a document.
+            </summary>
+            <response code="200">Document saved.</response>
+            <response code="403">Event logging disabled.</response>
+            <response code="413">Upload size too large.</response>
+            <returns>Create response.</returns>
+        </member>
         <member name="T:Jellyfin.Api.Controllers.CollectionController">
             <summary>
             The collection controller.
@@ -995,11 +1049,12 @@
             <response code="200">Configuration returned.</response>
             <returns>Configuration.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.ConfigurationController.UpdateNamedConfiguration(System.String)">
+        <member name="M:Jellyfin.Api.Controllers.ConfigurationController.UpdateNamedConfiguration(System.String,System.Text.Json.JsonDocument)">
             <summary>
             Updates named configuration.
             </summary>
             <param name="key">Configuration key.</param>
+            <param name="configuration">Configuration.</param>
             <response code="204">Named configuration updated.</response>
             <returns>Update status.</returns>
         </member>
@@ -1023,20 +1078,18 @@
             The dashboard controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.DashboardController.#ctor(Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Controllers.DashboardController},MediaBrowser.Controller.IServerApplicationHost,MediaBrowser.Common.Plugins.IPluginManager)">
+        <member name="M:Jellyfin.Api.Controllers.DashboardController.#ctor(Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Controllers.DashboardController},MediaBrowser.Common.Plugins.IPluginManager)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.DashboardController"/> class.
             </summary>
             <param name="logger">Instance of <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
-            <param name="appHost">Instance of <see cref="T:MediaBrowser.Controller.IServerApplicationHost"/> interface.</param>
             <param name="pluginManager">Instance of <see cref="T:MediaBrowser.Common.Plugins.IPluginManager"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.DashboardController.GetConfigurationPages(System.Nullable{System.Boolean},System.Nullable{MediaBrowser.Controller.Plugins.ConfigurationPageType})">
+        <member name="M:Jellyfin.Api.Controllers.DashboardController.GetConfigurationPages(System.Nullable{System.Boolean})">
             <summary>
             Gets the configuration pages.
             </summary>
             <param name="enableInMainMenu">Whether to enable in the main menu.</param>
-            <param name="pageType">The <see cref="T:Jellyfin.Api.Models.ConfigurationPageInfo"/>.</param>
             <response code="200">ConfigurationPages returned.</response>
             <response code="404">Server still loading.</response>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> with infos about the plugins.</returns>
@@ -1055,12 +1108,11 @@
             Devices Controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.DevicesController.#ctor(MediaBrowser.Controller.Devices.IDeviceManager,MediaBrowser.Controller.Security.IAuthenticationRepository,MediaBrowser.Controller.Session.ISessionManager)">
+        <member name="M:Jellyfin.Api.Controllers.DevicesController.#ctor(MediaBrowser.Controller.Devices.IDeviceManager,MediaBrowser.Controller.Session.ISessionManager)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.DevicesController"/> class.
             </summary>
             <param name="deviceManager">Instance of <see cref="T:MediaBrowser.Controller.Devices.IDeviceManager"/> interface.</param>
-            <param name="authenticationRepository">Instance of <see cref="T:MediaBrowser.Controller.Security.IAuthenticationRepository"/> interface.</param>
             <param name="sessionManager">Instance of <see cref="T:MediaBrowser.Controller.Session.ISessionManager"/> interface.</param>
         </member>
         <member name="M:Jellyfin.Api.Controllers.DevicesController.GetDevices(System.Nullable{System.Boolean},System.Nullable{System.Guid})">
@@ -1090,15 +1142,14 @@
             <response code="404">Device not found.</response>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.OkResult"/> containing the device info on success, or a <see cref="T:Microsoft.AspNetCore.Mvc.NotFoundResult"/> if the device could not be found.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.DevicesController.UpdateDeviceOptions(System.String,MediaBrowser.Model.Devices.DeviceOptions)">
+        <member name="M:Jellyfin.Api.Controllers.DevicesController.UpdateDeviceOptions(System.String,Jellyfin.Data.Dtos.DeviceOptionsDto)">
             <summary>
             Update device options.
             </summary>
             <param name="id">Device Id.</param>
             <param name="deviceOptions">Device Options.</param>
             <response code="204">Device options updated.</response>
-            <response code="404">Device not found.</response>
-            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult"/> on success, or a <see cref="T:Microsoft.AspNetCore.Mvc.NotFoundResult"/> if the device could not be found.</returns>
+            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult"/>.</returns>
         </member>
         <member name="M:Jellyfin.Api.Controllers.DevicesController.DeleteDevice(System.String)">
             <summary>
@@ -1131,7 +1182,7 @@
             <response code="200">Display preferences retrieved.</response>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.OkResult"/> containing the display preferences on success, or a <see cref="T:Microsoft.AspNetCore.Mvc.NotFoundResult"/> if the display preferences could not be found.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.DisplayPreferencesController.UpdateDisplayPreferences(System.String,System.Guid,System.String,MediaBrowser.Model.Entities.DisplayPreferencesDto)">
+        <member name="M:Jellyfin.Api.Controllers.DisplayPreferencesController.UpdateDisplayPreferences(System.String,System.Guid,System.String,MediaBrowser.Model.Dto.DisplayPreferencesDto)">
             <summary>
             Update Display Preferences.
             </summary>
@@ -1330,7 +1381,7 @@
             Dynamic hls controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.#ctor(MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Dlna.IDlnaManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder,Microsoft.Extensions.Configuration.IConfiguration,MediaBrowser.Controller.Devices.IDeviceManager,Jellyfin.Api.Helpers.TranscodingJobHelper,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Controllers.DynamicHlsController},Jellyfin.Api.Helpers.DynamicHlsHelper)">
+        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.#ctor(MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Dlna.IDlnaManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.Devices.IDeviceManager,Jellyfin.Api.Helpers.TranscodingJobHelper,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Controllers.DynamicHlsController},Jellyfin.Api.Helpers.DynamicHlsHelper,MediaBrowser.Controller.MediaEncoding.EncodingHelper,Jellyfin.MediaEncoding.Hls.Playlist.IDynamicHlsPlaylistGenerator)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.DynamicHlsController"/> class.
             </summary>
@@ -1342,25 +1393,26 @@
             <param name="serverConfigurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
             <param name="mediaEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.IMediaEncoder"/> interface.</param>
             <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
-            <param name="subtitleEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder"/> interface.</param>
-            <param name="configuration">Instance of the <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> interface.</param>
             <param name="deviceManager">Instance of the <see cref="T:MediaBrowser.Controller.Devices.IDeviceManager"/> interface.</param>
             <param name="transcodingJobHelper">Instance of the <see cref="T:Jellyfin.Api.Helpers.TranscodingJobHelper"/> class.</param>
             <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
             <param name="dynamicHlsHelper">Instance of <see cref="T:Jellyfin.Api.Helpers.DynamicHlsHelper"/>.</param>
+            <param name="encodingHelper">Instance of <see cref="T:MediaBrowser.Controller.MediaEncoding.EncodingHelper"/>.</param>
+            <param name="dynamicHlsPlaylistGenerator">Instance of <see cref="T:Jellyfin.MediaEncoding.Hls.Playlist.IDynamicHlsPlaylistGenerator"/>.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.GetMasterHlsVideoPlaylist(System.Guid,System.Nullable{System.Boolean},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.SubtitleDeliveryMethod},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.EncodingContext},System.Collections.Generic.Dictionary{System.String,System.String},System.Boolean)">
+        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.GetLiveHlsStream(System.Guid,System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.SubtitleDeliveryMethod},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.EncodingContext},System.Collections.Generic.Dictionary{System.String,System.String},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean})">
             <summary>
-            Gets a video hls playlist stream.
+            Gets a hls live stream.
             </summary>
             <param name="itemId">The item id.</param>
+            <param name="container">The audio container.</param>
             <param name="static">Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.</param>
             <param name="params">The streaming parameters.</param>
             <param name="tag">The tag.</param>
             <param name="deviceProfileId">Optional. The dlna device profile id to utilize.</param>
             <param name="playSessionId">The play session id.</param>
             <param name="segmentContainer">The segment container.</param>
-            <param name="segmentLength">The segment length.</param>
+            <param name="segmentLength">The segment lenght.</param>
             <param name="minSegments">The minimum number of segments.</param>
             <param name="mediaSourceId">The media version id, if playing an alternate version.</param>
             <param name="deviceId">The device id of the client requesting. Used to stop encoding processes when needed.</param>
@@ -1394,7 +1446,67 @@
             <param name="cpuCoreLimit">Optional. The limit of how many cpu cores to use.</param>
             <param name="liveStreamId">The live stream id.</param>
             <param name="enableMpegtsM2TsMode">Optional. Whether to enable the MpegtsM2Ts mode.</param>
-            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vpx, wmv.</param>
+            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vp8, vp9, vpx (deprecated), wmv.</param>
+            <param name="subtitleCodec">Optional. Specify a subtitle codec to encode to.</param>
+            <param name="transcodeReasons">Optional. The transcoding reason.</param>
+            <param name="audioStreamIndex">Optional. The index of the audio stream to use. If omitted the first audio stream will be used.</param>
+            <param name="videoStreamIndex">Optional. The index of the video stream to use. If omitted the first video stream will be used.</param>
+            <param name="context">Optional. The <see cref="T:MediaBrowser.Model.Dlna.EncodingContext"/>.</param>
+            <param name="streamOptions">Optional. The streaming options.</param>
+            <param name="maxWidth">Optional. The max width.</param>
+            <param name="maxHeight">Optional. The max height.</param>
+            <param name="enableSubtitlesInManifest">Optional. Whether to enable subtitles in the manifest.</param>
+            <response code="200">Hls live stream retrieved.</response>
+            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.FileResult"/> containing the hls file.</returns>
+        </member>
+        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.GetMasterHlsVideoPlaylist(System.Guid,System.Nullable{System.Boolean},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.SubtitleDeliveryMethod},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.EncodingContext},System.Collections.Generic.Dictionary{System.String,System.String},System.Boolean)">
+            <summary>
+            Gets a video hls playlist stream.
+            </summary>
+            <param name="itemId">The item id.</param>
+            <param name="static">Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.</param>
+            <param name="params">The streaming parameters.</param>
+            <param name="tag">The tag.</param>
+            <param name="deviceProfileId">Optional. The dlna device profile id to utilize.</param>
+            <param name="playSessionId">The play session id.</param>
+            <param name="segmentContainer">The segment container.</param>
+            <param name="segmentLength">The segment length.</param>
+            <param name="minSegments">The minimum number of segments.</param>
+            <param name="mediaSourceId">The media version id, if playing an alternate version.</param>
+            <param name="deviceId">The device id of the client requesting. Used to stop encoding processes when needed.</param>
+            <param name="audioCodec">Optional. Specify a audio codec to encode to, e.g. mp3. If omitted the server will auto-select using the url's extension. Options: aac, mp3, vorbis, wma.</param>
+            <param name="enableAutoStreamCopy">Whether or not to allow automatic stream copy if requested values match the original source. Defaults to true.</param>
+            <param name="allowVideoStreamCopy">Whether or not to allow copying of the video stream url.</param>
+            <param name="allowAudioStreamCopy">Whether or not to allow copying of the audio stream url.</param>
+            <param name="breakOnNonKeyFrames">Optional. Whether to break on non key frames.</param>
+            <param name="audioSampleRate">Optional. Specify a specific audio sample rate, e.g. 44100.</param>
+            <param name="maxAudioBitDepth">Optional. The maximum audio bit depth.</param>
+            <param name="audioBitRate">Optional. Specify an audio bitrate to encode to, e.g. 128000. If omitted this will be left to encoder defaults.</param>
+            <param name="audioChannels">Optional. Specify a specific number of audio channels to encode to, e.g. 2.</param>
+            <param name="maxAudioChannels">Optional. Specify a maximum number of audio channels to encode to, e.g. 2.</param>
+            <param name="profile">Optional. Specify a specific an encoder profile (varies by encoder), e.g. main, baseline, high.</param>
+            <param name="level">Optional. Specify a level for the encoder profile (varies by encoder), e.g. 3, 3.1.</param>
+            <param name="framerate">Optional. A specific video framerate to encode to, e.g. 23.976. Generally this should be omitted unless the device has specific requirements.</param>
+            <param name="maxFramerate">Optional. A specific maximum video framerate to encode to, e.g. 23.976. Generally this should be omitted unless the device has specific requirements.</param>
+            <param name="copyTimestamps">Whether or not to copy timestamps when transcoding with an offset. Defaults to false.</param>
+            <param name="startTimeTicks">Optional. Specify a starting offset, in ticks. 1 tick = 10000 ms.</param>
+            <param name="width">Optional. The fixed horizontal resolution of the encoded video.</param>
+            <param name="height">Optional. The fixed vertical resolution of the encoded video.</param>
+            <param name="maxWidth">Optional. The maximum horizontal resolution of the encoded video.</param>
+            <param name="maxHeight">Optional. The maximum vertical resolution of the encoded video.</param>
+            <param name="videoBitRate">Optional. Specify a video bitrate to encode to, e.g. 500000. If omitted this will be left to encoder defaults.</param>
+            <param name="subtitleStreamIndex">Optional. The index of the subtitle stream to use. If omitted no subtitles will be used.</param>
+            <param name="subtitleMethod">Optional. Specify the subtitle delivery method.</param>
+            <param name="maxRefFrames">Optional.</param>
+            <param name="maxVideoBitDepth">Optional. The maximum video bit depth.</param>
+            <param name="requireAvc">Optional. Whether to require avc.</param>
+            <param name="deInterlace">Optional. Whether to deinterlace the video.</param>
+            <param name="requireNonAnamorphic">Optional. Whether to require a non anamorphic stream.</param>
+            <param name="transcodingMaxAudioChannels">Optional. The maximum number of audio channels to transcode.</param>
+            <param name="cpuCoreLimit">Optional. The limit of how many cpu cores to use.</param>
+            <param name="liveStreamId">The live stream id.</param>
+            <param name="enableMpegtsM2TsMode">Optional. Whether to enable the MpegtsM2Ts mode.</param>
+            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vp8, vp9, vpx (deprecated), wmv.</param>
             <param name="subtitleCodec">Optional. Specify a subtitle codec to encode to.</param>
             <param name="transcodeReasons">Optional. The transcoding reason.</param>
             <param name="audioStreamIndex">Optional. The index of the audio stream to use. If omitted the first audio stream will be used.</param>
@@ -1451,7 +1563,7 @@
             <param name="cpuCoreLimit">Optional. The limit of how many cpu cores to use.</param>
             <param name="liveStreamId">The live stream id.</param>
             <param name="enableMpegtsM2TsMode">Optional. Whether to enable the MpegtsM2Ts mode.</param>
-            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vpx, wmv.</param>
+            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vp8, vp9, vpx (deprecated), wmv.</param>
             <param name="subtitleCodec">Optional. Specify a subtitle codec to encode to.</param>
             <param name="transcodeReasons">Optional. The transcoding reason.</param>
             <param name="audioStreamIndex">Optional. The index of the audio stream to use. If omitted the first audio stream will be used.</param>
@@ -1462,7 +1574,7 @@
             <response code="200">Audio stream returned.</response>
             <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.FileResult"/> containing the playlist file.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.GetVariantHlsVideoPlaylist(System.Guid,System.Nullable{System.Boolean},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.SubtitleDeliveryMethod},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.EncodingContext},System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.GetVariantHlsVideoPlaylist(System.Guid,System.Nullable{System.Boolean},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.SubtitleDeliveryMethod},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.EncodingContext},System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             Gets a video stream using HTTP live streaming.
             </summary>
@@ -1495,6 +1607,8 @@
             <param name="startTimeTicks">Optional. Specify a starting offset, in ticks. 1 tick = 10000 ms.</param>
             <param name="width">Optional. The fixed horizontal resolution of the encoded video.</param>
             <param name="height">Optional. The fixed vertical resolution of the encoded video.</param>
+            <param name="maxWidth">Optional. The maximum horizontal resolution of the encoded video.</param>
+            <param name="maxHeight">Optional. The maximum vertical resolution of the encoded video.</param>
             <param name="videoBitRate">Optional. Specify a video bitrate to encode to, e.g. 500000. If omitted this will be left to encoder defaults.</param>
             <param name="subtitleStreamIndex">Optional. The index of the subtitle stream to use. If omitted no subtitles will be used.</param>
             <param name="subtitleMethod">Optional. Specify the subtitle delivery method.</param>
@@ -1507,7 +1621,7 @@
             <param name="cpuCoreLimit">Optional. The limit of how many cpu cores to use.</param>
             <param name="liveStreamId">The live stream id.</param>
             <param name="enableMpegtsM2TsMode">Optional. Whether to enable the MpegtsM2Ts mode.</param>
-            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vpx, wmv.</param>
+            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vp8, vp9, vpx (deprecated), wmv.</param>
             <param name="subtitleCodec">Optional. Specify a subtitle codec to encode to.</param>
             <param name="transcodeReasons">Optional. The transcoding reason.</param>
             <param name="audioStreamIndex">Optional. The index of the audio stream to use. If omitted the first audio stream will be used.</param>
@@ -1573,7 +1687,7 @@
             <response code="200">Audio stream returned.</response>
             <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.FileResult"/> containing the audio file.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.GetHlsVideoSegment(System.Guid,System.String,System.Int32,System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.SubtitleDeliveryMethod},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.EncodingContext},System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.GetHlsVideoSegment(System.Guid,System.String,System.Int32,System.String,System.Int64,System.Int64,System.Nullable{System.Boolean},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.SubtitleDeliveryMethod},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.EncodingContext},System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             Gets a video stream using HTTP live streaming.
             </summary>
@@ -1581,13 +1695,15 @@
             <param name="playlistId">The playlist id.</param>
             <param name="segmentId">The segment id.</param>
             <param name="container">The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv. </param>
+            <param name="runtimeTicks">The position of the requested segment in ticks.</param>
+            <param name="actualSegmentLengthTicks">The length of the requested segment in ticks.</param>
             <param name="static">Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.</param>
             <param name="params">The streaming parameters.</param>
             <param name="tag">The tag.</param>
             <param name="deviceProfileId">Optional. The dlna device profile id to utilize.</param>
             <param name="playSessionId">The play session id.</param>
             <param name="segmentContainer">The segment container.</param>
-            <param name="segmentLength">The segment lenght.</param>
+            <param name="segmentLength">The desired segment length.</param>
             <param name="minSegments">The minimum number of segments.</param>
             <param name="mediaSourceId">The media version id, if playing an alternate version.</param>
             <param name="deviceId">The device id of the client requesting. Used to stop encoding processes when needed.</param>
@@ -1609,6 +1725,8 @@
             <param name="startTimeTicks">Optional. Specify a starting offset, in ticks. 1 tick = 10000 ms.</param>
             <param name="width">Optional. The fixed horizontal resolution of the encoded video.</param>
             <param name="height">Optional. The fixed vertical resolution of the encoded video.</param>
+            <param name="maxWidth">Optional. The maximum horizontal resolution of the encoded video.</param>
+            <param name="maxHeight">Optional. The maximum vertical resolution of the encoded video.</param>
             <param name="videoBitRate">Optional. Specify a video bitrate to encode to, e.g. 500000. If omitted this will be left to encoder defaults.</param>
             <param name="subtitleStreamIndex">Optional. The index of the subtitle stream to use. If omitted no subtitles will be used.</param>
             <param name="subtitleMethod">Optional. Specify the subtitle delivery method.</param>
@@ -1621,7 +1739,7 @@
             <param name="cpuCoreLimit">Optional. The limit of how many cpu cores to use.</param>
             <param name="liveStreamId">The live stream id.</param>
             <param name="enableMpegtsM2TsMode">Optional. Whether to enable the MpegtsM2Ts mode.</param>
-            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vpx, wmv.</param>
+            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vp8, vp9, vpx (deprecated), wmv.</param>
             <param name="subtitleCodec">Optional. Specify a subtitle codec to encode to.</param>
             <param name="transcodeReasons">Optional. The transcoding reason.</param>
             <param name="audioStreamIndex">Optional. The index of the audio stream to use. If omitted the first audio stream will be used.</param>
@@ -1631,7 +1749,7 @@
             <response code="200">Video stream returned.</response>
             <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.FileResult"/> containing the audio file.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.GetHlsAudioSegment(System.Guid,System.String,System.Int32,System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.SubtitleDeliveryMethod},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.EncodingContext},System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.GetHlsAudioSegment(System.Guid,System.String,System.Int32,System.String,System.Int64,System.Int64,System.Nullable{System.Boolean},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.SubtitleDeliveryMethod},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.EncodingContext},System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             Gets a video stream using HTTP live streaming.
             </summary>
@@ -1639,6 +1757,8 @@
             <param name="playlistId">The playlist id.</param>
             <param name="segmentId">The segment id.</param>
             <param name="container">The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv. </param>
+            <param name="runtimeTicks">The position of the requested segment in ticks.</param>
+            <param name="actualSegmentLengthTicks">The length of the requested segment in ticks.</param>
             <param name="static">Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.</param>
             <param name="params">The streaming parameters.</param>
             <param name="tag">The tag.</param>
@@ -1697,12 +1817,13 @@
             <param name="state">The <see cref="T:Jellyfin.Api.Models.StreamingDtos.StreamState"/>.</param>
             <returns>The command line arguments for audio transcoding.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.GetVideoArguments(Jellyfin.Api.Models.StreamingDtos.StreamState,System.Int32)">
+        <member name="M:Jellyfin.Api.Controllers.DynamicHlsController.GetVideoArguments(Jellyfin.Api.Models.StreamingDtos.StreamState,System.Int32,System.Boolean)">
             <summary>
             Gets the video arguments for transcoding.
             </summary>
             <param name="state">The <see cref="T:Jellyfin.Api.Models.StreamingDtos.StreamState"/>.</param>
             <param name="startNumber">The first number in the hls sequence.</param>
+            <param name="isEventPlaylist">Whether the playlist is EVENT or VOD.</param>
             <returns>The command line arguments for video transcoding.</returns>
         </member>
         <member name="T:Jellyfin.Api.Controllers.EnvironmentController">
@@ -1776,7 +1897,7 @@
             <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
             <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.FilterController.GetQueryFiltersLegacy(System.Nullable{System.Guid},System.Nullable{System.Guid},System.String[],System.String[])">
+        <member name="M:Jellyfin.Api.Controllers.FilterController.GetQueryFiltersLegacy(System.Nullable{System.Guid},System.Nullable{System.Guid},Jellyfin.Data.Enums.BaseItemKind[],System.String[])">
             <summary>
             Gets legacy query filters.
             </summary>
@@ -1787,7 +1908,7 @@
             <response code="200">Legacy filters retrieved.</response>
             <returns>Legacy query filters.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.FilterController.GetQueryFilters(System.Nullable{System.Guid},System.Nullable{System.Guid},System.String[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+        <member name="M:Jellyfin.Api.Controllers.FilterController.GetQueryFilters(System.Nullable{System.Guid},System.Nullable{System.Guid},Jellyfin.Data.Enums.BaseItemKind[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
             <summary>
             Gets query filters.
             </summary>
@@ -1817,7 +1938,7 @@
             <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
             <param name="dtoService">Instance of the <see cref="T:MediaBrowser.Controller.Dto.IDtoService"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.GenresController.GetGenres(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],System.String[],System.String[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Guid},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Boolean)">
+        <member name="M:Jellyfin.Api.Controllers.GenresController.GetGenres(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],Jellyfin.Data.Enums.BaseItemKind[],Jellyfin.Data.Enums.BaseItemKind[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Guid},System.String,System.String,System.String,System.String[],Jellyfin.Data.Enums.SortOrder[],System.Nullable{System.Boolean},System.Boolean)">
             <summary>
             Gets all genres from a given item, folder, or the entire library.
             </summary>
@@ -1835,6 +1956,8 @@
             <param name="nameStartsWithOrGreater">Optional filter by items whose name is sorted equally or greater than a given input string.</param>
             <param name="nameStartsWith">Optional filter by items whose name is sorted equally than a given input string.</param>
             <param name="nameLessThan">Optional filter by items whose name is equally or lesser than a given input string.</param>
+            <param name="sortBy">Optional. Specify one or more sort orders, comma delimited.</param>
+            <param name="sortOrder">Sort Order - Ascending,Descending.</param>
             <param name="enableImages">Optional, include image information in output.</param>
             <param name="enableTotalRecordCount">Optional. Include total record count.</param>
             <response code="200">Genres returned.</response>
@@ -1978,7 +2101,7 @@
             Image controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.ImageController.#ctor(MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Drawing.IImageProcessor,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.Net.IAuthorizationContext,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Controllers.ImageController},MediaBrowser.Controller.Configuration.IServerConfigurationManager)">
+        <member name="M:Jellyfin.Api.Controllers.ImageController.#ctor(MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Drawing.IImageProcessor,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.Net.IAuthorizationContext,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Controllers.ImageController},MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Common.Configuration.IApplicationPaths,MediaBrowser.Controller.Drawing.IImageEncoder)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.ImageController"/> class.
             </summary>
@@ -1990,6 +2113,8 @@
             <param name="authContext">Instance of the <see cref="T:MediaBrowser.Controller.Net.IAuthorizationContext"/> interface.</param>
             <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
             <param name="serverConfigurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
+            <param name="appPaths">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IApplicationPaths"/> interface.</param>
+            <param name="imageEncoder">Instance of the <see cref="T:MediaBrowser.Controller.Drawing.IImageEncoder"/> interface.</param>
         </member>
         <member name="M:Jellyfin.Api.Controllers.ImageController.PostUserImage(System.Guid,MediaBrowser.Model.Entities.ImageType,System.Nullable{System.Int32})">
             <summary>
@@ -2519,6 +2644,35 @@
             or a <see cref="T:Microsoft.AspNetCore.Mvc.NotFoundResult"/> if item not found.
             </returns>
         </member>
+        <member name="M:Jellyfin.Api.Controllers.ImageController.GetSplashscreen(System.String,System.Nullable{MediaBrowser.Model.Drawing.ImageFormat},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Int32)">
+            <summary>
+            Generates or gets the splashscreen.
+            </summary>
+            <param name="tag">Supply the cache tag from the item object to receive strong caching headers.</param>
+            <param name="format">Determines the output format of the image - original,gif,jpg,png.</param>
+            <param name="maxWidth">The maximum image width to return.</param>
+            <param name="maxHeight">The maximum image height to return.</param>
+            <param name="width">The fixed image width to return.</param>
+            <param name="height">The fixed image height to return.</param>
+            <param name="fillWidth">Width of box to fill.</param>
+            <param name="fillHeight">Height of box to fill.</param>
+            <param name="blur">Blur image.</param>
+            <param name="backgroundColor">Apply a background color for transparent images.</param>
+            <param name="foregroundLayer">Apply a foreground layer on top of the image.</param>
+            <param name="quality">Quality setting, from 0-100.</param>
+            <response code="200">Splashscreen returned successfully.</response>
+            <returns>The splashscreen.</returns>
+        </member>
+        <member name="M:Jellyfin.Api.Controllers.ImageController.UploadCustomSplashscreen">
+            <summary>
+            Uploads a custom splashscreen.
+            </summary>
+            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult"/> indicating success.</returns>
+            <response code="204">Successfully uploaded new splashscreen.</response>
+            <response code="400">Error reading MimeType from uploaded image.</response>
+            <response code="403">User does not have permission to upload splashscreen..</response>
+            <exception cref="T:System.ArgumentException">Error reading the image format.</exception>
+        </member>
         <member name="T:Jellyfin.Api.Controllers.InstantMixController">
             <summary>
             The instant mix controller.
@@ -2608,21 +2762,6 @@
             <response code="200">Instant playlist returned.</response>
             <returns>A <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/> with the playlist items.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.InstantMixController.GetInstantMixFromMusicGenreById(System.Guid,System.Nullable{System.Guid},System.Nullable{System.Int32},MediaBrowser.Model.Querying.ItemFields[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[])">
-            <summary>
-            Creates an instant playlist based on a given genre.
-            </summary>
-            <param name="id">The item id.</param>
-            <param name="userId">Optional. Filter by user id, and attach user data.</param>
-            <param name="limit">Optional. The maximum number of records to return.</param>
-            <param name="fields">Optional. Specify additional fields of information to return in the output.</param>
-            <param name="enableImages">Optional. Include image information in output.</param>
-            <param name="enableUserData">Optional. Include user data.</param>
-            <param name="imageTypeLimit">Optional. The max number of images to return, per image type.</param>
-            <param name="enableImageTypes">Optional. The image types to include in the output.</param>
-            <response code="200">Instant playlist returned.</response>
-            <returns>A <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/> with the playlist items.</returns>
-        </member>
         <member name="M:Jellyfin.Api.Controllers.InstantMixController.GetInstantMixFromItem(System.Guid,System.Nullable{System.Guid},System.Nullable{System.Int32},MediaBrowser.Model.Querying.ItemFields[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[])">
             <summary>
             Creates an instant playlist based on a given item.
@@ -2653,7 +2792,7 @@
             <response code="200">Instant playlist returned.</response>
             <returns>A <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/> with the playlist items.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.InstantMixController.GetInstantMixFromMusicGenreById2(System.Guid,System.Nullable{System.Guid},System.Nullable{System.Int32},MediaBrowser.Model.Querying.ItemFields[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[])">
+        <member name="M:Jellyfin.Api.Controllers.InstantMixController.GetInstantMixFromMusicGenreById(System.Guid,System.Nullable{System.Guid},System.Nullable{System.Int32},MediaBrowser.Model.Querying.ItemFields[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[])">
             <summary>
             Creates an instant playlist based on a given genre.
             </summary>
@@ -2673,12 +2812,11 @@
             Item lookup controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.ItemLookupController.#ctor(MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.Library.ILibraryManager,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Controllers.ItemLookupController})">
+        <member name="M:Jellyfin.Api.Controllers.ItemLookupController.#ctor(MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.Library.ILibraryManager,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Controllers.ItemLookupController})">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.ItemLookupController"/> class.
             </summary>
             <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
-            <param name="serverConfigurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
             <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
             <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
             <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
@@ -2817,7 +2955,7 @@
             <param name="providerManager">Instance of <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
             <param name="fileSystem">Instance of <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.ItemRefreshController.Post(System.Guid,MediaBrowser.Controller.Providers.MetadataRefreshMode,MediaBrowser.Controller.Providers.MetadataRefreshMode,System.Boolean,System.Boolean)">
+        <member name="M:Jellyfin.Api.Controllers.ItemRefreshController.RefreshItem(System.Guid,MediaBrowser.Controller.Providers.MetadataRefreshMode,MediaBrowser.Controller.Providers.MetadataRefreshMode,System.Boolean,System.Boolean)">
             <summary>
             Refreshes metadata for an item.
             </summary>
@@ -2835,7 +2973,7 @@
             The items controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.ItemsController.#ctor(MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Model.Globalization.ILocalizationManager,MediaBrowser.Controller.Dto.IDtoService,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Controllers.ItemsController})">
+        <member name="M:Jellyfin.Api.Controllers.ItemsController.#ctor(MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Model.Globalization.ILocalizationManager,MediaBrowser.Controller.Dto.IDtoService,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Controllers.ItemsController},MediaBrowser.Controller.Session.ISessionManager)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.ItemsController"/> class.
             </summary>
@@ -2844,8 +2982,9 @@
             <param name="localization">Instance of the <see cref="T:MediaBrowser.Model.Globalization.ILocalizationManager"/> interface.</param>
             <param name="dtoService">Instance of the <see cref="T:MediaBrowser.Controller.Dto.IDtoService"/> interface.</param>
             <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger"/> interface.</param>
+            <param name="sessionManager">Instance of the <see cref="T:MediaBrowser.Controller.Session.ISessionManager"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.ItemsController.GetItems(System.Nullable{System.Guid},System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},MediaBrowser.Model.Entities.LocationType[],MediaBrowser.Model.Entities.LocationType[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Guid[],System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.String,Jellyfin.Data.Enums.SortOrder[],System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],System.String[],System.String[],MediaBrowser.Model.Querying.ItemFilter[],System.Nullable{System.Boolean},System.String[],MediaBrowser.Model.Entities.ImageType[],System.String[],System.Nullable{System.Boolean},System.String[],System.String[],System.String[],System.Int32[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.String,System.Guid[],System.String[],System.String[],System.String[],System.Guid[],System.Guid[],System.Guid[],System.Guid[],System.String[],System.Guid[],System.Guid[],MediaBrowser.Model.Entities.VideoType[],System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},MediaBrowser.Model.Entities.SeriesStatus[],System.String,System.String,System.String,System.Guid[],System.Guid[],System.Boolean,System.Nullable{System.Boolean})">
+        <member name="M:Jellyfin.Api.Controllers.ItemsController.GetItems(System.Guid,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},MediaBrowser.Model.Entities.LocationType[],MediaBrowser.Model.Entities.LocationType[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Guid[],System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.String,Jellyfin.Data.Enums.SortOrder[],System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],Jellyfin.Data.Enums.BaseItemKind[],Jellyfin.Data.Enums.BaseItemKind[],MediaBrowser.Model.Querying.ItemFilter[],System.Nullable{System.Boolean},System.String[],MediaBrowser.Model.Entities.ImageType[],System.String[],System.Nullable{System.Boolean},System.String[],System.String[],System.String[],System.Int32[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.String,System.Guid[],System.String[],System.String[],System.String[],System.Guid[],System.Guid[],System.Guid[],System.Guid[],System.String[],System.Guid[],System.Guid[],MediaBrowser.Model.Entities.VideoType[],System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},MediaBrowser.Model.Entities.SeriesStatus[],System.String,System.String,System.String,System.Guid[],System.Guid[],System.Boolean,System.Nullable{System.Boolean})">
             <summary>
             Gets items based on a query.
             </summary>
@@ -2875,6 +3014,11 @@
             <param name="hasImdbId">Optional filter by items that have an imdb id or not.</param>
             <param name="hasTmdbId">Optional filter by items that have a tmdb id or not.</param>
             <param name="hasTvdbId">Optional filter by items that have a tvdb id or not.</param>
+            <param name="isMovie">Optional filter for live tv movies.</param>
+            <param name="isSeries">Optional filter for live tv series.</param>
+            <param name="isNews">Optional filter for live tv news.</param>
+            <param name="isKids">Optional filter for live tv kids.</param>
+            <param name="isSports">Optional filter for live tv sports.</param>
             <param name="excludeItemIds">Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.</param>
             <param name="startIndex">Optional. The record index to start at. All items with a lower index will be dropped from the results.</param>
             <param name="limit">Optional. The maximum number of records to return.</param>
@@ -2931,7 +3075,7 @@
             <param name="enableImages">Optional, include image information in output.</param>
             <returns>A <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/> with the items.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.ItemsController.GetItemsByUserId(System.Guid,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},MediaBrowser.Model.Entities.LocationType[],MediaBrowser.Model.Entities.LocationType[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Guid[],System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.String,Jellyfin.Data.Enums.SortOrder[],System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],System.String[],System.String[],MediaBrowser.Model.Querying.ItemFilter[],System.Nullable{System.Boolean},System.String[],MediaBrowser.Model.Entities.ImageType[],System.String[],System.Nullable{System.Boolean},System.String[],System.String[],System.String[],System.Int32[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.String,System.Guid[],System.String[],System.String[],System.String[],System.Guid[],System.Guid[],System.Guid[],System.Guid[],System.String[],System.Guid[],System.Guid[],MediaBrowser.Model.Entities.VideoType[],System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},MediaBrowser.Model.Entities.SeriesStatus[],System.String,System.String,System.String,System.Guid[],System.Guid[],System.Boolean,System.Nullable{System.Boolean})">
+        <member name="M:Jellyfin.Api.Controllers.ItemsController.GetItemsByUserId(System.Guid,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},MediaBrowser.Model.Entities.LocationType[],MediaBrowser.Model.Entities.LocationType[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Guid[],System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.String,Jellyfin.Data.Enums.SortOrder[],System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],Jellyfin.Data.Enums.BaseItemKind[],Jellyfin.Data.Enums.BaseItemKind[],MediaBrowser.Model.Querying.ItemFilter[],System.Nullable{System.Boolean},System.String[],MediaBrowser.Model.Entities.ImageType[],System.String[],System.Nullable{System.Boolean},System.String[],System.String[],System.String[],System.Int32[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.String,System.Guid[],System.String[],System.String[],System.String[],System.Guid[],System.Guid[],System.Guid[],System.Guid[],System.String[],System.Guid[],System.Guid[],MediaBrowser.Model.Entities.VideoType[],System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},MediaBrowser.Model.Entities.SeriesStatus[],System.String,System.String,System.String,System.Guid[],System.Guid[],System.Boolean,System.Nullable{System.Boolean})">
             <summary>
             Gets items based on a query.
             </summary>
@@ -2947,8 +3091,8 @@
             <param name="hasParentalRating">Optional filter by items that have or do not have a parental rating.</param>
             <param name="isHd">Optional filter by items that are HD or not.</param>
             <param name="is4K">Optional filter by items that are 4K or not.</param>
-            <param name="locationTypes">Optional. If specified, results will be filtered based on LocationType. This allows multiple, comma delimeted.</param>
-            <param name="excludeLocationTypes">Optional. If specified, results will be filtered based on the LocationType. This allows multiple, comma delimeted.</param>
+            <param name="locationTypes">Optional. If specified, results will be filtered based on LocationType. This allows multiple, comma delimited.</param>
+            <param name="excludeLocationTypes">Optional. If specified, results will be filtered based on the LocationType. This allows multiple, comma delimited.</param>
             <param name="isMissing">Optional filter by items that are missing episodes or not.</param>
             <param name="isUnaired">Optional filter by items that are unaired episodes or not.</param>
             <param name="minCommunityRating">Optional filter by minimum community rating.</param>
@@ -2961,42 +3105,47 @@
             <param name="hasImdbId">Optional filter by items that have an imdb id or not.</param>
             <param name="hasTmdbId">Optional filter by items that have a tmdb id or not.</param>
             <param name="hasTvdbId">Optional filter by items that have a tvdb id or not.</param>
-            <param name="excludeItemIds">Optional. If specified, results will be filtered by exxcluding item ids. This allows multiple, comma delimeted.</param>
+            <param name="isMovie">Optional filter for live tv movies.</param>
+            <param name="isSeries">Optional filter for live tv series.</param>
+            <param name="isNews">Optional filter for live tv news.</param>
+            <param name="isKids">Optional filter for live tv kids.</param>
+            <param name="isSports">Optional filter for live tv sports.</param>
+            <param name="excludeItemIds">Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.</param>
             <param name="startIndex">Optional. The record index to start at. All items with a lower index will be dropped from the results.</param>
             <param name="limit">Optional. The maximum number of records to return.</param>
             <param name="recursive">When searching within folders, this determines whether or not the search will be recursive. true/false.</param>
             <param name="searchTerm">Optional. Filter based on a search term.</param>
             <param name="sortOrder">Sort Order - Ascending,Descending.</param>
             <param name="parentId">Specify this to localize the search to a specific item or folder. Omit to use the root.</param>
-            <param name="fields">Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimeted. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.</param>
-            <param name="excludeItemTypes">Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimeted.</param>
-            <param name="includeItemTypes">Optional. If specified, results will be filtered based on the item type. This allows multiple, comma delimeted.</param>
-            <param name="filters">Optional. Specify additional filters to apply. This allows multiple, comma delimeted. Options: IsFolder, IsNotFolder, IsUnplayed, IsPlayed, IsFavorite, IsResumable, Likes, Dislikes.</param>
+            <param name="fields">Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.</param>
+            <param name="excludeItemTypes">Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.</param>
+            <param name="includeItemTypes">Optional. If specified, results will be filtered based on the item type. This allows multiple, comma delimited.</param>
+            <param name="filters">Optional. Specify additional filters to apply. This allows multiple, comma delimited. Options: IsFolder, IsNotFolder, IsUnplayed, IsPlayed, IsFavorite, IsResumable, Likes, Dislikes.</param>
             <param name="isFavorite">Optional filter by items that are marked as favorite, or not.</param>
             <param name="mediaTypes">Optional filter by MediaType. Allows multiple, comma delimited.</param>
             <param name="imageTypes">Optional. If specified, results will be filtered based on those containing image types. This allows multiple, comma delimited.</param>
-            <param name="sortBy">Optional. Specify one or more sort orders, comma delimeted. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.</param>
+            <param name="sortBy">Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.</param>
             <param name="isPlayed">Optional filter by items that are played, or not.</param>
-            <param name="genres">Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimeted.</param>
-            <param name="officialRatings">Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimeted.</param>
-            <param name="tags">Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimeted.</param>
-            <param name="years">Optional. If specified, results will be filtered based on production year. This allows multiple, comma delimeted.</param>
+            <param name="genres">Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.</param>
+            <param name="officialRatings">Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.</param>
+            <param name="tags">Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.</param>
+            <param name="years">Optional. If specified, results will be filtered based on production year. This allows multiple, comma delimited.</param>
             <param name="enableUserData">Optional, include user data.</param>
             <param name="imageTypeLimit">Optional, the max number of images to return, per image type.</param>
             <param name="enableImageTypes">Optional. The image types to include in the output.</param>
             <param name="person">Optional. If specified, results will be filtered to include only those containing the specified person.</param>
             <param name="personIds">Optional. If specified, results will be filtered to include only those containing the specified person id.</param>
             <param name="personTypes">Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.</param>
-            <param name="studios">Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimeted.</param>
-            <param name="artists">Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimeted.</param>
-            <param name="excludeArtistIds">Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimeted.</param>
+            <param name="studios">Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.</param>
+            <param name="artists">Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.</param>
+            <param name="excludeArtistIds">Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.</param>
             <param name="artistIds">Optional. If specified, results will be filtered to include only those containing the specified artist id.</param>
             <param name="albumArtistIds">Optional. If specified, results will be filtered to include only those containing the specified album artist id.</param>
             <param name="contributingArtistIds">Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.</param>
-            <param name="albums">Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimeted.</param>
-            <param name="albumIds">Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimeted.</param>
+            <param name="albums">Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.</param>
+            <param name="albumIds">Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.</param>
             <param name="ids">Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.</param>
-            <param name="videoTypes">Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimeted.</param>
+            <param name="videoTypes">Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.</param>
             <param name="minOfficialRating">Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).</param>
             <param name="isLocked">Optional filter by items that are locked.</param>
             <param name="isPlaceHolder">Optional filter by items that are placeholders.</param>
@@ -3007,17 +3156,17 @@
             <param name="maxWidth">Optional. Filter by the maximum width of the item.</param>
             <param name="maxHeight">Optional. Filter by the maximum height of the item.</param>
             <param name="is3D">Optional filter by items that are 3D, or not.</param>
-            <param name="seriesStatus">Optional filter by Series Status. Allows multiple, comma delimeted.</param>
+            <param name="seriesStatus">Optional filter by Series Status. Allows multiple, comma delimited.</param>
             <param name="nameStartsWithOrGreater">Optional filter by items whose name is sorted equally or greater than a given input string.</param>
             <param name="nameStartsWith">Optional filter by items whose name is sorted equally than a given input string.</param>
             <param name="nameLessThan">Optional filter by items whose name is equally or lesser than a given input string.</param>
-            <param name="studioIds">Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimeted.</param>
-            <param name="genreIds">Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimeted.</param>
+            <param name="studioIds">Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.</param>
+            <param name="genreIds">Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.</param>
             <param name="enableTotalRecordCount">Optional. Enable the total record count.</param>
             <param name="enableImages">Optional, include image information in output.</param>
             <returns>A <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/> with the items.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.ItemsController.GetResumeItems(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],System.String[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.String[],System.String[],System.Boolean,System.Nullable{System.Boolean})">
+        <member name="M:Jellyfin.Api.Controllers.ItemsController.GetResumeItems(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],System.String[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],Jellyfin.Data.Enums.BaseItemKind[],Jellyfin.Data.Enums.BaseItemKind[],System.Boolean,System.Nullable{System.Boolean},System.Boolean)">
             <summary>
             Gets items based on a query.
             </summary>
@@ -3035,6 +3184,7 @@
             <param name="includeItemTypes">Optional. If specified, results will be filtered based on the item type. This allows multiple, comma delimited.</param>
             <param name="enableTotalRecordCount">Optional. Enable the total record count.</param>
             <param name="enableImages">Optional. Include image information in output.</param>
+            <param name="excludeActiveSessions">Optional. Whether to exclude the currently active sessions.</param>
             <response code="200">Items returned.</response>
             <returns>A <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/> with the items that are resumable.</returns>
         </member>
@@ -3946,7 +4096,6 @@
             </summary>
             <param name="size">The bitrate. Defaults to 102400.</param>
             <response code="200">Test buffer returned.</response>
-            <response code="400">Size has to be a numer between 0 and 10,000,000.</response>
             <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.FileResult"/> with specified bitrate.</returns>
         </member>
         <member name="T:Jellyfin.Api.Controllers.MoviesController">
@@ -3988,7 +4137,7 @@
             <param name="userManager">Instance of <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
             <param name="dtoService">Instance of <see cref="T:MediaBrowser.Controller.Dto.IDtoService"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.MusicGenresController.GetMusicGenres(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],System.String[],System.String[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Guid},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Boolean)">
+        <member name="M:Jellyfin.Api.Controllers.MusicGenresController.GetMusicGenres(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],Jellyfin.Data.Enums.BaseItemKind[],Jellyfin.Data.Enums.BaseItemKind[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Guid},System.String,System.String,System.String,System.String[],Jellyfin.Data.Enums.SortOrder[],System.Nullable{System.Boolean},System.Boolean)">
             <summary>
             Gets all music genres from a given item, folder, or the entire library.
             </summary>
@@ -4006,6 +4155,8 @@
             <param name="nameStartsWithOrGreater">Optional filter by items whose name is sorted equally or greater than a given input string.</param>
             <param name="nameStartsWith">Optional filter by items whose name is sorted equally than a given input string.</param>
             <param name="nameLessThan">Optional filter by items whose name is equally or lesser than a given input string.</param>
+            <param name="sortBy">Optional. Specify one or more sort orders, comma delimited.</param>
+            <param name="sortOrder">Sort Order - Ascending,Descending.</param>
             <param name="enableImages">Optional, include image information in output.</param>
             <param name="enableTotalRecordCount">Optional. Include total record count.</param>
             <response code="200">Music genres returned.</response>
@@ -4149,14 +4300,13 @@
             Persons controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.PersonsController.#ctor(MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Dto.IDtoService,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager)">
+        <member name="M:Jellyfin.Api.Controllers.PersonsController.#ctor(MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Dto.IDtoService,MediaBrowser.Controller.Library.IUserManager)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.PersonsController"/> class.
             </summary>
             <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
             <param name="dtoService">Instance of the <see cref="T:MediaBrowser.Controller.Dto.IDtoService"/> interface.</param>
             <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
-            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
         </member>
         <member name="M:Jellyfin.Api.Controllers.PersonsController.GetPersons(System.Nullable{System.Int32},System.String,MediaBrowser.Model.Querying.ItemFields[],MediaBrowser.Model.Querying.ItemFilter[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.String[],System.String[],System.Nullable{System.Guid},System.Nullable{System.Guid},System.Nullable{System.Boolean})">
             <summary>
@@ -4400,37 +4550,12 @@
             Plugins controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.PluginsController.#ctor(MediaBrowser.Common.Updates.IInstallationManager,MediaBrowser.Common.Plugins.IPluginManager,MediaBrowser.Common.Configuration.IConfigurationManager)">
+        <member name="M:Jellyfin.Api.Controllers.PluginsController.#ctor(MediaBrowser.Common.Updates.IInstallationManager,MediaBrowser.Common.Plugins.IPluginManager)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.PluginsController"/> class.
             </summary>
             <param name="installationManager">Instance of the <see cref="T:MediaBrowser.Common.Updates.IInstallationManager"/> interface.</param>
             <param name="pluginManager">Instance of the <see cref="T:MediaBrowser.Common.Plugins.IPluginManager"/> interface.</param>
-            <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
-        </member>
-        <member name="M:Jellyfin.Api.Controllers.PluginsController.GetPluginSecurityInfo">
-            <summary>
-            Get plugin security info.
-            </summary>
-            <response code="200">Plugin security info returned.</response>
-            <returns>Plugin security info.</returns>
-        </member>
-        <member name="M:Jellyfin.Api.Controllers.PluginsController.GetRegistrationStatus(System.String)">
-            <summary>
-            Gets registration status for a feature.
-            </summary>
-            <param name="name">Feature name.</param>
-            <response code="200">Registration status returned.</response>
-            <returns>Mb registration record.</returns>
-        </member>
-        <member name="M:Jellyfin.Api.Controllers.PluginsController.GetRegistration(System.String)">
-            <summary>
-            Gets registration status for a feature.
-            </summary>
-            <param name="name">Feature name.</param>
-            <response code="501">Not implemented.</response>
-            <returns>Not Implemented.</returns>
-            <exception cref="T:System.NotImplementedException">This endpoint is not implemented.</exception>
         </member>
         <member name="M:Jellyfin.Api.Controllers.PluginsController.GetPlugins">
             <summary>
@@ -4517,31 +4642,24 @@
             <response code="404">Plugin not found.</response>
             <returns>A <see cref="T:MediaBrowser.Common.Plugins.PluginManifest"/> on success, or a <see cref="T:Microsoft.AspNetCore.Mvc.NotFoundResult"/> if the plugin could not be found.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.PluginsController.UpdatePluginSecurityInfo(Jellyfin.Api.Models.PluginDtos.PluginSecurityInfo)">
-            <summary>
-            Updates plugin security info.
-            </summary>
-            <param name="pluginSecurityInfo">Plugin security info.</param>
-            <response code="204">Plugin security info updated.</response>
-            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult"/>.</returns>
-        </member>
         <member name="T:Jellyfin.Api.Controllers.QuickConnectController">
             <summary>
             Quick connect controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.QuickConnectController.#ctor(MediaBrowser.Controller.QuickConnect.IQuickConnect)">
+        <member name="M:Jellyfin.Api.Controllers.QuickConnectController.#ctor(MediaBrowser.Controller.QuickConnect.IQuickConnect,MediaBrowser.Controller.Net.IAuthorizationContext)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.QuickConnectController"/> class.
             </summary>
             <param name="quickConnect">Instance of the <see cref="T:MediaBrowser.Controller.QuickConnect.IQuickConnect"/> interface.</param>
+            <param name="authContext">Instance of the <see cref="T:MediaBrowser.Controller.Net.IAuthorizationContext"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.QuickConnectController.GetStatus">
+        <member name="M:Jellyfin.Api.Controllers.QuickConnectController.GetEnabled">
             <summary>
             Gets the current quick connect state.
             </summary>
             <response code="200">Quick connect state returned.</response>
-            <returns>The current <see cref="T:MediaBrowser.Model.QuickConnect.QuickConnectState"/>.</returns>
+            <returns>Whether Quick Connect is enabled on the server or not.</returns>
         </member>
         <member name="M:Jellyfin.Api.Controllers.QuickConnectController.Initiate">
             <summary>
@@ -4560,22 +4678,6 @@
             <response code="404">Unknown quick connect secret.</response>
             <returns>An updated <see cref="T:MediaBrowser.Model.QuickConnect.QuickConnectResult"/>.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.QuickConnectController.Activate">
-            <summary>
-            Temporarily activates quick connect for five minutes.
-            </summary>
-            <response code="204">Quick connect has been temporarily activated.</response>
-            <response code="403">Quick connect is unavailable on this server.</response>
-            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult"/> on success.</returns>
-        </member>
-        <member name="M:Jellyfin.Api.Controllers.QuickConnectController.Available(MediaBrowser.Model.QuickConnect.QuickConnectState)">
-            <summary>
-            Enables or disables quick connect.
-            </summary>
-            <param name="status">New <see cref="T:MediaBrowser.Model.QuickConnect.QuickConnectState"/>.</param>
-            <response code="204">Quick connect state set successfully.</response>
-            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult"/> on success.</returns>
-        </member>
         <member name="M:Jellyfin.Api.Controllers.QuickConnectController.Authorize(System.String)">
             <summary>
             Authorizes a pending quick connect request.
@@ -4585,25 +4687,17 @@
             <response code="403">Unknown user id.</response>
             <returns>Boolean indicating if the authorization was successful.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.QuickConnectController.Deauthorize">
-            <summary>
-            Deauthorize all quick connect devices for the current user.
-            </summary>
-            <response code="200">All quick connect devices were deleted.</response>
-            <returns>The number of devices that were deleted.</returns>
-        </member>
         <member name="T:Jellyfin.Api.Controllers.RemoteImageController">
             <summary>
             Remote Images Controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.RemoteImageController.#ctor(MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.IServerApplicationPaths,System.Net.Http.IHttpClientFactory,MediaBrowser.Controller.Library.ILibraryManager)">
+        <member name="M:Jellyfin.Api.Controllers.RemoteImageController.#ctor(MediaBrowser.Controller.Providers.IProviderManager,MediaBrowser.Controller.IServerApplicationPaths,MediaBrowser.Controller.Library.ILibraryManager)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.RemoteImageController"/> class.
             </summary>
             <param name="providerManager">Instance of the <see cref="T:MediaBrowser.Controller.Providers.IProviderManager"/> interface.</param>
             <param name="applicationPaths">Instance of the <see cref="T:MediaBrowser.Controller.IServerApplicationPaths"/> interface.</param>
-            <param name="httpClientFactory">Instance of the <see cref="T:System.Net.Http.IHttpClientFactory"/> interface.</param>
             <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
         </member>
         <member name="M:Jellyfin.Api.Controllers.RemoteImageController.GetRemoteImages(System.Guid,System.Nullable{MediaBrowser.Model.Entities.ImageType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Boolean)">
@@ -4646,15 +4740,6 @@
             </summary>
             <param name="filename">The filename.</param>
             <returns>System.String.</returns>
-        </member>
-        <member name="M:Jellyfin.Api.Controllers.RemoteImageController.DownloadImage(System.Uri,System.Guid,System.String)">
-            <summary>
-            Downloads the image.
-            </summary>
-            <param name="url">The URL.</param>
-            <param name="urlHash">The URL hash.</param>
-            <param name="pointerCachePath">The pointer cache path.</param>
-            <returns>Task.</returns>
         </member>
         <member name="T:Jellyfin.Api.Controllers.ScheduledTasksController">
             <summary>
@@ -4727,7 +4812,7 @@
             <param name="dtoService">Instance of <see cref="T:MediaBrowser.Controller.Dto.IDtoService"/> interface.</param>
             <param name="imageProcessor">Instance of <see cref="T:MediaBrowser.Controller.Drawing.IImageProcessor"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.SearchController.Get(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Guid},System.String,System.String[],System.String[],System.String[],System.Nullable{System.Guid},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+        <member name="M:Jellyfin.Api.Controllers.SearchController.Get(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Guid},System.String,Jellyfin.Data.Enums.BaseItemKind[],Jellyfin.Data.Enums.BaseItemKind[],System.String[],System.Nullable{System.Guid},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Gets the search hint result.
             </summary>
@@ -4783,7 +4868,7 @@
             <response code="200">List of sessions returned.</response>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> with the available sessions.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.SessionController.DisplayContent(System.String,System.String,System.String,System.String)">
+        <member name="M:Jellyfin.Api.Controllers.SessionController.DisplayContent(System.String,Jellyfin.Data.Enums.BaseItemKind,System.String,System.String)">
             <summary>
             Instructs a session to browse to an item or view.
             </summary>
@@ -4999,7 +5084,7 @@
             <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
             <param name="dtoService">Instance of the <see cref="T:MediaBrowser.Controller.Dto.IDtoService"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.StudiosController.GetStudios(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],System.String[],System.String[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Guid},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Boolean)">
+        <member name="M:Jellyfin.Api.Controllers.StudiosController.GetStudios(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],Jellyfin.Data.Enums.BaseItemKind[],Jellyfin.Data.Enums.BaseItemKind[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Guid},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Boolean)">
             <summary>
             Gets all studios from a given item, folder, or the entire library.
             </summary>
@@ -5188,7 +5273,7 @@
             <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
             <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.SuggestionsController.GetSuggestions(System.Guid,System.String[],System.String[],System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean)">
+        <member name="M:Jellyfin.Api.Controllers.SuggestionsController.GetSuggestions(System.Guid,System.String[],Jellyfin.Data.Enums.BaseItemKind[],System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean)">
             <summary>
             Gets suggestions.
             </summary>
@@ -5479,7 +5564,7 @@
             </summary>
             <param name="itemsController">Instance of <see cref="T:Jellyfin.Api.Controllers.ItemsController"/>.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.TrailersController.GetTrailers(System.Nullable{System.Guid},System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},MediaBrowser.Model.Entities.LocationType[],MediaBrowser.Model.Entities.LocationType[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Guid[],System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.String,Jellyfin.Data.Enums.SortOrder[],System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],System.String[],MediaBrowser.Model.Querying.ItemFilter[],System.Nullable{System.Boolean},System.String[],MediaBrowser.Model.Entities.ImageType[],System.String[],System.Nullable{System.Boolean},System.String[],System.String[],System.String[],System.Int32[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.String,System.Guid[],System.String[],System.String[],System.String[],System.Guid[],System.Guid[],System.Guid[],System.Guid[],System.String[],System.Guid[],System.Guid[],MediaBrowser.Model.Entities.VideoType[],System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},MediaBrowser.Model.Entities.SeriesStatus[],System.String,System.String,System.String,System.Guid[],System.Guid[],System.Boolean,System.Nullable{System.Boolean})">
+        <member name="M:Jellyfin.Api.Controllers.TrailersController.GetTrailers(System.Guid,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},MediaBrowser.Model.Entities.LocationType[],MediaBrowser.Model.Entities.LocationType[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Guid[],System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.String,Jellyfin.Data.Enums.SortOrder[],System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],Jellyfin.Data.Enums.BaseItemKind[],MediaBrowser.Model.Querying.ItemFilter[],System.Nullable{System.Boolean},System.String[],MediaBrowser.Model.Entities.ImageType[],System.String[],System.Nullable{System.Boolean},System.String[],System.String[],System.String[],System.Int32[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.String,System.Guid[],System.String[],System.String[],System.String[],System.Guid[],System.Guid[],System.Guid[],System.Guid[],System.String[],System.Guid[],System.Guid[],MediaBrowser.Model.Entities.VideoType[],System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},MediaBrowser.Model.Entities.SeriesStatus[],System.String,System.String,System.String,System.Guid[],System.Guid[],System.Boolean,System.Nullable{System.Boolean})">
             <summary>
             Finds movies and trailers similar to a given trailer.
             </summary>
@@ -5509,6 +5594,11 @@
             <param name="hasImdbId">Optional filter by items that have an imdb id or not.</param>
             <param name="hasTmdbId">Optional filter by items that have a tmdb id or not.</param>
             <param name="hasTvdbId">Optional filter by items that have a tvdb id or not.</param>
+            <param name="isMovie">Optional filter for live tv movies.</param>
+            <param name="isSeries">Optional filter for live tv series.</param>
+            <param name="isNews">Optional filter for live tv news.</param>
+            <param name="isKids">Optional filter for live tv kids.</param>
+            <param name="isSports">Optional filter for live tv sports.</param>
             <param name="excludeItemIds">Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.</param>
             <param name="startIndex">Optional. The record index to start at. All items with a lower index will be dropped from the results.</param>
             <param name="limit">Optional. The maximum number of records to return.</param>
@@ -5578,7 +5668,7 @@
             <param name="dtoService">Instance of the <see cref="T:MediaBrowser.Controller.Dto.IDtoService"/> interface.</param>
             <param name="tvSeriesManager">Instance of the <see cref="T:MediaBrowser.Controller.TV.ITVSeriesManager"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.TvShowsController.GetNextUp(System.Nullable{System.Guid},System.Nullable{System.Int32},System.Nullable{System.Int32},MediaBrowser.Model.Querying.ItemFields[],System.String,System.Nullable{System.Guid},System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Boolean},System.Boolean,System.Boolean)">
+        <member name="M:Jellyfin.Api.Controllers.TvShowsController.GetNextUp(System.Nullable{System.Guid},System.Nullable{System.Int32},System.Nullable{System.Int32},MediaBrowser.Model.Querying.ItemFields[],System.String,System.Nullable{System.Guid},System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Gets a list of next up episodes.
             </summary>
@@ -5588,12 +5678,14 @@
             <param name="fields">Optional. Specify additional fields of information to return in the output.</param>
             <param name="seriesId">Optional. Filter by series id.</param>
             <param name="parentId">Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.</param>
-            <param name="enableImges">Optional. Include image information in output.</param>
+            <param name="enableImages">Optional. Include image information in output.</param>
             <param name="imageTypeLimit">Optional. The max number of images to return, per image type.</param>
             <param name="enableImageTypes">Optional. The image types to include in the output.</param>
             <param name="enableUserData">Optional. Include user data.</param>
+            <param name="nextUpDateCutoff">Optional. Starting date of shows to show in Next Up section.</param>
             <param name="enableTotalRecordCount">Whether to enable the total records count. Defaults to true.</param>
             <param name="disableFirstEpisode">Whether to disable sending the first episode in a series as next up.</param>
+            <param name="enableRewatching">Whether to include watched episode in next up results.</param>
             <returns>A <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/> with the next up episodes.</returns>
         </member>
         <member name="M:Jellyfin.Api.Controllers.TvShowsController.GetUpcomingEpisodes(System.Nullable{System.Guid},System.Nullable{System.Int32},System.Nullable{System.Int32},MediaBrowser.Model.Querying.ItemFields[],System.Nullable{System.Guid},System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Boolean})">
@@ -5605,7 +5697,7 @@
             <param name="limit">Optional. The maximum number of records to return.</param>
             <param name="fields">Optional. Specify additional fields of information to return in the output.</param>
             <param name="parentId">Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.</param>
-            <param name="enableImges">Optional. Include image information in output.</param>
+            <param name="enableImages">Optional. Include image information in output.</param>
             <param name="imageTypeLimit">Optional. The max number of images to return, per image type.</param>
             <param name="enableImageTypes">Optional. The image types to include in the output.</param>
             <param name="enableUserData">Optional. Include user data.</param>
@@ -5705,7 +5797,7 @@
             User controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.UserController.#ctor(MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Session.ISessionManager,MediaBrowser.Common.Net.INetworkManager,MediaBrowser.Controller.Devices.IDeviceManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Configuration.IServerConfigurationManager)">
+        <member name="M:Jellyfin.Api.Controllers.UserController.#ctor(MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Session.ISessionManager,MediaBrowser.Common.Net.INetworkManager,MediaBrowser.Controller.Devices.IDeviceManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Configuration.IServerConfigurationManager,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Controllers.UserController},MediaBrowser.Controller.QuickConnect.IQuickConnect)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.UserController"/> class.
             </summary>
@@ -5715,6 +5807,8 @@
             <param name="deviceManager">Instance of the <see cref="T:MediaBrowser.Controller.Devices.IDeviceManager"/> interface.</param>
             <param name="authContext">Instance of the <see cref="T:MediaBrowser.Controller.Net.IAuthorizationContext"/> interface.</param>
             <param name="config">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger"/> interface.</param>
+            <param name="quickConnectManager">Instance of the <see cref="T:MediaBrowser.Controller.QuickConnect.IQuickConnect"/> interface.</param>
         </member>
         <member name="M:Jellyfin.Api.Controllers.UserController.GetUsers(System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
             <summary>
@@ -5962,7 +6056,7 @@
             <response code="200">Special features returned.</response>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.OkResult"/> containing the special features.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.UserLibraryController.GetLatestMedia(System.Guid,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],System.String[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Boolean},System.Int32,System.Boolean)">
+        <member name="M:Jellyfin.Api.Controllers.UserLibraryController.GetLatestMedia(System.Guid,System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],Jellyfin.Data.Enums.BaseItemKind[],System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Boolean},System.Int32,System.Boolean)">
             <summary>
             Gets latest media.
             </summary>
@@ -6057,116 +6151,12 @@
             <response code="404">Video or attachment not found.</response>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.FileStreamResult"/> containing the attachment stream on success, or a <see cref="T:Microsoft.AspNetCore.Mvc.NotFoundResult"/> if the attachment could not be found.</returns>
         </member>
-        <member name="T:Jellyfin.Api.Controllers.VideoHlsController">
-            <summary>
-            The video hls controller.
-            </summary>
-        </member>
-        <member name="M:Jellyfin.Api.Controllers.VideoHlsController.#ctor(MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder,Microsoft.Extensions.Configuration.IConfiguration,MediaBrowser.Controller.Dlna.IDlnaManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.Devices.IDeviceManager,Jellyfin.Api.Helpers.TranscodingJobHelper,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Controllers.VideoHlsController})">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.VideoHlsController"/> class.
-            </summary>
-            <param name="mediaEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.IMediaEncoder"/> interface.</param>
-            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
-            <param name="subtitleEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder"/> interface.</param>
-            <param name="configuration">Instance of the <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> interface.</param>
-            <param name="dlnaManager">Instance of the <see cref="T:MediaBrowser.Controller.Dlna.IDlnaManager"/> interface.</param>
-            <param name="userManger">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
-            <param name="authorizationContext">Instance of the <see cref="T:MediaBrowser.Controller.Net.IAuthorizationContext"/> interface.</param>
-            <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
-            <param name="mediaSourceManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IMediaSourceManager"/> interface.</param>
-            <param name="serverConfigurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
-            <param name="deviceManager">Instance of the <see cref="T:MediaBrowser.Controller.Devices.IDeviceManager"/> interface.</param>
-            <param name="transcodingJobHelper">The <see cref="T:Jellyfin.Api.Helpers.TranscodingJobHelper"/> singleton.</param>
-            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/>.</param>
-        </member>
-        <member name="M:Jellyfin.Api.Controllers.VideoHlsController.GetLiveHlsStream(System.Guid,System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.SubtitleDeliveryMethod},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{MediaBrowser.Model.Dlna.EncodingContext},System.Collections.Generic.Dictionary{System.String,System.String},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean})">
-            <summary>
-            Gets a hls live stream.
-            </summary>
-            <param name="itemId">The item id.</param>
-            <param name="container">The audio container.</param>
-            <param name="static">Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.</param>
-            <param name="params">The streaming parameters.</param>
-            <param name="tag">The tag.</param>
-            <param name="deviceProfileId">Optional. The dlna device profile id to utilize.</param>
-            <param name="playSessionId">The play session id.</param>
-            <param name="segmentContainer">The segment container.</param>
-            <param name="segmentLength">The segment lenght.</param>
-            <param name="minSegments">The minimum number of segments.</param>
-            <param name="mediaSourceId">The media version id, if playing an alternate version.</param>
-            <param name="deviceId">The device id of the client requesting. Used to stop encoding processes when needed.</param>
-            <param name="audioCodec">Optional. Specify a audio codec to encode to, e.g. mp3. If omitted the server will auto-select using the url's extension. Options: aac, mp3, vorbis, wma.</param>
-            <param name="enableAutoStreamCopy">Whether or not to allow automatic stream copy if requested values match the original source. Defaults to true.</param>
-            <param name="allowVideoStreamCopy">Whether or not to allow copying of the video stream url.</param>
-            <param name="allowAudioStreamCopy">Whether or not to allow copying of the audio stream url.</param>
-            <param name="breakOnNonKeyFrames">Optional. Whether to break on non key frames.</param>
-            <param name="audioSampleRate">Optional. Specify a specific audio sample rate, e.g. 44100.</param>
-            <param name="maxAudioBitDepth">Optional. The maximum audio bit depth.</param>
-            <param name="audioBitRate">Optional. Specify an audio bitrate to encode to, e.g. 128000. If omitted this will be left to encoder defaults.</param>
-            <param name="audioChannels">Optional. Specify a specific number of audio channels to encode to, e.g. 2.</param>
-            <param name="maxAudioChannels">Optional. Specify a maximum number of audio channels to encode to, e.g. 2.</param>
-            <param name="profile">Optional. Specify a specific an encoder profile (varies by encoder), e.g. main, baseline, high.</param>
-            <param name="level">Optional. Specify a level for the encoder profile (varies by encoder), e.g. 3, 3.1.</param>
-            <param name="framerate">Optional. A specific video framerate to encode to, e.g. 23.976. Generally this should be omitted unless the device has specific requirements.</param>
-            <param name="maxFramerate">Optional. A specific maximum video framerate to encode to, e.g. 23.976. Generally this should be omitted unless the device has specific requirements.</param>
-            <param name="copyTimestamps">Whether or not to copy timestamps when transcoding with an offset. Defaults to false.</param>
-            <param name="startTimeTicks">Optional. Specify a starting offset, in ticks. 1 tick = 10000 ms.</param>
-            <param name="width">Optional. The fixed horizontal resolution of the encoded video.</param>
-            <param name="height">Optional. The fixed vertical resolution of the encoded video.</param>
-            <param name="videoBitRate">Optional. Specify a video bitrate to encode to, e.g. 500000. If omitted this will be left to encoder defaults.</param>
-            <param name="subtitleStreamIndex">Optional. The index of the subtitle stream to use. If omitted no subtitles will be used.</param>
-            <param name="subtitleMethod">Optional. Specify the subtitle delivery method.</param>
-            <param name="maxRefFrames">Optional.</param>
-            <param name="maxVideoBitDepth">Optional. The maximum video bit depth.</param>
-            <param name="requireAvc">Optional. Whether to require avc.</param>
-            <param name="deInterlace">Optional. Whether to deinterlace the video.</param>
-            <param name="requireNonAnamorphic">Optional. Whether to require a non anamorphic stream.</param>
-            <param name="transcodingMaxAudioChannels">Optional. The maximum number of audio channels to transcode.</param>
-            <param name="cpuCoreLimit">Optional. The limit of how many cpu cores to use.</param>
-            <param name="liveStreamId">The live stream id.</param>
-            <param name="enableMpegtsM2TsMode">Optional. Whether to enable the MpegtsM2Ts mode.</param>
-            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vpx, wmv.</param>
-            <param name="subtitleCodec">Optional. Specify a subtitle codec to encode to.</param>
-            <param name="transcodeReasons">Optional. The transcoding reason.</param>
-            <param name="audioStreamIndex">Optional. The index of the audio stream to use. If omitted the first audio stream will be used.</param>
-            <param name="videoStreamIndex">Optional. The index of the video stream to use. If omitted the first video stream will be used.</param>
-            <param name="context">Optional. The <see cref="T:MediaBrowser.Model.Dlna.EncodingContext"/>.</param>
-            <param name="streamOptions">Optional. The streaming options.</param>
-            <param name="maxWidth">Optional. The max width.</param>
-            <param name="maxHeight">Optional. The max height.</param>
-            <param name="enableSubtitlesInManifest">Optional. Whether to enable subtitles in the manifest.</param>
-            <response code="200">Hls live stream retrieved.</response>
-            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.FileResult"/> containing the hls file.</returns>
-        </member>
-        <member name="M:Jellyfin.Api.Controllers.VideoHlsController.GetCommandLineArguments(System.String,Jellyfin.Api.Models.StreamingDtos.StreamState)">
-            <summary>
-            Gets the command line arguments for ffmpeg.
-            </summary>
-            <param name="outputPath">The output path of the file.</param>
-            <param name="state">The <see cref="T:Jellyfin.Api.Models.StreamingDtos.StreamState"/>.</param>
-            <returns>The command line arguments as a string.</returns>
-        </member>
-        <member name="M:Jellyfin.Api.Controllers.VideoHlsController.GetAudioArguments(Jellyfin.Api.Models.StreamingDtos.StreamState)">
-            <summary>
-            Gets the audio arguments for transcoding.
-            </summary>
-            <param name="state">The <see cref="T:Jellyfin.Api.Models.StreamingDtos.StreamState"/>.</param>
-            <returns>The command line arguments for audio transcoding.</returns>
-        </member>
-        <member name="M:Jellyfin.Api.Controllers.VideoHlsController.GetVideoArguments(Jellyfin.Api.Models.StreamingDtos.StreamState)">
-            <summary>
-            Gets the video arguments for transcoding.
-            </summary>
-            <param name="state">The <see cref="T:Jellyfin.Api.Models.StreamingDtos.StreamState"/>.</param>
-            <returns>The command line arguments for video transcoding.</returns>
-        </member>
         <member name="T:Jellyfin.Api.Controllers.VideosController">
             <summary>
             The videos controller.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.VideosController.#ctor(MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Dto.IDtoService,MediaBrowser.Controller.Dlna.IDlnaManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder,Microsoft.Extensions.Configuration.IConfiguration,MediaBrowser.Controller.Devices.IDeviceManager,Jellyfin.Api.Helpers.TranscodingJobHelper,System.Net.Http.IHttpClientFactory)">
+        <member name="M:Jellyfin.Api.Controllers.VideosController.#ctor(MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Dto.IDtoService,MediaBrowser.Controller.Dlna.IDlnaManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Controller.Devices.IDeviceManager,Jellyfin.Api.Helpers.TranscodingJobHelper,System.Net.Http.IHttpClientFactory,MediaBrowser.Controller.MediaEncoding.EncodingHelper)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Controllers.VideosController"/> class.
             </summary>
@@ -6178,12 +6168,10 @@
             <param name="mediaSourceManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IMediaSourceManager"/> interface.</param>
             <param name="serverConfigurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
             <param name="mediaEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.IMediaEncoder"/> interface.</param>
-            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
-            <param name="subtitleEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder"/> interface.</param>
-            <param name="configuration">Instance of the <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> interface.</param>
             <param name="deviceManager">Instance of the <see cref="T:MediaBrowser.Controller.Devices.IDeviceManager"/> interface.</param>
             <param name="transcodingJobHelper">Instance of the <see cref="T:Jellyfin.Api.Helpers.TranscodingJobHelper"/> class.</param>
             <param name="httpClientFactory">Instance of the <see cref="T:System.Net.Http.IHttpClientFactory"/> interface.</param>
+            <param name="encodingHelper">Instance of <see cref="T:MediaBrowser.Controller.MediaEncoding.EncodingHelper"/>.</param>
         </member>
         <member name="M:Jellyfin.Api.Controllers.VideosController.GetAdditionalPart(System.Guid,System.Nullable{System.Guid})">
             <summary>
@@ -6260,7 +6248,7 @@
             <param name="cpuCoreLimit">Optional. The limit of how many cpu cores to use.</param>
             <param name="liveStreamId">The live stream id.</param>
             <param name="enableMpegtsM2TsMode">Optional. Whether to enable the MpegtsM2Ts mode.</param>
-            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vpx, wmv.</param>
+            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vp8, vp9, vpx (deprecated), wmv.</param>
             <param name="subtitleCodec">Optional. Specify a subtitle codec to encode to.</param>
             <param name="transcodeReasons">Optional. The transcoding reason.</param>
             <param name="audioStreamIndex">Optional. The index of the audio stream to use. If omitted the first audio stream will be used.</param>
@@ -6318,7 +6306,7 @@
             <param name="cpuCoreLimit">Optional. The limit of how many cpu cores to use.</param>
             <param name="liveStreamId">The live stream id.</param>
             <param name="enableMpegtsM2TsMode">Optional. Whether to enable the MpegtsM2Ts mode.</param>
-            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vpx, wmv.</param>
+            <param name="videoCodec">Optional. Specify a video codec to encode to, e.g. h264. If omitted the server will auto-select using the url's extension. Options: h265, h264, mpeg4, theora, vp8, vp9, vpx (deprecated), wmv.</param>
             <param name="subtitleCodec">Optional. Specify a subtitle codec to encode to.</param>
             <param name="transcodeReasons">Optional. The transcoding reason.</param>
             <param name="audioStreamIndex">Optional. The index of the audio stream to use. If omitted the first audio stream will be used.</param>
@@ -6341,7 +6329,7 @@
             <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
             <param name="dtoService">Instance of the <see cref="T:MediaBrowser.Controller.Dto.IDtoService"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Controllers.YearsController.GetYears(System.Nullable{System.Int32},System.Nullable{System.Int32},Jellyfin.Data.Enums.SortOrder[],System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],System.String[],System.String[],System.String[],System.String[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Guid},System.Boolean,System.Nullable{System.Boolean})">
+        <member name="M:Jellyfin.Api.Controllers.YearsController.GetYears(System.Nullable{System.Int32},System.Nullable{System.Int32},Jellyfin.Data.Enums.SortOrder[],System.Nullable{System.Guid},MediaBrowser.Model.Querying.ItemFields[],Jellyfin.Data.Enums.BaseItemKind[],Jellyfin.Data.Enums.BaseItemKind[],System.String[],System.String[],System.Nullable{System.Boolean},System.Nullable{System.Int32},MediaBrowser.Model.Entities.ImageType[],System.Nullable{System.Guid},System.Boolean,System.Nullable{System.Boolean})">
             <summary>
             Get years.
             </summary>
@@ -6408,20 +6396,12 @@
             <param name="enableImageTypes">Enable image types.</param>
             <returns>Modified DtoOptions object.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Extensions.DtoExtensions.ContainsField(MediaBrowser.Controller.Dto.DtoOptions,MediaBrowser.Model.Querying.ItemFields)">
-            <summary>
-            Check if DtoOptions contains field.
-            </summary>
-            <param name="dtoOptions">DtoOptions object.</param>
-            <param name="field">Field to check.</param>
-            <returns>Field existence.</returns>
-        </member>
         <member name="T:Jellyfin.Api.Helpers.AudioHelper">
             <summary>
             Audio helper.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Helpers.AudioHelper.#ctor(MediaBrowser.Controller.Dlna.IDlnaManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder,Microsoft.Extensions.Configuration.IConfiguration,MediaBrowser.Controller.Devices.IDeviceManager,Jellyfin.Api.Helpers.TranscodingJobHelper,System.Net.Http.IHttpClientFactory,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+        <member name="M:Jellyfin.Api.Helpers.AudioHelper.#ctor(MediaBrowser.Controller.Dlna.IDlnaManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Controller.Devices.IDeviceManager,Jellyfin.Api.Helpers.TranscodingJobHelper,System.Net.Http.IHttpClientFactory,Microsoft.AspNetCore.Http.IHttpContextAccessor,MediaBrowser.Controller.MediaEncoding.EncodingHelper)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Helpers.AudioHelper"/> class.
             </summary>
@@ -6432,13 +6412,11 @@
             <param name="mediaSourceManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IMediaSourceManager"/> interface.</param>
             <param name="serverConfigurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
             <param name="mediaEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.IMediaEncoder"/> interface.</param>
-            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
-            <param name="subtitleEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder"/> interface.</param>
-            <param name="configuration">Instance of the <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> interface.</param>
             <param name="deviceManager">Instance of the <see cref="T:MediaBrowser.Controller.Devices.IDeviceManager"/> interface.</param>
             <param name="transcodingJobHelper">Instance of <see cref="T:Jellyfin.Api.Helpers.TranscodingJobHelper"/>.</param>
             <param name="httpClientFactory">Instance of the <see cref="T:System.Net.Http.IHttpClientFactory"/> interface.</param>
             <param name="httpContextAccessor">Instance of the <see cref="T:Microsoft.AspNetCore.Http.IHttpContextAccessor"/> interface.</param>
+            <param name="encodingHelper">Instance of <see cref="T:MediaBrowser.Controller.MediaEncoding.EncodingHelper"/>.</param>
         </member>
         <member name="M:Jellyfin.Api.Helpers.AudioHelper.GetAudioStream(MediaBrowser.Controller.MediaEncoding.TranscodingJobType,Jellyfin.Api.Models.StreamingDtos.StreamingRequestDto)">
             <summary>
@@ -6502,25 +6480,12 @@
             <param name="user">Current claims principal.</param>
             <returns>The flag specifying whether the request is using an api key.</returns>
         </member>
-        <member name="T:Jellyfin.Api.Helpers.ClassMigrationHelper">
-            <summary>
-            A static class for copying matching properties from one object to another.
-            TODO: remove at the point when a fixed migration path has been decided upon.
-            </summary>
-        </member>
-        <member name="M:Jellyfin.Api.Helpers.ClassMigrationHelper.CopyProperties(System.Object,System.Object)">
-            <summary>
-            Extension for 'Object' that copies the properties to a destination object.
-            </summary>
-            <param name="source">The source.</param>
-            <param name="destination">The destination.</param>
-        </member>
         <member name="T:Jellyfin.Api.Helpers.DynamicHlsHelper">
             <summary>
             Dynamic hls helper.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Helpers.DynamicHlsHelper.#ctor(MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Dlna.IDlnaManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder,Microsoft.Extensions.Configuration.IConfiguration,MediaBrowser.Controller.Devices.IDeviceManager,Jellyfin.Api.Helpers.TranscodingJobHelper,MediaBrowser.Common.Net.INetworkManager,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Helpers.DynamicHlsHelper},Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+        <member name="M:Jellyfin.Api.Helpers.DynamicHlsHelper.#ctor(MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Dlna.IDlnaManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Controller.Devices.IDeviceManager,Jellyfin.Api.Helpers.TranscodingJobHelper,MediaBrowser.Common.Net.INetworkManager,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Helpers.DynamicHlsHelper},Microsoft.AspNetCore.Http.IHttpContextAccessor,MediaBrowser.Controller.MediaEncoding.EncodingHelper)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Helpers.DynamicHlsHelper"/> class.
             </summary>
@@ -6531,14 +6496,12 @@
             <param name="mediaSourceManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IMediaSourceManager"/> interface.</param>
             <param name="serverConfigurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
             <param name="mediaEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.IMediaEncoder"/> interface.</param>
-            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
-            <param name="subtitleEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder"/> interface.</param>
-            <param name="configuration">Instance of the <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> interface.</param>
             <param name="deviceManager">Instance of the <see cref="T:MediaBrowser.Controller.Devices.IDeviceManager"/> interface.</param>
             <param name="transcodingJobHelper">Instance of <see cref="T:Jellyfin.Api.Helpers.TranscodingJobHelper"/>.</param>
             <param name="networkManager">Instance of the <see cref="T:MediaBrowser.Common.Net.INetworkManager"/> interface.</param>
             <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
             <param name="httpContextAccessor">Instance of the <see cref="T:Microsoft.AspNetCore.Http.IHttpContextAccessor"/> interface.</param>
+            <param name="encodingHelper">Instance of <see cref="T:MediaBrowser.Controller.MediaEncoding.EncodingHelper"/>.</param>
         </member>
         <member name="M:Jellyfin.Api.Helpers.DynamicHlsHelper.GetMasterHlsPlaylist(MediaBrowser.Controller.MediaEncoding.TranscodingJobType,Jellyfin.Api.Models.StreamingDtos.StreamingRequestDto,System.Boolean)">
             <summary>
@@ -6624,25 +6587,22 @@
             The stream response helpers.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Helpers.FileStreamResponseHelpers.GetStaticRemoteStreamResult(Jellyfin.Api.Models.StreamingDtos.StreamState,System.Boolean,System.Net.Http.HttpClient,Microsoft.AspNetCore.Http.HttpContext,System.Threading.CancellationToken)">
+        <member name="M:Jellyfin.Api.Helpers.FileStreamResponseHelpers.GetStaticRemoteStreamResult(Jellyfin.Api.Models.StreamingDtos.StreamState,System.Net.Http.HttpClient,Microsoft.AspNetCore.Http.HttpContext,System.Threading.CancellationToken)">
             <summary>
             Returns a static file from a remote source.
             </summary>
             <param name="state">The current <see cref="T:Jellyfin.Api.Models.StreamingDtos.StreamState"/>.</param>
-            <param name="isHeadRequest">Whether the current request is a HTTP HEAD request so only the headers get returned.</param>
             <param name="httpClient">The <see cref="T:System.Net.Http.HttpClient"/> making the remote request.</param>
             <param name="httpContext">The current http context.</param>
             <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> containing the API response.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Helpers.FileStreamResponseHelpers.GetStaticFileResult(System.String,System.String,System.Boolean,Microsoft.AspNetCore.Http.HttpContext)">
+        <member name="M:Jellyfin.Api.Helpers.FileStreamResponseHelpers.GetStaticFileResult(System.String,System.String)">
             <summary>
             Returns a static file from the server.
             </summary>
             <param name="path">The path to the file.</param>
             <param name="contentType">The content type of the file.</param>
-            <param name="isHeadRequest">Whether the current request is a HTTP HEAD request so only the headers get returned.</param>
-            <param name="httpContext">The current http context.</param>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> the file.</returns>
         </member>
         <member name="M:Jellyfin.Api.Helpers.FileStreamResponseHelpers.GetTranscodedFile(Jellyfin.Api.Models.StreamingDtos.StreamState,System.Boolean,Microsoft.AspNetCore.Http.HttpContext,Jellyfin.Api.Helpers.TranscodingJobHelper,System.String,MediaBrowser.Controller.MediaEncoding.TranscodingJobType,System.Threading.CancellationTokenSource)">
@@ -6802,7 +6762,7 @@
             <param name="liveStreamId">Live stream id.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> containing the <see cref="T:MediaBrowser.Model.MediaInfo.PlaybackInfoResponse"/>.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Helpers.MediaInfoHelper.SetDeviceSpecificData(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Dto.MediaSourceInfo,MediaBrowser.Model.Dlna.DeviceProfile,MediaBrowser.Controller.Net.AuthorizationInfo,System.Nullable{System.Int32},System.Int64,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Guid,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String)">
+        <member name="M:Jellyfin.Api.Helpers.MediaInfoHelper.SetDeviceSpecificData(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Dto.MediaSourceInfo,MediaBrowser.Model.Dlna.DeviceProfile,MediaBrowser.Controller.Net.AuthorizationInfo,System.Nullable{System.Int32},System.Int64,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Guid,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Net.IPAddress)">
             <summary>
             SetDeviceSpecificData.
             </summary>
@@ -6848,59 +6808,26 @@
             <param name="profile">Device profile.</param>
             <param name="type">Dlna profile type.</param>
         </member>
-        <member name="T:Jellyfin.Api.Helpers.ProgressiveFileCopier">
-            <summary>
-            Progressive file copier.
-            </summary>
-        </member>
-        <member name="M:Jellyfin.Api.Helpers.ProgressiveFileCopier.#ctor(System.String,Jellyfin.Api.Models.PlaybackDtos.TranscodingJobDto,Jellyfin.Api.Helpers.TranscodingJobHelper,System.Threading.CancellationToken)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Api.Helpers.ProgressiveFileCopier"/> class.
-            </summary>
-            <param name="path">The path to copy from.</param>
-            <param name="job">The transcoding job.</param>
-            <param name="transcodingJobHelper">Instance of the <see cref="T:Jellyfin.Api.Helpers.TranscodingJobHelper"/>.</param>
-            <param name="cancellationToken">The cancellation token.</param>
-        </member>
-        <member name="M:Jellyfin.Api.Helpers.ProgressiveFileCopier.#ctor(MediaBrowser.Controller.Library.IDirectStreamProvider,Jellyfin.Api.Models.PlaybackDtos.TranscodingJobDto,Jellyfin.Api.Helpers.TranscodingJobHelper,System.Threading.CancellationToken)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Api.Helpers.ProgressiveFileCopier"/> class.
-            </summary>
-            <param name="directStreamProvider">Instance of the <see cref="T:MediaBrowser.Controller.Library.IDirectStreamProvider"/> interface.</param>
-            <param name="job">The transcoding job.</param>
-            <param name="transcodingJobHelper">Instance of the <see cref="T:Jellyfin.Api.Helpers.TranscodingJobHelper"/>.</param>
-            <param name="cancellationToken">The cancellation token.</param>
-        </member>
-        <member name="P:Jellyfin.Api.Helpers.ProgressiveFileCopier.AllowEndOfFile">
-            <summary>
-            Gets or sets a value indicating whether allow read end of file.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Api.Helpers.ProgressiveFileCopier.StartPosition">
-            <summary>
-            Gets or sets copy start position.
-            </summary>
-        </member>
-        <member name="M:Jellyfin.Api.Helpers.ProgressiveFileCopier.WriteToAsync(System.IO.Stream,System.Threading.CancellationToken)">
-            <summary>
-            Write source stream to output.
-            </summary>
-            <param name="outputStream">Output stream.</param>
-            <param name="cancellationToken">Cancellation token.</param>
-            <returns>A <see cref="T:System.Threading.Tasks.Task"/>.</returns>
-        </member>
         <member name="T:Jellyfin.Api.Helpers.ProgressiveFileStream">
             <summary>
             A progressive file stream for transferring transcoded files as they are written to.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Helpers.ProgressiveFileStream.#ctor(System.String,Jellyfin.Api.Models.PlaybackDtos.TranscodingJobDto,Jellyfin.Api.Helpers.TranscodingJobHelper)">
+        <member name="M:Jellyfin.Api.Helpers.ProgressiveFileStream.#ctor(System.String,Jellyfin.Api.Models.PlaybackDtos.TranscodingJobDto,Jellyfin.Api.Helpers.TranscodingJobHelper,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Helpers.ProgressiveFileStream"/> class.
             </summary>
             <param name="filePath">The path to the transcoded file.</param>
             <param name="job">The transcoding job information.</param>
             <param name="transcodingJobHelper">The transcoding job helper.</param>
+            <param name="timeoutMs">The timeout duration in milliseconds.</param>
+        </member>
+        <member name="M:Jellyfin.Api.Helpers.ProgressiveFileStream.#ctor(System.IO.Stream,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Api.Helpers.ProgressiveFileStream"/> class.
+            </summary>
+            <param name="stream">The stream to progressively copy.</param>
+            <param name="timeoutMs">The timeout duration in milliseconds.</param>
         </member>
         <member name="P:Jellyfin.Api.Helpers.ProgressiveFileStream.CanRead">
             <inheritdoc />
@@ -6923,7 +6850,13 @@
         <member name="M:Jellyfin.Api.Helpers.ProgressiveFileStream.Read(System.Byte[],System.Int32,System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:Jellyfin.Api.Helpers.ProgressiveFileStream.Read(System.Span{System.Byte})">
+            <inheritdoc />
+        </member>
         <member name="M:Jellyfin.Api.Helpers.ProgressiveFileStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Api.Helpers.ProgressiveFileStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Jellyfin.Api.Helpers.ProgressiveFileStream.Seek(System.Int64,System.IO.SeekOrigin)">
@@ -6951,15 +6884,6 @@
             <param name="requestedSortOrder">Sort Order. Comma delimited string.</param>
             <returns>Order By.</returns>
         </member>
-        <member name="M:Jellyfin.Api.Helpers.RequestHelpers.Split(System.String,System.Char,System.Boolean)">
-            <summary>
-            Splits a string at a separating character into an array of substrings.
-            </summary>
-            <param name="value">The string to split.</param>
-            <param name="separator">The char that separates the substrings.</param>
-            <param name="removeEmpty">Option to remove empty substrings from the array.</param>
-            <returns>An array of the substrings.</returns>
-        </member>
         <member name="M:Jellyfin.Api.Helpers.RequestHelpers.AssertCanUpdateUser(MediaBrowser.Controller.Net.IAuthorizationContext,Microsoft.AspNetCore.Http.HttpRequest,System.Guid,System.Boolean)">
             <summary>
             Checks if the user can update an entry.
@@ -6975,7 +6899,7 @@
             The streaming helpers.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Helpers.StreamingHelpers.GetStreamingState(Jellyfin.Api.Models.StreamingDtos.StreamingRequestDto,Microsoft.AspNetCore.Http.HttpRequest,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder,Microsoft.Extensions.Configuration.IConfiguration,MediaBrowser.Controller.Dlna.IDlnaManager,MediaBrowser.Controller.Devices.IDeviceManager,Jellyfin.Api.Helpers.TranscodingJobHelper,MediaBrowser.Controller.MediaEncoding.TranscodingJobType,System.Threading.CancellationToken)">
+        <member name="M:Jellyfin.Api.Helpers.StreamingHelpers.GetStreamingState(Jellyfin.Api.Models.StreamingDtos.StreamingRequestDto,Microsoft.AspNetCore.Http.HttpRequest,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Controller.MediaEncoding.EncodingHelper,MediaBrowser.Controller.Dlna.IDlnaManager,MediaBrowser.Controller.Devices.IDeviceManager,Jellyfin.Api.Helpers.TranscodingJobHelper,MediaBrowser.Controller.MediaEncoding.TranscodingJobType,System.Threading.CancellationToken)">
             <summary>
             Gets the current streaming state.
             </summary>
@@ -6987,9 +6911,7 @@
             <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
             <param name="serverConfigurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
             <param name="mediaEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.IMediaEncoder"/> interface.</param>
-            <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
-            <param name="subtitleEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder"/> interface.</param>
-            <param name="configuration">Instance of the <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> interface.</param>
+            <param name="encodingHelper">Instance of <see cref="T:MediaBrowser.Controller.MediaEncoding.EncodingHelper"/>.</param>
             <param name="dlnaManager">Instance of the <see cref="T:MediaBrowser.Controller.Dlna.IDlnaManager"/> interface.</param>
             <param name="deviceManager">Instance of the <see cref="T:MediaBrowser.Controller.Devices.IDeviceManager"/> interface.</param>
             <param name="transcodingJobHelper">Initialized <see cref="T:Jellyfin.Api.Helpers.TranscodingJobHelper"/>.</param>
@@ -7069,10 +6991,12 @@
             The transcoding locks.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Helpers.TranscodingJobHelper.#ctor(Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Helpers.TranscodingJobHelper},MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.Session.ISessionManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILoggerFactory)">
+        <member name="M:Jellyfin.Api.Helpers.TranscodingJobHelper.#ctor(MediaBrowser.Controller.MediaEncoding.IAttachmentExtractor,MediaBrowser.Common.Configuration.IApplicationPaths,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Helpers.TranscodingJobHelper},MediaBrowser.Controller.Library.IMediaSourceManager,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Controller.Configuration.IServerConfigurationManager,MediaBrowser.Controller.Session.ISessionManager,MediaBrowser.Controller.Net.IAuthorizationContext,MediaBrowser.Controller.MediaEncoding.EncodingHelper,Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Helpers.TranscodingJobHelper"/> class.
             </summary>
+            <param name="attachmentExtractor">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.IAttachmentExtractor"/> interface.</param>
+            <param name="appPaths">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IApplicationPaths"/> interface.</param>
             <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
             <param name="mediaSourceManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IMediaSourceManager"/> interface.</param>
             <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
@@ -7080,8 +7004,7 @@
             <param name="serverConfigurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
             <param name="sessionManager">Instance of the <see cref="T:MediaBrowser.Controller.Session.ISessionManager"/> interface.</param>
             <param name="authorizationContext">Instance of the <see cref="T:MediaBrowser.Controller.Net.IAuthorizationContext"/> interface.</param>
-            <param name="subtitleEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.ISubtitleEncoder"/> interface.</param>
-            <param name="configuration">Instance of the <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> interface.</param>
+            <param name="encodingHelper">Instance of <see cref="T:MediaBrowser.Controller.MediaEncoding.EncodingHelper"/>.</param>
             <param name="loggerFactory">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory"/> interface.</param>
         </member>
         <member name="M:Jellyfin.Api.Helpers.TranscodingJobHelper.GetTranscodingJob(System.String)">
@@ -7312,6 +7235,22 @@
         <member name="M:Jellyfin.Api.ModelBinders.PipeDelimitedArrayModelBinder.BindModelAsync(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext)">
             <inheritdoc/>
         </member>
+        <member name="T:Jellyfin.Api.Models.ClientLogDtos.ClientLogDocumentResponseDto">
+            <summary>
+            Client log document response dto.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Api.Models.ClientLogDtos.ClientLogDocumentResponseDto.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Api.Models.ClientLogDtos.ClientLogDocumentResponseDto"/> class.
+            </summary>
+            <param name="fileName">The file name.</param>
+        </member>
+        <member name="P:Jellyfin.Api.Models.ClientLogDtos.ClientLogDocumentResponseDto.FileName">
+            <summary>
+            Gets the resulting filename.
+            </summary>
+        </member>
         <member name="T:Jellyfin.Api.Models.ConfigurationDtos.MediaEncoderPathDto">
             <summary>
             Media Encoder Path Dto.
@@ -7332,18 +7271,17 @@
             The configuration page info.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Models.ConfigurationPageInfo.#ctor(MediaBrowser.Controller.Plugins.IPluginConfigurationPage)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Api.Models.ConfigurationPageInfo"/> class.
-            </summary>
-            <param name="page">Instance of <see cref="T:MediaBrowser.Controller.Plugins.IPluginConfigurationPage"/> interface.</param>
-        </member>
         <member name="M:Jellyfin.Api.Models.ConfigurationPageInfo.#ctor(MediaBrowser.Common.Plugins.IPlugin,MediaBrowser.Model.Plugins.PluginPageInfo)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Models.ConfigurationPageInfo"/> class.
             </summary>
             <param name="plugin">Instance of <see cref="T:MediaBrowser.Common.Plugins.IPlugin"/> interface.</param>
             <param name="page">Instance of <see cref="T:MediaBrowser.Model.Plugins.PluginPageInfo"/> interface.</param>
+        </member>
+        <member name="M:Jellyfin.Api.Models.ConfigurationPageInfo.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Api.Models.ConfigurationPageInfo"/> class.
+            </summary>
         </member>
         <member name="P:Jellyfin.Api.Models.ConfigurationPageInfo.Name">
             <summary>
@@ -7371,110 +7309,11 @@
             Gets or sets the display name.
             </summary>
         </member>
-        <member name="P:Jellyfin.Api.Models.ConfigurationPageInfo.ConfigurationPageType">
-            <summary>
-            Gets or sets the type of the configuration page.
-            </summary>
-            <value>The type of the configuration page.</value>
-        </member>
         <member name="P:Jellyfin.Api.Models.ConfigurationPageInfo.PluginId">
             <summary>
             Gets or sets the plugin id.
             </summary>
             <value>The plugin id.</value>
-        </member>
-        <member name="T:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto">
-            <summary>
-            Defines the display preferences for any item that supports them (usually Folders).
-            </summary>
-        </member>
-        <member name="M:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto" /> class.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.Id">
-            <summary>
-            Gets or sets the user id.
-            </summary>
-            <value>The user id.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.ViewType">
-            <summary>
-            Gets or sets the type of the view.
-            </summary>
-            <value>The type of the view.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.SortBy">
-            <summary>
-            Gets or sets the sort by.
-            </summary>
-            <value>The sort by.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.IndexBy">
-            <summary>
-            Gets or sets the index by.
-            </summary>
-            <value>The index by.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.RememberIndexing">
-            <summary>
-            Gets or sets a value indicating whether [remember indexing].
-            </summary>
-            <value><c>true</c> if [remember indexing]; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.PrimaryImageHeight">
-            <summary>
-            Gets or sets the height of the primary image.
-            </summary>
-            <value>The height of the primary image.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.PrimaryImageWidth">
-            <summary>
-            Gets or sets the width of the primary image.
-            </summary>
-            <value>The width of the primary image.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.CustomPrefs">
-            <summary>
-            Gets the custom prefs.
-            </summary>
-            <value>The custom prefs.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.ScrollDirection">
-            <summary>
-            Gets or sets the scroll direction.
-            </summary>
-            <value>The scroll direction.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.ShowBackdrop">
-            <summary>
-            Gets or sets a value indicating whether to show backdrops on this item.
-            </summary>
-            <value><c>true</c> if showing backdrops; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.RememberSorting">
-            <summary>
-            Gets or sets a value indicating whether [remember sorting].
-            </summary>
-            <value><c>true</c> if [remember sorting]; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.SortOrder">
-            <summary>
-            Gets or sets the sort order.
-            </summary>
-            <value>The sort order.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.ShowSidebar">
-            <summary>
-            Gets or sets a value indicating whether [show sidebar].
-            </summary>
-            <value><c>true</c> if [show sidebar]; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:Jellyfin.Api.Models.DisplayPreferencesDtos.DisplayPreferencesDto.Client">
-            <summary>
-            Gets or sets the client.
-            </summary>
         </member>
         <member name="T:Jellyfin.Api.Models.EnvironmentDtos.DefaultDirectoryBrowserInfoDto">
             <summary>
@@ -8211,6 +8050,11 @@
             Gets or sets a value indicating whether has exited.
             </summary>
         </member>
+        <member name="P:Jellyfin.Api.Models.PlaybackDtos.TranscodingJobDto.ExitCode">
+            <summary>
+            Gets or sets exit code.
+            </summary>
+        </member>
         <member name="P:Jellyfin.Api.Models.PlaybackDtos.TranscodingJobDto.IsUserPaused">
             <summary>
             Gets or sets a value indicating whether is user paused.
@@ -8299,6 +8143,15 @@
             Change kill timer if started.
             </summary>
         </member>
+        <member name="M:Jellyfin.Api.Models.PlaybackDtos.TranscodingJobDto.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Api.Models.PlaybackDtos.TranscodingJobDto.Dispose(System.Boolean)">
+            <summary>
+            Dispose all resources.
+            </summary>
+            <param name="disposing">Whether to dispose all resources.</param>
+        </member>
         <member name="T:Jellyfin.Api.Models.PlaybackDtos.TranscodingThrottler">
             <summary>
             Transcoding throttler.
@@ -8364,56 +8217,6 @@
         <member name="P:Jellyfin.Api.Models.PlaylistDtos.CreatePlaylistDto.MediaType">
             <summary>
             Gets or sets the media type.
-            </summary>
-        </member>
-        <member name="T:Jellyfin.Api.Models.PluginDtos.MBRegistrationRecord">
-            <summary>
-            MB Registration Record.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Api.Models.PluginDtos.MBRegistrationRecord.ExpirationDate">
-            <summary>
-            Gets or sets expiration date.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Api.Models.PluginDtos.MBRegistrationRecord.IsRegistered">
-            <summary>
-            Gets or sets a value indicating whether is registered.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Api.Models.PluginDtos.MBRegistrationRecord.RegChecked">
-            <summary>
-            Gets or sets a value indicating whether reg checked.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Api.Models.PluginDtos.MBRegistrationRecord.RegError">
-            <summary>
-            Gets or sets a value indicating whether reg error.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Api.Models.PluginDtos.MBRegistrationRecord.TrialVersion">
-            <summary>
-            Gets or sets a value indicating whether trial version.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Api.Models.PluginDtos.MBRegistrationRecord.IsValid">
-            <summary>
-            Gets or sets a value indicating whether is valid.
-            </summary>
-        </member>
-        <member name="T:Jellyfin.Api.Models.PluginDtos.PluginSecurityInfo">
-            <summary>
-            Plugin security info.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Api.Models.PluginDtos.PluginSecurityInfo.SupporterKey">
-            <summary>
-            Gets or sets the supporter key.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Api.Models.PluginDtos.PluginSecurityInfo.IsMbSupporter">
-            <summary>
-            Gets or sets a value indicating whether is mb supporter.
             </summary>
         </member>
         <member name="T:Jellyfin.Api.Models.SessionDtos.ClientCapabilitiesDto">
@@ -8587,6 +8390,16 @@
             Gets or sets the min segments.
             </summary>
         </member>
+        <member name="P:Jellyfin.Api.Models.StreamingDtos.StreamingRequestDto.CurrentRuntimeTicks">
+            <summary>
+            Gets or sets the position of the requested segment in ticks.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Api.Models.StreamingDtos.StreamingRequestDto.ActualSegmentLengthTicks">
+            <summary>
+            Gets or sets the actual segment length in ticks.
+            </summary>
+        </member>
         <member name="T:Jellyfin.Api.Models.StreamingDtos.StreamState">
             <summary>
             The stream state dto.
@@ -8624,6 +8437,9 @@
             <summary>
             Gets or sets the direct stream provicer.
             </summary>
+            <remarks>
+            Deprecated.
+            </remarks>
         </member>
         <member name="P:Jellyfin.Api.Models.StreamingDtos.StreamState.WaitForPath">
             <summary>
@@ -8961,9 +8777,21 @@
         </member>
         <member name="P:Jellyfin.Api.Models.SyncPlayDtos.RemoveFromPlaylistRequestDto.PlaylistItemIds">
             <summary>
-            Gets or sets the playlist identifiers ot the items.
+            Gets or sets the playlist identifiers ot the items. Ignored when clearing the playlist.
             </summary>
             <value>The playlist identifiers ot the items.</value>
+        </member>
+        <member name="P:Jellyfin.Api.Models.SyncPlayDtos.RemoveFromPlaylistRequestDto.ClearPlaylist">
+            <summary>
+            Gets or sets a value indicating whether the entire playlist should be cleared.
+            </summary>
+            <value>Whether the entire playlist should be cleared.</value>
+        </member>
+        <member name="P:Jellyfin.Api.Models.SyncPlayDtos.RemoveFromPlaylistRequestDto.ClearPlayingItem">
+            <summary>
+            Gets or sets a value indicating whether the playing item should be removed as well. Used only when clearing the playlist.
+            </summary>
+            <value>Whether the playing item should be removed as well.</value>
         </member>
         <member name="T:Jellyfin.Api.Models.SyncPlayDtos.SeekRequestDto">
             <summary>
@@ -9074,9 +8902,9 @@
             The quick connect request body.
             </summary>
         </member>
-        <member name="P:Jellyfin.Api.Models.UserDtos.QuickConnectDto.Token">
+        <member name="P:Jellyfin.Api.Models.UserDtos.QuickConnectDto.Secret">
             <summary>
-            Gets or sets the quick connect token.
+            Gets or sets the quick connect secret.
             </summary>
         </member>
         <member name="T:Jellyfin.Api.Models.UserDtos.UpdateUserEasyPassword">

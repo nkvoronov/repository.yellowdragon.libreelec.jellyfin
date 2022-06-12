@@ -91,6 +91,10 @@ html {
     background: #143451;
 }
 
+a[data-role=button] {
+    background: #082845 !important;
+}
+
 .button-submit {
     background: #00a4dc;
     color: #fff;
@@ -193,6 +197,11 @@ html {
     color: rgba(255, 255, 255, 0.78);
 }
 
+.layout-tv .formDialogFooter:not(.formDialogFooter-clear) {
+    background: transparent;
+    color: initial;
+}
+
 .itemSelectionPanel {
     border: 1px solid #00a4dc;
 }
@@ -236,7 +245,11 @@ html {
 }
 
 .listItem:focus {
-    background: #333;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.listItem:hover {
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .progressring-spiner {
@@ -310,6 +323,7 @@ html {
 
 .countIndicator,
 .fullSyncIndicator,
+.mediaSourceIndicator,
 .playedIndicator {
     background: #00a4dc;
 }
@@ -440,6 +454,10 @@ html {
 
 .cardBox:not(.visualCardBox) .cardPadder {
     background-color: #0f3562;
+}
+
+.cardPadder .cardImageIcon {
+    color: rgba(0, 0, 0, 0.4);
 }
 
 .card:focus .cardBox.visualCardBox,

@@ -202,6 +202,12 @@
             <param name="key">The key.</param>
             <returns>System.Object.</returns>
         </member>
+        <member name="M:MediaBrowser.Common.Configuration.IConfigurationManager.GetConfigurationStores">
+            <summary>
+            Gets the array of coniguration stores.
+            </summary>
+            <returns>Array of ConfigurationStore.</returns>
+        </member>
         <member name="M:MediaBrowser.Common.Configuration.IConfigurationManager.GetConfigurationType(System.String)">
             <summary>
             Gets the type of the configuration.
@@ -233,60 +239,6 @@
             </summary>
             <param name="oldConfig">The old configuration.</param>
             <param name="newConfig">The new configuration.</param>
-        </member>
-        <member name="T:MediaBrowser.Common.Cryptography.Constants">
-            <summary>
-            Class containing global constants for Jellyfin Cryptography.
-            </summary>
-        </member>
-        <member name="F:MediaBrowser.Common.Cryptography.Constants.DefaultSaltLength">
-            <summary>
-            The default length for new salts.
-            </summary>
-        </member>
-        <member name="F:MediaBrowser.Common.Cryptography.Constants.DefaultIterations">
-            <summary>
-            The default amount of iterations for hashing passwords.
-            </summary>
-        </member>
-        <member name="T:MediaBrowser.Common.Cryptography.CryptoExtensions">
-            <summary>
-            Class containing extension methods for working with Jellyfin cryptography objects.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Cryptography.CryptoExtensions.CreatePasswordHash(MediaBrowser.Model.Cryptography.ICryptoProvider,System.String)">
-            <summary>
-            Creates a new <see cref="T:MediaBrowser.Common.Cryptography.PasswordHash" /> instance.
-            </summary>
-            <param name="cryptoProvider">The <see cref="T:MediaBrowser.Model.Cryptography.ICryptoProvider" /> instance used.</param>
-            <param name="password">The password that will be hashed.</param>
-            <returns>A <see cref="T:MediaBrowser.Common.Cryptography.PasswordHash" /> instance with the hash method, hash, salt and number of iterations.</returns>
-        </member>
-        <member name="P:MediaBrowser.Common.Cryptography.PasswordHash.Id">
-            <summary>
-            Gets the symbolic name for the function used.
-            </summary>
-            <value>Returns the symbolic name for the function used.</value>
-        </member>
-        <member name="P:MediaBrowser.Common.Cryptography.PasswordHash.Parameters">
-            <summary>
-            Gets the additional parameters used by the hash function.
-            </summary>
-        </member>
-        <member name="P:MediaBrowser.Common.Cryptography.PasswordHash.Salt">
-            <summary>
-            Gets the salt used for hashing the password.
-            </summary>
-            <value>Returns the salt used for hashing the password.</value>
-        </member>
-        <member name="P:MediaBrowser.Common.Cryptography.PasswordHash.Hash">
-            <summary>
-            Gets the hashed password.
-            </summary>
-            <value>Return the hashed password.</value>
-        </member>
-        <member name="M:MediaBrowser.Common.Cryptography.PasswordHash.ToString">
-            <inheritdoc />
         </member>
         <member name="T:MediaBrowser.Common.Events.EventHelper">
             <summary>
@@ -330,21 +282,6 @@
             </summary>
             <param name="str">The string.</param>
             <returns><see cref="T:System.Guid" />.</returns>
-        </member>
-        <member name="T:MediaBrowser.Common.Extensions.CopyToExtensions">
-            <summary>
-            Provides <c>CopyTo</c> extensions methods for <see cref="T:System.Collections.Generic.IReadOnlyList`1" />.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Extensions.CopyToExtensions.CopyTo``1(System.Collections.Generic.IReadOnlyList{``0},System.Collections.Generic.IList{``0},System.Int32)">
-            <summary>
-            Copies all the elements of the current collection to the specified list
-            starting at the specified destination array index. The index is specified as a 32-bit integer.
-            </summary>
-            <param name="source">The current collection that is the source of the elements.</param>
-            <param name="destination">The list that is the destination of the elements copied from the current collection.</param>
-            <param name="index">A 32-bit integer that represents the index in <c>destination</c> at which copying begins.</param>
-            <typeparam name="T">The type of the array.</typeparam>
         </member>
         <member name="T:MediaBrowser.Common.Extensions.HttpContextExtensions">
             <summary>
@@ -442,49 +379,34 @@
             </summary>
             <param name="message">The message.</param>
         </member>
-        <member name="T:MediaBrowser.Common.Extensions.ShuffleExtensions">
+        <member name="T:MediaBrowser.Common.FfmpegException">
             <summary>
-            Provides <c>Shuffle</c> extensions methods for <see cref="T:System.Collections.Generic.IList`1" />.
+            Represents errors that occur during interaction with FFmpeg.
             </summary>
         </member>
-        <member name="M:MediaBrowser.Common.Extensions.ShuffleExtensions.Shuffle``1(System.Collections.Generic.IList{``0})">
+        <member name="M:MediaBrowser.Common.FfmpegException.#ctor">
             <summary>
-            Shuffles the items in a list.
-            </summary>
-            <param name="list">The list that should get shuffled.</param>
-            <typeparam name="T">The type.</typeparam>
-        </member>
-        <member name="M:MediaBrowser.Common.Extensions.ShuffleExtensions.Shuffle``1(System.Collections.Generic.IList{``0},System.Random)">
-            <summary>
-            Shuffles the items in a list.
-            </summary>
-            <param name="list">The list that should get shuffled.</param>
-            <param name="rng">The random number generator to use.</param>
-            <typeparam name="T">The type.</typeparam>
-        </member>
-        <member name="T:MediaBrowser.Common.Extensions.StringExtensions">
-            <summary>
-            Extensions methods to simplify string operations.
+            Initializes a new instance of the <see cref="T:MediaBrowser.Common.FfmpegException"/> class.
             </summary>
         </member>
-        <member name="M:MediaBrowser.Common.Extensions.StringExtensions.LeftPart(System.ReadOnlySpan{System.Char},System.Char)">
+        <member name="M:MediaBrowser.Common.FfmpegException.#ctor(System.String)">
             <summary>
-            Returns the part on the left of the <c>needle</c>.
+            Initializes a new instance of the <see cref="T:MediaBrowser.Common.FfmpegException"/> class with a specified error message.
             </summary>
-            <param name="haystack">The string to seek.</param>
-            <param name="needle">The needle to find.</param>
-            <returns>The part left of the <paramref name="needle" />.</returns>
+            <param name="message">The message that describes the error.</param>
         </member>
-        <member name="M:MediaBrowser.Common.Extensions.StringExtensions.LeftPart(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char},System.StringComparison)">
+        <member name="M:MediaBrowser.Common.FfmpegException.#ctor(System.String,System.Exception)">
             <summary>
-            Returns the part on the left of the <c>needle</c>.
+            Initializes a new instance of the <see cref="T:MediaBrowser.Common.FfmpegException"/> class with a specified error message and a
+            reference to the inner exception that is the cause of this exception.
             </summary>
-            <param name="haystack">The string to seek.</param>
-            <param name="needle">The needle to find.</param>
-            <param name="stringComparison">One of the enumeration values that specifies the rules for the search.</param>
-            <returns>The part left of the <c>needle</c>.</returns>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">
+            The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if
+            no inner exception is specified.
+            </param>
         </member>
-        <member name="T:MediaBrowser.Common.CreationDelegate">
+        <member name="T:MediaBrowser.Common.CreationDelegateFactory">
             <summary>
             Delegate used with GetExports{T}.
             </summary>
@@ -584,7 +506,7 @@
             <param name="manageLifetime">If set to <c>true</c> [manage lifetime].</param>
             <returns><see cref="T:System.Collections.Generic.IReadOnlyCollection`1" />.</returns>
         </member>
-        <member name="M:MediaBrowser.Common.IApplicationHost.GetExports``1(MediaBrowser.Common.CreationDelegate,System.Boolean)">
+        <member name="M:MediaBrowser.Common.IApplicationHost.GetExports``1(MediaBrowser.Common.CreationDelegateFactory,System.Boolean)">
             <summary>
             Gets the exports.
             </summary>
@@ -613,234 +535,11 @@
             </summary>
             <returns>A task.</returns>
         </member>
-        <member name="M:MediaBrowser.Common.IApplicationHost.Init">
+        <member name="M:MediaBrowser.Common.IApplicationHost.Init(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             Initializes this instance.
             </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.IApplicationHost.CreateInstance(System.Type)">
-            <summary>
-            Creates the instance.
-            </summary>
-            <param name="type">The type.</param>
-            <returns>System.Object.</returns>
-        </member>
-        <member name="T:MediaBrowser.Common.Json.Converters.JsonBoolNumberConverter">
-            <summary>
-            Converts a number to a boolean.
-            This is needed for HDHomerun.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonBoolNumberConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonBoolNumberConverter.Write(System.Text.Json.Utf8JsonWriter,System.Boolean,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:MediaBrowser.Common.Json.Converters.JsonCommaDelimitedArrayConverter`1">
-            <summary>
-            Convert comma delimited string to array of type.
-            </summary>
-            <typeparam name="T">Type to convert to.</typeparam>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonCommaDelimitedArrayConverter`1.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:MediaBrowser.Common.Json.Converters.JsonCommaDelimitedArrayConverter`1"/> class.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonCommaDelimitedArrayConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonCommaDelimitedArrayConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0[],System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:MediaBrowser.Common.Json.Converters.JsonCommaDelimitedArrayConverterFactory">
-            <summary>
-            Json comma delimited array converter factory.
-            </summary>
-            <remarks>
-            This must be applied as an attribute, adding to the JsonConverter list causes stack overflow.
-            </remarks>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonCommaDelimitedArrayConverterFactory.CanConvert(System.Type)">
-            <inheritdoc />
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonCommaDelimitedArrayConverterFactory.CreateConverter(System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:MediaBrowser.Common.Json.Converters.JsonDateTimeConverter">
-            <summary>
-            Legacy DateTime converter.
-            Milliseconds aren't output if zero by default.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonDateTimeConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonDateTimeConverter.Write(System.Text.Json.Utf8JsonWriter,System.DateTime,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:MediaBrowser.Common.Json.Converters.JsonGuidConverter">
-            <summary>
-            Converts a GUID object or value to/from JSON.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonGuidConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonGuidConverter.Write(System.Text.Json.Utf8JsonWriter,System.Guid,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:MediaBrowser.Common.Json.Converters.JsonNullableGuidConverter">
-            <summary>
-            Converts a GUID object or value to/from JSON.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonNullableGuidConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonNullableGuidConverter.Write(System.Text.Json.Utf8JsonWriter,System.Nullable{System.Guid},System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:MediaBrowser.Common.Json.Converters.JsonNullableStructConverter`1">
-            <summary>
-            Converts a nullable struct or value to/from JSON.
-            Required - some clients send an empty string.
-            </summary>
-            <typeparam name="TStruct">The struct type.</typeparam>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonNullableStructConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonNullableStructConverter`1.Write(System.Text.Json.Utf8JsonWriter,System.Nullable{`0},System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:MediaBrowser.Common.Json.Converters.JsonNullableStructConverterFactory">
-            <summary>
-            Json nullable struct converter factory.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonNullableStructConverterFactory.CanConvert(System.Type)">
-            <inheritdoc />
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonNullableStructConverterFactory.CreateConverter(System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:MediaBrowser.Common.Json.Converters.JsonPipeDelimitedArrayConverter`1">
-            <summary>
-            Convert Pipe delimited string to array of type.
-            </summary>
-            <typeparam name="T">Type to convert to.</typeparam>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonPipeDelimitedArrayConverter`1.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:MediaBrowser.Common.Json.Converters.JsonPipeDelimitedArrayConverter`1"/> class.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonPipeDelimitedArrayConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonPipeDelimitedArrayConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0[],System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:MediaBrowser.Common.Json.Converters.JsonPipeDelimitedArrayConverterFactory">
-            <summary>
-            Json Pipe delimited array converter factory.
-            </summary>
-            <remarks>
-            This must be applied as an attribute, adding to the JsonConverter list causes stack overflow.
-            </remarks>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonPipeDelimitedArrayConverterFactory.CanConvert(System.Type)">
-            <inheritdoc />
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonPipeDelimitedArrayConverterFactory.CreateConverter(System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:MediaBrowser.Common.Json.Converters.JsonStringConverter">
-            <summary>
-            Converter to allow the serializer to read strings.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonStringConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonStringConverter.Write(System.Text.Json.Utf8JsonWriter,System.String,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:MediaBrowser.Common.Json.Converters.JsonVersionConverter">
-            <summary>
-            Converts a Version object or value to/from JSON.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonVersionConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:MediaBrowser.Common.Json.Converters.JsonVersionConverter.Write(System.Text.Json.Utf8JsonWriter,System.Version,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:MediaBrowser.Common.Json.JsonDefaults">
-            <summary>
-            Helper class for having compatible JSON throughout the codebase.
-            </summary>
-        </member>
-        <member name="F:MediaBrowser.Common.Json.JsonDefaults.PascalCaseMediaType">
-            <summary>
-            Pascal case json profile media type.
-            </summary>
-        </member>
-        <member name="F:MediaBrowser.Common.Json.JsonDefaults.CamelCaseMediaType">
-            <summary>
-            Camel case json profile media type.
-            </summary>
-        </member>
-        <member name="F:MediaBrowser.Common.Json.JsonDefaults._jsonSerializerOptions">
-            <summary>
-            When changing these options, update
-             Jellyfin.Server/Extensions/ApiServiceCollectionExtensions.cs
-              -> AddJellyfinApi
-               -> AddJsonOptions.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.JsonDefaults.GetOptions">
-            <summary>
-            Gets the default <see cref="T:System.Text.Json.JsonSerializerOptions" /> options.
-            </summary>
-            <remarks>
-            The return value must not be modified.
-            If the defaults must be modified the author must use the copy constructor.
-            </remarks>
-            <returns>The default <see cref="T:System.Text.Json.JsonSerializerOptions" /> options.</returns>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.JsonDefaults.GetCamelCaseOptions">
-            <summary>
-            Gets camelCase json options.
-            </summary>
-            <remarks>
-            The return value must not be modified.
-            If the defaults must be modified the author must use the copy constructor.
-            </remarks>
-            <returns>The camelCase <see cref="T:System.Text.Json.JsonSerializerOptions" /> options.</returns>
-        </member>
-        <member name="M:MediaBrowser.Common.Json.JsonDefaults.GetPascalCaseOptions">
-            <summary>
-            Gets PascalCase json options.
-            </summary>
-            <remarks>
-            The return value must not be modified.
-            If the defaults must be modified the author must use the copy constructor.
-            </remarks>
-            <returns>The PascalCase <see cref="T:System.Text.Json.JsonSerializerOptions" /> options.</returns>
-        </member>
-        <member name="T:MediaBrowser.Common.Net.DefaultHttpClientHandler">
-            <summary>
-            Default http client handler.
-            </summary>
-        </member>
-        <member name="M:MediaBrowser.Common.Net.DefaultHttpClientHandler.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:MediaBrowser.Common.Net.DefaultHttpClientHandler"/> class.
-            </summary>
+            <param name="serviceCollection">Instance of the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> interface.</param>
         </member>
         <member name="T:MediaBrowser.Common.Net.INetworkManager">
             <summary>
@@ -1200,7 +899,6 @@
             <summary>
             Task that looks up a Host name and returns its IP addresses.
             </summary>
-            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
         </member>
         <member name="T:MediaBrowser.Common.Net.IPNetAddress">
             <summary>
@@ -1308,16 +1006,6 @@
             Base network object class.
             </summary>
         </member>
-        <member name="F:MediaBrowser.Common.Net.IPObject.Ipv6Loopback">
-            <summary>
-            IPv6 Loopback address.
-            </summary>
-        </member>
-        <member name="F:MediaBrowser.Common.Net.IPObject.Ipv4Loopback">
-            <summary>
-            IPv4 Loopback address.
-            </summary>
-        </member>
         <member name="F:MediaBrowser.Common.Net.IPObject._networkAddress">
             <summary>
             The network address of this object.
@@ -1355,13 +1043,6 @@
             <param name="address">IP Address to convert.</param>
             <param name="prefixLength">Subnet prefix.</param>
             <returns>IPAddress.</returns>
-        </member>
-        <member name="M:MediaBrowser.Common.Net.IPObject.IsLoopback(System.Net.IPAddress)">
-            <summary>
-            Tests to see if the ip address is a Loopback address.
-            </summary>
-            <param name="address">Value to test.</param>
-            <returns>True if it is.</returns>
         </member>
         <member name="M:MediaBrowser.Common.Net.IPObject.IsIP6(System.Net.IPAddress)">
             <summary>
@@ -1553,7 +1234,7 @@
             <param name="isNetwork">Collection is a network collection.</param>
             <returns>A new collection, with the items excluded.</returns>
         </member>
-        <member name="M:MediaBrowser.Common.Net.NetworkExtensions.Union(System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject},System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject})">
+        <member name="M:MediaBrowser.Common.Net.NetworkExtensions.ThatAreContainedInNetworks(System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject},System.Collections.ObjectModel.Collection{MediaBrowser.Common.Net.IPObject})">
             <summary>
             Returns all items that co-exist in this object and target.
             </summary>
@@ -1928,7 +1609,7 @@
         </member>
         <member name="P:MediaBrowser.Common.Plugins.LocalPlugin.DllFiles">
             <summary>
-            Gets the list of dll files for this plugin.
+            Gets or sets the list of dll files for this plugin.
             </summary>
         </member>
         <member name="P:MediaBrowser.Common.Plugins.LocalPlugin.Instance">
@@ -2063,6 +1744,43 @@
             </summary>
             <param name="action">The action.</param>
         </member>
+        <member name="T:MediaBrowser.Common.Providers.ProviderIdParsers">
+            <summary>
+            Parsers for provider ids.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.Common.Providers.ProviderIdParsers.TryFindImdbId(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char}@)">
+            <summary>
+            Parses an IMDb id from a string.
+            </summary>
+            <param name="text">The text to parse.</param>
+            <param name="imdbId">The parsed IMDb id.</param>
+            <returns>True if parsing was successful, false otherwise.</returns>
+        </member>
+        <member name="M:MediaBrowser.Common.Providers.ProviderIdParsers.TryFindTmdbMovieId(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char}@)">
+            <summary>
+            Parses an TMDb id from a movie url.
+            </summary>
+            <param name="text">The text with the url to parse.</param>
+            <param name="tmdbId">The parsed TMDb id.</param>
+            <returns>True if parsing was successful, false otherwise.</returns>
+        </member>
+        <member name="M:MediaBrowser.Common.Providers.ProviderIdParsers.TryFindTmdbSeriesId(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char}@)">
+            <summary>
+            Parses an TMDb id from a series url.
+            </summary>
+            <param name="text">The text with the url to parse.</param>
+            <param name="tmdbId">The parsed TMDb id.</param>
+            <returns>True if parsing was successful, false otherwise.</returns>
+        </member>
+        <member name="M:MediaBrowser.Common.Providers.ProviderIdParsers.TryFindTvdbId(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char}@)">
+            <summary>
+            Parses an TVDb id from a url.
+            </summary>
+            <param name="text">The text with the url to parse.</param>
+            <param name="tvdbId">The parsed TVDb id.</param>
+            <returns>True if parsing was successful, false otherwise.</returns>
+        </member>
         <member name="M:MediaBrowser.Common.Providers.SubtitleConfigurationFactory.GetConfigurations">
             <inheritdoc />
         </member>
@@ -2093,7 +1811,7 @@
             <param name="cancellationToken">The cancellation token.</param>
             <returns>Task{IReadOnlyList{PackageInfo}}.</returns>
         </member>
-        <member name="M:MediaBrowser.Common.Updates.IInstallationManager.FilterPackages(System.Collections.Generic.IEnumerable{MediaBrowser.Model.Updates.PackageInfo},System.String,System.Nullable{System.Guid},System.Version)">
+        <member name="M:MediaBrowser.Common.Updates.IInstallationManager.FilterPackages(System.Collections.Generic.IEnumerable{MediaBrowser.Model.Updates.PackageInfo},System.String,System.Guid,System.Version)">
             <summary>
             Returns all plugins matching the requirements.
             </summary>
@@ -2103,7 +1821,7 @@
             <param name="specificVersion">The version of the plugin.</param>
             <returns>All plugins matching the requirements.</returns>
         </member>
-        <member name="M:MediaBrowser.Common.Updates.IInstallationManager.GetCompatibleVersions(System.Collections.Generic.IEnumerable{MediaBrowser.Model.Updates.PackageInfo},System.String,System.Nullable{System.Guid},System.Version,System.Version)">
+        <member name="M:MediaBrowser.Common.Updates.IInstallationManager.GetCompatibleVersions(System.Collections.Generic.IEnumerable{MediaBrowser.Model.Updates.PackageInfo},System.String,System.Guid,System.Version,System.Version)">
             <summary>
             Returns all compatible versions ordered from newest to oldest.
             </summary>

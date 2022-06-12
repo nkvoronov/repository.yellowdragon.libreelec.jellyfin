@@ -114,7 +114,7 @@
             Represents a complete video, including all parts and subtitles.
             </summary>
         </member>
-        <member name="M:Emby.Naming.AudioBook.AudioBookInfo.#ctor(System.String,System.Nullable{System.Int32},System.Collections.Generic.List{Emby.Naming.AudioBook.AudioBookFileInfo},System.Collections.Generic.List{Emby.Naming.AudioBook.AudioBookFileInfo},System.Collections.Generic.List{Emby.Naming.AudioBook.AudioBookFileInfo})">
+        <member name="M:Emby.Naming.AudioBook.AudioBookInfo.#ctor(System.String,System.Nullable{System.Int32},System.Collections.Generic.IReadOnlyList{Emby.Naming.AudioBook.AudioBookFileInfo},System.Collections.Generic.IReadOnlyList{Emby.Naming.AudioBook.AudioBookFileInfo},System.Collections.Generic.IReadOnlyList{Emby.Naming.AudioBook.AudioBookFileInfo})">
             <summary>
             Initializes a new instance of the <see cref="T:Emby.Naming.AudioBook.AudioBookInfo" /> class.
             </summary>
@@ -299,9 +299,29 @@
             Initializes a new instance of the <see cref="T:Emby.Naming.Common.NamingOptions"/> class.
             </summary>
         </member>
+        <member name="P:Emby.Naming.Common.NamingOptions.AllExtrasTypesFolderNames">
+            <summary>
+            Gets or sets the folder name to extra types mapping.
+            </summary>
+        </member>
         <member name="P:Emby.Naming.Common.NamingOptions.AudioFileExtensions">
             <summary>
             Gets or sets list of audio file extensions.
+            </summary>
+        </member>
+        <member name="P:Emby.Naming.Common.NamingOptions.MediaFlagDelimiters">
+            <summary>
+            Gets or sets list of external media flag delimiters.
+            </summary>
+        </member>
+        <member name="P:Emby.Naming.Common.NamingOptions.MediaForcedFlags">
+            <summary>
+            Gets or sets list of external media forced flags.
+            </summary>
+        </member>
+        <member name="P:Emby.Naming.Common.NamingOptions.MediaDefaultFlags">
+            <summary>
+            Gets or sets list of external media default flags.
             </summary>
         </member>
         <member name="P:Emby.Naming.Common.NamingOptions.AlbumStackingPrefixes">
@@ -312,21 +332,6 @@
         <member name="P:Emby.Naming.Common.NamingOptions.SubtitleFileExtensions">
             <summary>
             Gets or sets list of subtitle file extensions.
-            </summary>
-        </member>
-        <member name="P:Emby.Naming.Common.NamingOptions.SubtitleFlagDelimiters">
-            <summary>
-            Gets or sets list of subtitles flag delimiters.
-            </summary>
-        </member>
-        <member name="P:Emby.Naming.Common.NamingOptions.SubtitleForcedFlags">
-            <summary>
-            Gets or sets list of subtitle forced flags.
-            </summary>
-        </member>
-        <member name="P:Emby.Naming.Common.NamingOptions.SubtitleDefaultFlags">
-            <summary>
-            Gets or sets list of subtitle default flags.
             </summary>
         </member>
         <member name="P:Emby.Naming.Common.NamingOptions.EpisodeExpressions">
@@ -379,9 +384,9 @@
             Gets or sets list of 3D Format rules.
             </summary>
         </member>
-        <member name="P:Emby.Naming.Common.NamingOptions.VideoFileStackingExpressions">
+        <member name="P:Emby.Naming.Common.NamingOptions.VideoFileStackingRules">
             <summary>
-            Gets or sets list of raw video file-stacking expressions strings.
+            Gets the file stacking rules.
             </summary>
         </member>
         <member name="P:Emby.Naming.Common.NamingOptions.CleanDateTimes">
@@ -402,11 +407,6 @@
         <member name="P:Emby.Naming.Common.NamingOptions.VideoExtraRules">
             <summary>
             Gets or sets list of extra rules for videos.
-            </summary>
-        </member>
-        <member name="P:Emby.Naming.Common.NamingOptions.VideoFileStackingRegexes">
-            <summary>
-            Gets list of video file-stack regular expressions.
             </summary>
         </member>
         <member name="P:Emby.Naming.Common.NamingOptions.CleanDateTimeRegexes">
@@ -434,60 +434,69 @@
             Compiles raw regex strings into regexes.
             </summary>
         </member>
-        <member name="T:Emby.Naming.Subtitles.SubtitleInfo">
+        <member name="T:Emby.Naming.ExternalFiles.ExternalPathParser">
             <summary>
-            Class holding information about subtitle.
+            External media file parser class.
             </summary>
         </member>
-        <member name="M:Emby.Naming.Subtitles.SubtitleInfo.#ctor(System.String,System.Boolean,System.Boolean)">
+        <member name="M:Emby.Naming.ExternalFiles.ExternalPathParser.#ctor(Emby.Naming.Common.NamingOptions,MediaBrowser.Model.Globalization.ILocalizationManager,MediaBrowser.Model.Dlna.DlnaProfileType)">
             <summary>
-            Initializes a new instance of the <see cref="T:Emby.Naming.Subtitles.SubtitleInfo"/> class.
+            Initializes a new instance of the <see cref="T:Emby.Naming.ExternalFiles.ExternalPathParser"/> class.
+            </summary>
+            <param name="localizationManager">The localization manager.</param>
+            <param name="namingOptions">The <see cref="T:Emby.Naming.Common.NamingOptions"/> object containing FileExtensions, MediaDefaultFlags, MediaForcedFlags and MediaFlagDelimiters.</param>
+            <param name="type">The <see cref="T:MediaBrowser.Model.Dlna.DlnaProfileType"/> of the parsed file.</param>
+        </member>
+        <member name="M:Emby.Naming.ExternalFiles.ExternalPathParser.ParseFile(System.String,System.String)">
+            <summary>
+            Parse filename and extract information.
             </summary>
             <param name="path">Path to file.</param>
-            <param name="isDefault">Is subtitle default.</param>
-            <param name="isForced">Is subtitle forced.</param>
+            <param name="extraString">Part of the filename only containing the extra information.</param>
+            <returns>Returns null or an <see cref="T:Emby.Naming.ExternalFiles.ExternalPathParserResult"/> object if parsing is successful.</returns>
         </member>
-        <member name="P:Emby.Naming.Subtitles.SubtitleInfo.Path">
+        <member name="T:Emby.Naming.ExternalFiles.ExternalPathParserResult">
+            <summary>
+            Class holding information about external files.
+            </summary>
+        </member>
+        <member name="M:Emby.Naming.ExternalFiles.ExternalPathParserResult.#ctor(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Emby.Naming.ExternalFiles.ExternalPathParserResult"/> class.
+            </summary>
+            <param name="path">Path to file.</param>
+            <param name="isDefault">Is default.</param>
+            <param name="isForced">Is forced.</param>
+        </member>
+        <member name="P:Emby.Naming.ExternalFiles.ExternalPathParserResult.Path">
             <summary>
             Gets or sets the path.
             </summary>
             <value>The path.</value>
         </member>
-        <member name="P:Emby.Naming.Subtitles.SubtitleInfo.Language">
+        <member name="P:Emby.Naming.ExternalFiles.ExternalPathParserResult.Language">
             <summary>
             Gets or sets the language.
             </summary>
             <value>The language.</value>
         </member>
-        <member name="P:Emby.Naming.Subtitles.SubtitleInfo.IsDefault">
+        <member name="P:Emby.Naming.ExternalFiles.ExternalPathParserResult.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>The title.</value>
+        </member>
+        <member name="P:Emby.Naming.ExternalFiles.ExternalPathParserResult.IsDefault">
             <summary>
             Gets or sets a value indicating whether this instance is default.
             </summary>
             <value><c>true</c> if this instance is default; otherwise, <c>false</c>.</value>
         </member>
-        <member name="P:Emby.Naming.Subtitles.SubtitleInfo.IsForced">
+        <member name="P:Emby.Naming.ExternalFiles.ExternalPathParserResult.IsForced">
             <summary>
             Gets or sets a value indicating whether this instance is forced.
             </summary>
             <value><c>true</c> if this instance is forced; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="T:Emby.Naming.Subtitles.SubtitleParser">
-            <summary>
-            Subtitle Parser class.
-            </summary>
-        </member>
-        <member name="M:Emby.Naming.Subtitles.SubtitleParser.#ctor(Emby.Naming.Common.NamingOptions)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Emby.Naming.Subtitles.SubtitleParser"/> class.
-            </summary>
-            <param name="options"><see cref="T:Emby.Naming.Common.NamingOptions"/> object containing SubtitleFileExtensions, SubtitleDefaultFlags, SubtitleForcedFlags and SubtitleFlagDelimiters.</param>
-        </member>
-        <member name="M:Emby.Naming.Subtitles.SubtitleParser.ParseFile(System.String)">
-            <summary>
-            Parse file to determine if is subtitle and <see cref="T:Emby.Naming.Subtitles.SubtitleInfo"/>.
-            </summary>
-            <param name="path">Path to file.</param>
-            <returns>Returns null or <see cref="T:Emby.Naming.Subtitles.SubtitleInfo"/> object if parsing is successful.</returns>
         </member>
         <member name="T:Emby.Naming.TV.EpisodeInfo">
             <summary>
@@ -660,7 +669,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:Emby.Naming.TV.EpisodeResolver"/> class.
             </summary>
-            <param name="options"><see cref="T:Emby.Naming.Common.NamingOptions"/> object containing VideoFileExtensions and passed to <see cref="T:Emby.Naming.Video.StubResolver"/>, <see cref="T:Emby.Naming.Video.FlagParser"/>, <see cref="T:Emby.Naming.Video.Format3DParser"/> and <see cref="T:Emby.Naming.TV.EpisodePathParser"/>.</param>
+            <param name="options"><see cref="T:Emby.Naming.Common.NamingOptions"/> object containing VideoFileExtensions and passed to <see cref="T:Emby.Naming.Video.StubResolver"/>, <see cref="T:Emby.Naming.Video.Format3DParser"/> and <see cref="T:Emby.Naming.TV.EpisodePathParser"/>.</param>
         </member>
         <member name="M:Emby.Naming.TV.EpisodeResolver.Resolve(System.String,System.Boolean,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Boolean)">
             <summary>
@@ -732,6 +741,79 @@
             Seems redundant and barely used.
             </summary>
         </member>
+        <member name="T:Emby.Naming.TV.SeriesInfo">
+            <summary>
+            Holder object for Series information.
+            </summary>
+        </member>
+        <member name="M:Emby.Naming.TV.SeriesInfo.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Emby.Naming.TV.SeriesInfo"/> class.
+            </summary>
+            <param name="path">Path to the file.</param>
+        </member>
+        <member name="P:Emby.Naming.TV.SeriesInfo.Path">
+            <summary>
+            Gets or sets the path.
+            </summary>
+            <value>The path.</value>
+        </member>
+        <member name="P:Emby.Naming.TV.SeriesInfo.Name">
+            <summary>
+            Gets or sets the name of the series.
+            </summary>
+            <value>The name of the series.</value>
+        </member>
+        <member name="T:Emby.Naming.TV.SeriesPathParser">
+            <summary>
+            Used to parse information about series from paths containing more information that only the series name.
+            Uses the same regular expressions as the EpisodePathParser but have different success criteria.
+            </summary>
+        </member>
+        <member name="M:Emby.Naming.TV.SeriesPathParser.Parse(Emby.Naming.Common.NamingOptions,System.String)">
+            <summary>
+            Parses information about series from path.
+            </summary>
+            <param name="options"><see cref="T:Emby.Naming.Common.NamingOptions"/> object containing EpisodeExpressions and MultipleEpisodeExpressions.</param>
+            <param name="path">Path.</param>
+            <returns>Returns <see cref="T:Emby.Naming.TV.SeriesPathParserResult"/> object.</returns>
+        </member>
+        <member name="T:Emby.Naming.TV.SeriesPathParserResult">
+            <summary>
+            Holder object for <see cref="T:Emby.Naming.TV.SeriesPathParser"/> result.
+            </summary>
+        </member>
+        <member name="P:Emby.Naming.TV.SeriesPathParserResult.SeriesName">
+            <summary>
+            Gets or sets the name of the series.
+            </summary>
+            <value>The name of the series.</value>
+        </member>
+        <member name="P:Emby.Naming.TV.SeriesPathParserResult.Success">
+            <summary>
+            Gets or sets a value indicating whether parsing was successful.
+            </summary>
+        </member>
+        <member name="T:Emby.Naming.TV.SeriesResolver">
+            <summary>
+            Used to resolve information about series from path.
+            </summary>
+        </member>
+        <member name="F:Emby.Naming.TV.SeriesResolver._seriesNameRegex">
+            <summary>
+            Regex that matches strings of at least 2 characters separated by a dot or underscore.
+            Used for removing separators between words, i.e turns "The_show" into "The show" while
+            preserving namings like "S.H.O.W".
+            </summary>
+        </member>
+        <member name="M:Emby.Naming.TV.SeriesResolver.Resolve(Emby.Naming.Common.NamingOptions,System.String)">
+            <summary>
+            Resolve information about series from path.
+            </summary>
+            <param name="options"><see cref="T:Emby.Naming.Common.NamingOptions"/> object passed to <see cref="T:Emby.Naming.TV.SeriesPathParser"/>.</param>
+            <param name="path">Path to series.</param>
+            <returns>SeriesInfo.</returns>
+        </member>
         <member name="T:Emby.Naming.Video.CleanDateTimeParser">
             <summary>
             <see href="http://kodi.wiki/view/Advancedsettings.xml#video" />.
@@ -774,7 +856,7 @@
             <see href="http://kodi.wiki/view/Advancedsettings.xml#video" />.
             </summary>
         </member>
-        <member name="M:Emby.Naming.Video.CleanStringParser.TryClean(System.String,System.Collections.Generic.IReadOnlyList{System.Text.RegularExpressions.Regex},System.ReadOnlySpan{System.Char}@)">
+        <member name="M:Emby.Naming.Video.CleanStringParser.TryClean(System.String,System.Collections.Generic.IReadOnlyList{System.Text.RegularExpressions.Regex},System.String@)">
             <summary>
             Attempts to extract clean name with regular expressions.
             </summary>
@@ -782,24 +864,6 @@
             <param name="expressions">List of regex to parse name and year from.</param>
             <param name="newName">Parsing result string.</param>
             <returns>True if parsing was successful.</returns>
-        </member>
-        <member name="T:Emby.Naming.Video.ExtraResolver">
-            <summary>
-            Resolve if file is extra for video.
-            </summary>
-        </member>
-        <member name="M:Emby.Naming.Video.ExtraResolver.#ctor(Emby.Naming.Common.NamingOptions)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Emby.Naming.Video.ExtraResolver"/> class.
-            </summary>
-            <param name="options"><see cref="T:Emby.Naming.Common.NamingOptions"/> object containing VideoExtraRules and passed to <see cref="T:Emby.Naming.Audio.AudioFileParser"/> and <see cref="T:Emby.Naming.Video.VideoResolver"/>.</param>
-        </member>
-        <member name="M:Emby.Naming.Video.ExtraResolver.GetExtraInfo(System.String)">
-            <summary>
-            Attempts to resolve if file is extra.
-            </summary>
-            <param name="path">Path to file.</param>
-            <returns>Returns <see cref="T:Emby.Naming.Video.ExtraResult"/> object.</returns>
         </member>
         <member name="T:Emby.Naming.Video.ExtraResult">
             <summary>
@@ -852,6 +916,19 @@
             Gets or sets the type of the media to return when matched.
             </summary>
         </member>
+        <member name="T:Emby.Naming.Video.ExtraRuleResolver">
+            <summary>
+            Resolve if file is extra for video.
+            </summary>
+        </member>
+        <member name="M:Emby.Naming.Video.ExtraRuleResolver.GetExtraInfo(System.String,Emby.Naming.Common.NamingOptions)">
+            <summary>
+            Attempts to resolve if file is extra.
+            </summary>
+            <param name="path">Path to file.</param>
+            <param name="namingOptions">The naming options.</param>
+            <returns>Returns <see cref="T:Emby.Naming.Video.ExtraResult"/> object.</returns>
+        </member>
         <member name="T:Emby.Naming.Video.ExtraRuleType">
             <summary>
             Extra rules type to determine against what <see cref="P:Emby.Naming.Video.ExtraRule.Token"/> should be matched.
@@ -882,24 +959,27 @@
             Object holding list of files paths with additional information.
             </summary>
         </member>
-        <member name="M:Emby.Naming.Video.FileStack.#ctor">
+        <member name="M:Emby.Naming.Video.FileStack.#ctor(System.String,System.Boolean,System.Collections.Generic.IReadOnlyList{System.String})">
             <summary>
             Initializes a new instance of the <see cref="T:Emby.Naming.Video.FileStack"/> class.
             </summary>
+            <param name="name">The stack name.</param>
+            <param name="isDirectory">Whether the stack files are directories.</param>
+            <param name="files">The stack files.</param>
         </member>
         <member name="P:Emby.Naming.Video.FileStack.Name">
             <summary>
-            Gets or sets name of file stack.
+            Gets the name of file stack.
             </summary>
         </member>
         <member name="P:Emby.Naming.Video.FileStack.Files">
             <summary>
-            Gets or sets list of paths in stack.
+            Gets the list of paths in stack.
             </summary>
         </member>
         <member name="P:Emby.Naming.Video.FileStack.IsDirectoryStack">
             <summary>
-            Gets or sets a value indicating whether stack is directory stack.
+            Gets a value indicating whether stack is directory stack.
             </summary>
         </member>
         <member name="M:Emby.Naming.Video.FileStack.ContainsFile(System.String,System.Boolean)">
@@ -910,48 +990,42 @@
             <param name="isDirectory">Requested type of stack.</param>
             <returns>True if file is in the stack.</returns>
         </member>
-        <member name="T:Emby.Naming.Video.FlagParser">
+        <member name="T:Emby.Naming.Video.FileStackRule">
             <summary>
-            Parses list of flags from filename based on delimiters.
+            Regex based rule for file stacking (eg. disc1, disc2).
             </summary>
         </member>
-        <member name="M:Emby.Naming.Video.FlagParser.#ctor(Emby.Naming.Common.NamingOptions)">
+        <member name="M:Emby.Naming.Video.FileStackRule.#ctor(System.String,System.Boolean)">
             <summary>
-            Initializes a new instance of the <see cref="T:Emby.Naming.Video.FlagParser"/> class.
+            Initializes a new instance of the <see cref="T:Emby.Naming.Video.FileStackRule"/> class.
             </summary>
-            <param name="options"><see cref="T:Emby.Naming.Common.NamingOptions"/> object containing VideoFlagDelimiters.</param>
+            <param name="token">Token.</param>
+            <param name="isNumerical">Whether the file stack rule uses numerical or alphabetical numbering.</param>
         </member>
-        <member name="M:Emby.Naming.Video.FlagParser.GetFlags(System.String)">
+        <member name="P:Emby.Naming.Video.FileStackRule.IsNumerical">
             <summary>
-            Calls GetFlags function with _options.VideoFlagDelimiters parameter.
+            Gets a value indicating whether the rule uses numerical or alphabetical numbering.
             </summary>
-            <param name="path">Path to file.</param>
-            <returns>List of found flags.</returns>
         </member>
-        <member name="M:Emby.Naming.Video.FlagParser.GetFlags(System.String,System.Char[])">
+        <member name="M:Emby.Naming.Video.FileStackRule.Match(System.String,System.Nullable{System.ValueTuple{System.String,System.String,System.String}}@)">
             <summary>
-            Parses flags from filename based on delimiters.
+            Match the input against the rule regex.
             </summary>
-            <param name="path">Path to file.</param>
-            <param name="delimiters">Delimiters used to extract flags.</param>
-            <returns>List of found flags.</returns>
+            <param name="input">The input.</param>
+            <param name="result">The part type and number or <c>null</c>.</param>
+            <returns>A value indicating whether the input matched the rule.</returns>
         </member>
         <member name="T:Emby.Naming.Video.Format3DParser">
             <summary>
-            Parste 3D format related flags.
+            Parse 3D format related flags.
             </summary>
         </member>
-        <member name="M:Emby.Naming.Video.Format3DParser.#ctor(Emby.Naming.Common.NamingOptions)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Emby.Naming.Video.Format3DParser"/> class.
-            </summary>
-            <param name="options"><see cref="T:Emby.Naming.Common.NamingOptions"/> object containing VideoFlagDelimiters and passes options to <see cref="T:Emby.Naming.Video.FlagParser"/>.</param>
-        </member>
-        <member name="M:Emby.Naming.Video.Format3DParser.Parse(System.String)">
+        <member name="M:Emby.Naming.Video.Format3DParser.Parse(System.ReadOnlySpan{System.Char},Emby.Naming.Common.NamingOptions)">
             <summary>
             Parse 3D format related flags.
             </summary>
             <param name="path">Path to file.</param>
+            <param name="namingOptions">The naming options.</param>
             <returns>Returns <see cref="T:Emby.Naming.Video.Format3DResult"/> object.</returns>
         </member>
         <member name="T:Emby.Naming.Video.Format3DResult">
@@ -959,28 +1033,24 @@
             Helper object to return data from <see cref="T:Emby.Naming.Video.Format3DParser"/>.
             </summary>
         </member>
-        <member name="M:Emby.Naming.Video.Format3DResult.#ctor">
+        <member name="M:Emby.Naming.Video.Format3DResult.#ctor(System.Boolean,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Emby.Naming.Video.Format3DResult"/> class.
             </summary>
+            <param name="is3D">A value indicating whether the parsed string contains 3D tokens.</param>
+            <param name="format3D">The 3D format. Value might be null if [is3D] is <c>false</c>.</param>
         </member>
         <member name="P:Emby.Naming.Video.Format3DResult.Is3D">
             <summary>
-            Gets or sets a value indicating whether [is3 d].
+            Gets a value indicating whether [is3 d].
             </summary>
             <value><c>true</c> if [is3 d]; otherwise, <c>false</c>.</value>
         </member>
         <member name="P:Emby.Naming.Video.Format3DResult.Format3D">
             <summary>
-            Gets or sets the format3 d.
+            Gets the format3 d.
             </summary>
             <value>The format3 d.</value>
-        </member>
-        <member name="P:Emby.Naming.Video.Format3DResult.Tokens">
-            <summary>
-            Gets or sets the tokens.
-            </summary>
-            <value>The tokens.</value>
         </member>
         <member name="T:Emby.Naming.Video.Format3DRule">
             <summary>
@@ -1011,24 +1081,20 @@
             Resolve <see cref="T:Emby.Naming.Video.FileStack"/> from list of paths.
             </summary>
         </member>
-        <member name="M:Emby.Naming.Video.StackResolver.#ctor(Emby.Naming.Common.NamingOptions)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Emby.Naming.Video.StackResolver"/> class.
-            </summary>
-            <param name="options"><see cref="T:Emby.Naming.Common.NamingOptions"/> object containing VideoFileStackingRegexes and passes options to <see cref="T:Emby.Naming.Video.VideoResolver"/>.</param>
-        </member>
-        <member name="M:Emby.Naming.Video.StackResolver.ResolveDirectories(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Emby.Naming.Video.StackResolver.ResolveDirectories(System.Collections.Generic.IEnumerable{System.String},Emby.Naming.Common.NamingOptions)">
             <summary>
             Resolves only directories from paths.
             </summary>
             <param name="files">List of paths.</param>
+            <param name="namingOptions">The naming options.</param>
             <returns>Enumerable <see cref="T:Emby.Naming.Video.FileStack"/> of directories.</returns>
         </member>
-        <member name="M:Emby.Naming.Video.StackResolver.ResolveFiles(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Emby.Naming.Video.StackResolver.ResolveFiles(System.Collections.Generic.IEnumerable{System.String},Emby.Naming.Common.NamingOptions)">
             <summary>
             Resolves only files from paths.
             </summary>
             <param name="files">List of paths.</param>
+            <param name="namingOptions">The naming options.</param>
             <returns>Enumerable <see cref="T:Emby.Naming.Video.FileStack"/> of files.</returns>
         </member>
         <member name="M:Emby.Naming.Video.StackResolver.ResolveAudioBooks(System.Collections.Generic.IEnumerable{Emby.Naming.AudioBook.AudioBookFileInfo})">
@@ -1038,11 +1104,12 @@
             <param name="files">List of paths.</param>
             <returns>Enumerable <see cref="T:Emby.Naming.Video.FileStack"/> of directories.</returns>
         </member>
-        <member name="M:Emby.Naming.Video.StackResolver.Resolve(System.Collections.Generic.IEnumerable{MediaBrowser.Model.IO.FileSystemMetadata})">
+        <member name="M:Emby.Naming.Video.StackResolver.Resolve(System.Collections.Generic.IEnumerable{MediaBrowser.Model.IO.FileSystemMetadata},Emby.Naming.Common.NamingOptions)">
             <summary>
             Resolves videos from paths.
             </summary>
             <param name="files">List of paths.</param>
+            <param name="namingOptions">The naming options.</param>
             <returns>Enumerable <see cref="T:Emby.Naming.Video.FileStack"/> of videos.</returns>
         </member>
         <member name="T:Emby.Naming.Video.StubResolver">
@@ -1208,35 +1275,30 @@
             </summary>
             <value>The files.</value>
         </member>
-        <member name="P:Emby.Naming.Video.VideoInfo.Extras">
-            <summary>
-            Gets or sets the extras.
-            </summary>
-            <value>The extras.</value>
-        </member>
         <member name="P:Emby.Naming.Video.VideoInfo.AlternateVersions">
             <summary>
             Gets or sets the alternate versions.
             </summary>
             <value>The alternate versions.</value>
         </member>
+        <member name="P:Emby.Naming.Video.VideoInfo.ExtraType">
+            <summary>
+            Gets or sets the extra type.
+            </summary>
+        </member>
         <member name="T:Emby.Naming.Video.VideoListResolver">
             <summary>
             Resolves alternative versions and extras from list of video files.
             </summary>
         </member>
-        <member name="M:Emby.Naming.Video.VideoListResolver.#ctor(Emby.Naming.Common.NamingOptions)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Emby.Naming.Video.VideoListResolver"/> class.
-            </summary>
-            <param name="options"><see cref="T:Emby.Naming.Common.NamingOptions"/> object containing CleanStringRegexes and VideoFlagDelimiters and passes options to <see cref="T:Emby.Naming.Video.StackResolver"/> and <see cref="T:Emby.Naming.Video.VideoResolver"/>.</param>
-        </member>
-        <member name="M:Emby.Naming.Video.VideoListResolver.Resolve(System.Collections.Generic.List{MediaBrowser.Model.IO.FileSystemMetadata},System.Boolean)">
+        <member name="M:Emby.Naming.Video.VideoListResolver.Resolve(System.Collections.Generic.IReadOnlyList{Emby.Naming.Video.VideoFileInfo},Emby.Naming.Common.NamingOptions,System.Boolean,System.Boolean)">
             <summary>
             Resolves alternative versions and extras from list of video files.
             </summary>
-            <param name="files">List of related video files.</param>
+            <param name="videoInfos">List of related video files.</param>
+            <param name="namingOptions">The naming options.</param>
             <param name="supportMultiVersion">Indication we should consider multi-versions of content.</param>
+            <param name="parseName">Whether to parse the name or use the filename.</param>
             <returns>Returns enumerable of <see cref="T:Emby.Naming.Video.VideoInfo"/> which groups files together when related.</returns>
         </member>
         <member name="T:Emby.Naming.Video.VideoResolver">
@@ -1244,64 +1306,65 @@
             Resolves <see cref="T:Emby.Naming.Video.VideoFileInfo"/> from file path.
             </summary>
         </member>
-        <member name="M:Emby.Naming.Video.VideoResolver.#ctor(Emby.Naming.Common.NamingOptions)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Emby.Naming.Video.VideoResolver"/> class.
-            </summary>
-            <param name="options"><see cref="T:Emby.Naming.Common.NamingOptions"/> object containing VideoFileExtensions, StubFileExtensions, CleanStringRegexes and CleanDateTimeRegexes
-            and passes options in <see cref="T:Emby.Naming.Video.StubResolver"/>, <see cref="T:Emby.Naming.Video.FlagParser"/>, <see cref="T:Emby.Naming.Video.Format3DParser"/> and <see cref="T:Emby.Naming.Video.ExtraResolver"/>.</param>
-        </member>
-        <member name="M:Emby.Naming.Video.VideoResolver.ResolveDirectory(System.String)">
+        <member name="M:Emby.Naming.Video.VideoResolver.ResolveDirectory(System.String,Emby.Naming.Common.NamingOptions,System.Boolean)">
             <summary>
             Resolves the directory.
             </summary>
             <param name="path">The path.</param>
+            <param name="namingOptions">The naming options.</param>
+            <param name="parseName">Whether to parse the name or use the filename.</param>
             <returns>VideoFileInfo.</returns>
         </member>
-        <member name="M:Emby.Naming.Video.VideoResolver.ResolveFile(System.String)">
+        <member name="M:Emby.Naming.Video.VideoResolver.ResolveFile(System.String,Emby.Naming.Common.NamingOptions)">
             <summary>
             Resolves the file.
             </summary>
             <param name="path">The path.</param>
+            <param name="namingOptions">The naming options.</param>
             <returns>VideoFileInfo.</returns>
         </member>
-        <member name="M:Emby.Naming.Video.VideoResolver.Resolve(System.String,System.Boolean,System.Boolean)">
+        <member name="M:Emby.Naming.Video.VideoResolver.Resolve(System.String,System.Boolean,Emby.Naming.Common.NamingOptions,System.Boolean)">
             <summary>
             Resolves the specified path.
             </summary>
             <param name="path">The path.</param>
             <param name="isDirectory">if set to <c>true</c> [is folder].</param>
+            <param name="namingOptions">The naming options.</param>
             <param name="parseName">Whether or not the name should be parsed for info.</param>
             <returns>VideoFileInfo.</returns>
             <exception cref="T:System.ArgumentNullException"><c>path</c> is <c>null</c>.</exception>
         </member>
-        <member name="M:Emby.Naming.Video.VideoResolver.IsVideoFile(System.String)">
+        <member name="M:Emby.Naming.Video.VideoResolver.IsVideoFile(System.String,Emby.Naming.Common.NamingOptions)">
             <summary>
             Determines if path is video file based on extension.
             </summary>
             <param name="path">Path to file.</param>
+            <param name="namingOptions">The naming options.</param>
             <returns>True if is video file.</returns>
         </member>
-        <member name="M:Emby.Naming.Video.VideoResolver.IsStubFile(System.String)">
+        <member name="M:Emby.Naming.Video.VideoResolver.IsStubFile(System.String,Emby.Naming.Common.NamingOptions)">
             <summary>
             Determines if path is video file stub based on extension.
             </summary>
             <param name="path">Path to file.</param>
+            <param name="namingOptions">The naming options.</param>
             <returns>True if is video file stub.</returns>
         </member>
-        <member name="M:Emby.Naming.Video.VideoResolver.TryCleanString(System.String,System.ReadOnlySpan{System.Char}@)">
+        <member name="M:Emby.Naming.Video.VideoResolver.TryCleanString(System.String,Emby.Naming.Common.NamingOptions,System.String@)">
             <summary>
             Tries to clean name of clutter.
             </summary>
             <param name="name">Raw name.</param>
+            <param name="namingOptions">The naming options.</param>
             <param name="newName">Clean name.</param>
             <returns>True if cleaning of name was successful.</returns>
         </member>
-        <member name="M:Emby.Naming.Video.VideoResolver.CleanDateTime(System.String)">
+        <member name="M:Emby.Naming.Video.VideoResolver.CleanDateTime(System.String,Emby.Naming.Common.NamingOptions)">
             <summary>
             Tries to get name and year from raw name.
             </summary>
             <param name="name">Raw name.</param>
+            <param name="namingOptions">The naming options.</param>
             <returns>Returns <see cref="T:Emby.Naming.Video.CleanDateTimeResult"/> with name and optional year.</returns>
         </member>
     </members>

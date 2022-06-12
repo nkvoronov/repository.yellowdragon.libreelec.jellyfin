@@ -93,6 +93,10 @@ html {
     background: rgba(0, 0, 0, 0.7);
 }
 
+a[data-role=button] {
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+
 .button-submit {
     background: #00a4dc;
     color: #fff;
@@ -139,6 +143,10 @@ html {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+.layout-tv .formDialogFooter:not(.formDialogFooter-clear) {
+    background-color: transparent;
+}
+
 .defaultCardBackground1 {
     background-color: #213440;
 }
@@ -178,10 +186,6 @@ html {
 .cardFooter-vibrant .cardText-secondary {
     color: inherit;
     opacity: 0.5;
-}
-
-.actionSheetMenuItem:hover {
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .toast {
@@ -255,6 +259,14 @@ html {
 
 .listItem:focus {
     background: rgba(0, 0, 0, 0.3);
+}
+
+.listItem:hover {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.actionSheetMenuItem:hover {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .progressring-spiner {
@@ -331,6 +343,7 @@ html {
 
 .countIndicator,
 .fullSyncIndicator,
+.mediaSourceIndicator,
 .playedIndicator {
     background: #00a4dc;
 }
@@ -460,6 +473,10 @@ html {
 
 .cardBox:not(.visualCardBox) .cardPadder {
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cardPadder .cardImageIcon {
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .card:focus .cardBox.visualCardBox,

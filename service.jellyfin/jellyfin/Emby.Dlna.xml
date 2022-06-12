@@ -260,7 +260,7 @@
             <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger"/> for use with the <see cref="T:Emby.Dlna.ConnectionManager.ControlHandler"/> instance.</param>
             <param name="profile">The <see cref="T:MediaBrowser.Model.Dlna.DeviceProfile"/> for use with the <see cref="T:Emby.Dlna.ConnectionManager.ControlHandler"/> instance.</param>
         </member>
-        <member name="M:Emby.Dlna.ConnectionManager.ControlHandler.WriteResult(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Xml.XmlWriter)">
+        <member name="M:Emby.Dlna.ConnectionManager.ControlHandler.WriteResult(System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.Xml.XmlWriter)">
             <inheritdoc />
         </member>
         <member name="M:Emby.Dlna.ConnectionManager.ControlHandler.HandleGetProtocolInfo(System.Xml.XmlWriter)">
@@ -394,14 +394,14 @@
             <param name="mediaEncoder">The <see cref="T:MediaBrowser.Controller.MediaEncoding.IMediaEncoder"/> for use with the <see cref="T:Emby.Dlna.ContentDirectory.ControlHandler"/> instance.</param>
             <param name="tvSeriesManager">The <see cref="T:MediaBrowser.Controller.TV.ITVSeriesManager"/> for use with the <see cref="T:Emby.Dlna.ContentDirectory.ControlHandler"/> instance.</param>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.WriteResult(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Xml.XmlWriter)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.WriteResult(System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.Xml.XmlWriter)">
             <inheritdoc />
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.HandleXSetBookmark(System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.HandleXSetBookmark(System.Collections.Generic.IReadOnlyDictionary{System.String,System.String})">
             <summary>
             Adds a "XSetBookmark" element to the xml document.
             </summary>
-            <param name="sparams">The <see cref="T:System.Collections.IDictionary"/>.</param>
+            <param name="sparams">The method parameters.</param>
         </member>
         <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.HandleGetSearchCapabilities(System.Xml.XmlWriter)">
             <summary>
@@ -445,37 +445,28 @@
             </summary>
             <returns>The xml feature list.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetValueOrDefault(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
-            <summary>
-            Returns the value in the key of the dictionary, or defaultValue if it doesn't exist.
-            </summary>
-            <param name="sparams">The <see cref="T:System.Collections.IDictionary"/>.</param>
-            <param name="key">The key.</param>
-            <param name="defaultValue">The defaultValue.</param>
-            <returns>The <see cref="T:System.String"/>.</returns>
-        </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.HandleBrowse(System.Xml.XmlWriter,System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.HandleBrowse(System.Xml.XmlWriter,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.String)">
             <summary>
             Builds the "Browse" xml response.
             </summary>
             <param name="xmlWriter">The <see cref="T:System.Xml.XmlWriter"/>.</param>
-            <param name="sparams">The <see cref="T:System.Collections.IDictionary"/>.</param>
+            <param name="sparams">The method parameters.</param>
             <param name="deviceId">The device Id to use.</param>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.HandleXBrowseByLetter(System.Xml.XmlWriter,System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.HandleXBrowseByLetter(System.Xml.XmlWriter,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.String)">
             <summary>
             Builds the response to the "X_BrowseByLetter request.
             </summary>
             <param name="xmlWriter">The <see cref="T:System.Xml.XmlWriter"/>.</param>
-            <param name="sparams">The <see cref="T:System.Collections.IDictionary"/>.</param>
+            <param name="sparams">The method parameters.</param>
             <param name="deviceId">The device id.</param>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.HandleSearch(System.Xml.XmlWriter,System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.HandleSearch(System.Xml.XmlWriter,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.String)">
             <summary>
             Builds a response to the "Search" request.
             </summary>
             <param name="xmlWriter">The xmlWriter<see cref="T:System.Xml.XmlWriter"/>.</param>
-            <param name="sparams">The sparams<see cref="T:System.Collections.IDictionary"/>.</param>
+            <param name="sparams">The method parameters.</param>
             <param name="deviceId">The deviceId<see cref="T:System.String"/>.</param>
         </member>
         <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetChildrenSorted(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Model.Dlna.SearchCriteria,MediaBrowser.Model.Dlna.SortCriteria,System.Nullable{System.Int32},System.Nullable{System.Int32})">
@@ -563,165 +554,77 @@
             <param name="limit">The maximum number to return.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMovieContinueWatching(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMovieContinueWatching(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Entities.InternalItemsQuery)">
             <summary>
             Returns the Movies that are part watched that meet the criteria.
             </summary>
             <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
             <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetSeries(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
-            <summary>
-            Returns the series meeting the criteria.
-            </summary>
-            <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
-            <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
-            <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
-        </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMovieMovies(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
-            <summary>
-            Returns the Movie folders meeting the criteria.
-            </summary>
-            <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
-            <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
-            <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
-        </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMovieCollections(Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMovieCollections(MediaBrowser.Controller.Entities.InternalItemsQuery)">
             <summary>
             Returns the Movie collections meeting the criteria.
             </summary>
-            <param name="user">The see cref="User"/>.</param>
             <param name="query">The see cref="InternalItemsQuery"/>.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicAlbums(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetChildrenOfItem(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Entities.InternalItemsQuery,Jellyfin.Data.Enums.BaseItemKind,System.Boolean)">
             <summary>
-            Returns the Music albums meeting the criteria.
+            Returns the children that meet the criteria.
             </summary>
             <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
             <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
+            <param name="itemType">The item type.</param>
+            <param name="isFavorite">A value indicating whether to only fetch favorite items.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicSongs(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
-            <summary>
-            Returns the Music songs meeting the criteria.
-            </summary>
-            <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
-            <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
-            <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
-        </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetFavoriteSongs(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
-            <summary>
-            Returns the songs tagged as favourite that meet the criteria.
-            </summary>
-            <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
-            <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
-            <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
-        </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetFavoriteSeries(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
-            <summary>
-            Returns the series tagged as favourite that meet the criteria.
-            </summary>
-            <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
-            <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
-            <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
-        </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetFavoriteEpisodes(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
-            <summary>
-            Returns the episodes tagged as favourite that meet the criteria.
-            </summary>
-            <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
-            <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
-            <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
-        </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMovieFavorites(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
-            <summary>
-            Returns the movies tagged as favourite that meet the criteria.
-            </summary>
-            <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
-            <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
-            <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
-        </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetFavoriteAlbums(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
-            <summary>
-            /// Returns the albums tagged as favourite that meet the criteria.
-            </summary>
-            <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
-            <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
-            <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
-        </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetGenres(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetGenres(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Entities.InternalItemsQuery)">
             <summary>
             Returns the genres meeting the criteria.
             The GetGenres.
             </summary>
             <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
             <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicGenres(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicGenres(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Entities.InternalItemsQuery)">
             <summary>
             Returns the music genres meeting the criteria.
             </summary>
             <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
             <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicAlbumArtists(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicAlbumArtists(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Entities.InternalItemsQuery)">
             <summary>
             Returns the music albums by artist that meet the criteria.
             </summary>
             <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
             <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicArtists(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicArtists(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Entities.InternalItemsQuery)">
             <summary>
             Returns the music artists meeting the criteria.
             </summary>
             <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
             <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetFavoriteArtists(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetFavoriteArtists(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Entities.InternalItemsQuery)">
             <summary>
             Returns the artists tagged as favourite that meet the criteria.
             </summary>
             <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
             <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicPlaylists(Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicPlaylists(MediaBrowser.Controller.Entities.InternalItemsQuery)">
             <summary>
             Returns the music playlists meeting the criteria.
             </summary>
-            <param name="user">The user<see cref="T:Jellyfin.Data.Entities.User"/>.</param>
             <param name="query">The query<see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
-            <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
-        </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicLatest(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
-            <summary>
-            Returns the latest music meeting the criteria.
-            </summary>
-            <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
-            <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
         <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetNextUp(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Entities.InternalItemsQuery)">
@@ -732,90 +635,78 @@
             <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetTvLatest(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetLatest(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Entities.InternalItemsQuery,Jellyfin.Data.Enums.BaseItemKind)">
             <summary>
-            Returns the latest tv meeting the criteria.
+            Returns the latest items of [itemType] meeting the criteria.
             </summary>
             <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
             <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
+            <param name="itemType">The item type.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMovieLatest(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Controller.Entities.InternalItemsQuery)">
-            <summary>
-            Returns the latest movies meeting the criteria.
-            </summary>
-            <param name="parent">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
-            <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
-            <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
-        </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicArtistItems(MediaBrowser.Controller.Entities.BaseItem,System.Guid,Jellyfin.Data.Entities.User,MediaBrowser.Model.Dlna.SortCriteria,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicArtistItems(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Model.Dlna.SortCriteria,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Returns music artist items that meet the criteria.
             </summary>
             <param name="item">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="parentId">The <see cref="T:System.Guid"/>.</param>
             <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
             <param name="sort">The <see cref="T:MediaBrowser.Model.Dlna.SortCriteria"/>.</param>
             <param name="startIndex">The start index.</param>
             <param name="limit">The maximum number to return.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetGenreItems(MediaBrowser.Controller.Entities.BaseItem,System.Guid,Jellyfin.Data.Entities.User,MediaBrowser.Model.Dlna.SortCriteria,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetGenreItems(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Model.Dlna.SortCriteria,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Returns the genre items meeting the criteria.
             </summary>
             <param name="item">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="parentId">The <see cref="T:System.Guid"/>.</param>
             <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
             <param name="sort">The <see cref="T:MediaBrowser.Model.Dlna.SortCriteria"/>.</param>
             <param name="startIndex">The start index.</param>
             <param name="limit">The maximum number to return.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicGenreItems(MediaBrowser.Controller.Entities.BaseItem,System.Guid,Jellyfin.Data.Entities.User,MediaBrowser.Model.Dlna.SortCriteria,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetMusicGenreItems(MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User,MediaBrowser.Model.Dlna.SortCriteria,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Returns the music genre items meeting the criteria.
             </summary>
             <param name="item">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
-            <param name="parentId">The <see cref="T:System.Guid"/>.</param>
             <param name="user">The <see cref="T:Jellyfin.Data.Entities.User"/>.</param>
             <param name="sort">The <see cref="T:MediaBrowser.Model.Dlna.SortCriteria"/>.</param>
             <param name="startIndex">The start index.</param>
             <param name="limit">The maximum number to return.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.ToResult(MediaBrowser.Controller.Entities.BaseItem[])">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.ToResult(System.Nullable{System.Int32},System.Collections.Generic.IReadOnlyCollection{MediaBrowser.Controller.Entities.BaseItem})">
             <summary>
-            Converts a <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/> array into a <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.
+            Converts <see cref="T:System.Collections.Generic.IReadOnlyCollection`1"/> into a <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.
             </summary>
+            <param name="startIndex">The start index.</param>
             <param name="result">An array of <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
             <returns>A <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.ToResult(MediaBrowser.Model.Querying.QueryResult{MediaBrowser.Controller.Entities.BaseItem})">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.ToResult(System.Nullable{System.Int32},MediaBrowser.Model.Querying.QueryResult{MediaBrowser.Controller.Entities.BaseItem})">
             <summary>
             Converts a <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/> to a <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.
             </summary>
+            <param name="startIndex">The index the result started at.</param>
             <param name="result">A <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.SetSorting(MediaBrowser.Controller.Entities.InternalItemsQuery,MediaBrowser.Model.Dlna.SortCriteria,System.Boolean)">
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.ToResult(System.Nullable{System.Int32},MediaBrowser.Model.Querying.QueryResult{System.ValueTuple{MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Model.Dto.ItemCounts}})">
             <summary>
-            Sets the sorting method on a query.
+            Converts a query result to a <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.
             </summary>
-            <param name="query">The <see cref="T:MediaBrowser.Controller.Entities.InternalItemsQuery"/>.</param>
+            <param name="startIndex">The start index.</param>
+            <param name="result">A <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</param>
+            <returns>The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
+        </member>
+        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetOrderBy(MediaBrowser.Model.Dlna.SortCriteria,System.Boolean)">
+            <summary>
+            Gets the sorting method on a query.
+            </summary>
             <param name="sort">The <see cref="T:MediaBrowser.Model.Dlna.SortCriteria"/>.</param>
             <param name="isPreSorted">True if pre-sorted.</param>
-        </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.ApplyPaging(MediaBrowser.Model.Querying.QueryResult{Emby.Dlna.ContentDirectory.ServerItem},System.Nullable{System.Int32},System.Nullable{System.Int32})">
-            <summary>
-            Apply paging to a query.
-            </summary>
-            <param name="result">The <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</param>
-            <param name="startIndex">The start index.</param>
-            <param name="limit">The maximum number to return.</param>
-            <returns>A <see cref="T:MediaBrowser.Model.Querying.QueryResult`1"/>.</returns>
         </member>
         <member name="M:Emby.Dlna.ContentDirectory.ControlHandler.GetItemFromObjectId(System.String)">
             <summary>
@@ -836,20 +727,21 @@
             Defines the <see cref="T:Emby.Dlna.ContentDirectory.ServerItem" />.
             </summary>
         </member>
-        <member name="M:Emby.Dlna.ContentDirectory.ServerItem.#ctor(MediaBrowser.Controller.Entities.BaseItem)">
+        <member name="M:Emby.Dlna.ContentDirectory.ServerItem.#ctor(MediaBrowser.Controller.Entities.BaseItem,System.Nullable{Emby.Dlna.ContentDirectory.StubType})">
             <summary>
             Initializes a new instance of the <see cref="T:Emby.Dlna.ContentDirectory.ServerItem"/> class.
             </summary>
             <param name="item">The <see cref="T:MediaBrowser.Controller.Entities.BaseItem"/>.</param>
+            <param name="stubType">The stub type.</param>
         </member>
         <member name="P:Emby.Dlna.ContentDirectory.ServerItem.Item">
             <summary>
-            Gets or sets the underlying base item.
+            Gets the underlying base item.
             </summary>
         </member>
         <member name="P:Emby.Dlna.ContentDirectory.ServerItem.StubType">
             <summary>
-            Gets or sets the DLNA item type.
+            Gets the DLNA item type.
             </summary>
         </member>
         <member name="T:Emby.Dlna.ContentDirectory.ServiceActionListBuilder">
@@ -950,6 +842,12 @@
             Adds fields used by both items and folders.
             </summary>
         </member>
+        <member name="M:Emby.Dlna.DlnaManager.GetDefaultProfile">
+            <inheritdoc />
+        </member>
+        <member name="M:Emby.Dlna.DlnaManager.GetProfile(MediaBrowser.Model.Dlna.DeviceIdentification)">
+            <inheritdoc />
+        </member>
         <member name="M:Emby.Dlna.DlnaManager.IsMatch(MediaBrowser.Model.Dlna.DeviceIdentification,MediaBrowser.Model.Dlna.DeviceIdentification)">
             <summary>
             Attempts to match a device with a profile.
@@ -961,6 +859,24 @@
             <param name="profileInfo">The <see cref="T:MediaBrowser.Model.Dlna.DeviceIdentification"/> of the profile.</param>
             <returns><b>True</b> if they match.</returns>
         </member>
+        <member name="M:Emby.Dlna.DlnaManager.GetProfile(Microsoft.AspNetCore.Http.IHeaderDictionary)">
+            <inheritdoc />
+        </member>
+        <member name="M:Emby.Dlna.DlnaManager.GetProfile(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Emby.Dlna.DlnaManager.GetProfileInfos">
+            <inheritdoc />
+        </member>
+        <member name="M:Emby.Dlna.DlnaManager.DeleteProfile(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Emby.Dlna.DlnaManager.CreateProfile(MediaBrowser.Model.Dlna.DeviceProfile)">
+            <inheritdoc />
+        </member>
+        <member name="M:Emby.Dlna.DlnaManager.UpdateProfile(System.String,MediaBrowser.Model.Dlna.DeviceProfile)">
+            <inheritdoc />
+        </member>
         <member name="M:Emby.Dlna.DlnaManager.ReserializeProfile(MediaBrowser.Model.Dlna.DeviceProfile)">
             <summary>
             Recreates the object using serialization, to ensure it's not a subclass.
@@ -968,6 +884,12 @@
             </summary>
             <param name="profile">The device profile.</param>
             <returns>The re-serialized device profile.</returns>
+        </member>
+        <member name="M:Emby.Dlna.DlnaManager.GetServerDescriptionXml(Microsoft.AspNetCore.Http.IHeaderDictionary,System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Emby.Dlna.DlnaManager.GetIcon(System.String)">
+            <inheritdoc />
         </member>
         <member name="M:Emby.Dlna.IDlnaEventManager.CancelEventSubscription(System.String)">
             <summary>
@@ -1028,7 +950,7 @@
             <param name="config">The <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> for use with the <see cref="T:Emby.Dlna.MediaReceiverRegistrar.ControlHandler"/> instance.</param>
             <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger"/> for use with the <see cref="T:Emby.Dlna.MediaReceiverRegistrar.ControlHandler"/> instance.</param>
         </member>
-        <member name="M:Emby.Dlna.MediaReceiverRegistrar.ControlHandler.WriteResult(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Xml.XmlWriter)">
+        <member name="M:Emby.Dlna.MediaReceiverRegistrar.ControlHandler.WriteResult(System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.Xml.XmlWriter)">
             <inheritdoc />
         </member>
         <member name="M:Emby.Dlna.MediaReceiverRegistrar.ControlHandler.HandleIsAuthorized(System.Xml.XmlWriter)">
@@ -1180,6 +1102,12 @@
         </member>
         <member name="M:Emby.Dlna.PlayTo.PlayToManager.Dispose">
             <inheritdoc />
+        </member>
+        <member name="T:Emby.Dlna.PlayTo.TransportState">
+            <summary>
+            Core of the AVTransport service. It defines the conceptually top-
+            level state of the transport, for example, whether it is playing, recording, etc.
+            </summary>
         </member>
         <member name="E:Emby.Dlna.Ssdp.DeviceDiscovery.DeviceDiscovered">
             <inheritdoc />

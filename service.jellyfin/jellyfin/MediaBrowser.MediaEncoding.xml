@@ -62,7 +62,7 @@
             <param name="streams">The streams.</param>
             <param name="textStream">The text stream.</param>
         </member>
-        <member name="M:MediaBrowser.MediaEncoding.Encoder.EncoderValidator.GetFFmpegVersion(System.String)">
+        <member name="M:MediaBrowser.MediaEncoding.Encoder.EncoderValidator.GetFFmpegVersionInternal(System.String)">
             <summary>
             Using the output from "ffmpeg -version" work out the FFmpeg version.
             For pre-built binaries the first line should contain a string like "ffmpeg version x.y", which is easy
@@ -118,15 +118,10 @@
             The default HDR image extraction timeout in milliseconds.
             </summary>
         </member>
-        <member name="F:MediaBrowser.MediaEncoding.Encoder.MediaEncoder._usCulture">
-            <summary>
-            The us culture.
-            </summary>
-        </member>
         <member name="P:MediaBrowser.MediaEncoding.Encoder.MediaEncoder.EncoderPath">
             <inheritdoc />
         </member>
-        <member name="P:MediaBrowser.MediaEncoding.Encoder.MediaEncoder.EncoderLocation">
+        <member name="P:MediaBrowser.MediaEncoding.Encoder.MediaEncoder.ProbePath">
             <inheritdoc />
         </member>
         <member name="M:MediaBrowser.MediaEncoding.Encoder.MediaEncoder.SetFFmpegPath">
@@ -144,21 +139,13 @@
             <param name="path">The path.</param>
             <param name="pathType">The path type.</param>
         </member>
-        <member name="M:MediaBrowser.MediaEncoding.Encoder.MediaEncoder.ValidatePath(System.String,MediaBrowser.Model.System.FFmpegLocation)">
+        <member name="M:MediaBrowser.MediaEncoding.Encoder.MediaEncoder.ValidatePath(System.String)">
             <summary>
             Validates the supplied FQPN to ensure it is a ffmpeg utility.
-            If checks pass, global variable FFmpegPath and EncoderLocation are updated.
+            If checks pass, global variable FFmpegPath is updated.
             </summary>
             <param name="path">FQPN to test.</param>
-            <param name="location">Location (External, Custom, System) of tool.</param>
             <returns><c>true</c> if the version validation succeeded; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="M:MediaBrowser.MediaEncoding.Encoder.MediaEncoder.ExistsOnSystemPath(System.String)">
-            <summary>
-            Search the system $PATH environment variable looking for given filename.
-            </summary>
-            <param name="fileName">The filename.</param>
-            <returns>The full path to the file.</returns>
         </member>
         <member name="M:MediaBrowser.MediaEncoding.Encoder.MediaEncoder.GetMediaInfo(MediaBrowser.Controller.MediaEncoding.MediaInfoRequest,System.Threading.CancellationToken)">
             <summary>
@@ -174,6 +161,14 @@
             </summary>
             <param name="inputFile">The input file.</param>
             <param name="mediaSource">The mediaSource.</param>
+            <returns>System.String.</returns>
+            <exception cref="T:System.ArgumentException">Unrecognized InputType.</exception>
+        </member>
+        <member name="M:MediaBrowser.MediaEncoding.Encoder.MediaEncoder.GetExternalSubtitleInputArgument(System.String)">
+            <summary>
+            Gets the input argument for an external subtitle file.
+            </summary>
+            <param name="inputFile">The input file.</param>
             <returns>System.String.</returns>
             <exception cref="T:System.ArgumentException">Unrecognized InputType.</exception>
         </member>
@@ -209,15 +204,7 @@
             </summary>
             <param name="result">The result.</param>
         </member>
-        <member name="M:MediaBrowser.MediaEncoding.Probing.FFProbeHelpers.GetDictionaryValue(System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.String)">
-            <summary>
-            Gets a string from an FFProbeResult tags dictionary.
-            </summary>
-            <param name="tags">The tags.</param>
-            <param name="key">The key.</param>
-            <returns>System.String.</returns>
-        </member>
-        <member name="M:MediaBrowser.MediaEncoding.Probing.FFProbeHelpers.GetDictionaryNumericValue(System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+        <member name="M:MediaBrowser.MediaEncoding.Probing.FFProbeHelpers.GetDictionaryNumericValue(System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.String)">
             <summary>
             Gets an int from an FFProbeResult tags dictionary.
             </summary>
@@ -225,7 +212,7 @@
             <param name="key">The key.</param>
             <returns>System.Nullable{System.Int32}.</returns>
         </member>
-        <member name="M:MediaBrowser.MediaEncoding.Probing.FFProbeHelpers.GetDictionaryDateTime(System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+        <member name="M:MediaBrowser.MediaEncoding.Probing.FFProbeHelpers.GetDictionaryDateTime(System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.String)">
             <summary>
             Gets a DateTime from an FFProbeResult tags dictionary.
             </summary>
@@ -603,6 +590,14 @@
             <param name="streamInfo">The stream info.</param>
             <returns>MediaAttachments.</returns>
         </member>
+        <member name="M:MediaBrowser.MediaEncoding.Probing.ProbeResultNormalizer.IsCodecTimeBaseDoubleTheFrameRate(System.Nullable{System.Single},System.String)">
+            <summary>
+            Determines whether a stream code time base is double the frame rate.
+            </summary>
+            <param name="averageFrameRate">average frame rate.</param>
+            <param name="codecTimeBase">codec time base string.</param>
+            <returns>true if the codec time base is double the frame rate.</returns>
+        </member>
         <member name="M:MediaBrowser.MediaEncoding.Probing.ProbeResultNormalizer.GetMediaStream(System.Boolean,MediaBrowser.MediaEncoding.Probing.MediaStreamInfo,MediaBrowser.MediaEncoding.Probing.MediaFormatInfo)">
             <summary>
             Converts ffprobe stream info to our MediaStream class.
@@ -620,7 +615,7 @@
             <param name="key">The key.</param>
             <returns>System.String.</returns>
         </member>
-        <member name="M:MediaBrowser.MediaEncoding.Probing.ProbeResultNormalizer.GetFrameRate(System.String)">
+        <member name="M:MediaBrowser.MediaEncoding.Probing.ProbeResultNormalizer.GetFrameRate(System.ReadOnlySpan{System.Char})">
             <summary>
             Gets a frame rate from a string value in ffprobe output
             This could be a number or in the format of 2997/125.
@@ -636,7 +631,7 @@
             <param name="allowCommaDelimiter">if set to <c>true</c> [allow comma delimiter].</param>
             <returns>System.String[][].</returns>
         </member>
-        <member name="M:MediaBrowser.MediaEncoding.Probing.ProbeResultNormalizer.FetchStudios(MediaBrowser.Model.MediaInfo.MediaInfo,System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+        <member name="M:MediaBrowser.MediaEncoding.Probing.ProbeResultNormalizer.FetchStudios(MediaBrowser.Model.MediaInfo.MediaInfo,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.String)">
             <summary>
             Gets the studios from the tags collection.
             </summary>
@@ -644,23 +639,31 @@
             <param name="tags">The tags.</param>
             <param name="tagName">Name of the tag.</param>
         </member>
-        <member name="M:MediaBrowser.MediaEncoding.Probing.ProbeResultNormalizer.FetchGenres(MediaBrowser.Model.MediaInfo.MediaInfo,System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:MediaBrowser.MediaEncoding.Probing.ProbeResultNormalizer.FetchGenres(MediaBrowser.Model.MediaInfo.MediaInfo,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String})">
             <summary>
             Gets the genres from the tags collection.
             </summary>
             <param name="info">The information.</param>
             <param name="tags">The tags.</param>
         </member>
-        <member name="M:MediaBrowser.MediaEncoding.Probing.ProbeResultNormalizer.GetDictionaryDiscValue(System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+        <member name="M:MediaBrowser.MediaEncoding.Probing.ProbeResultNormalizer.GetDictionaryTrackOrDiscNumber(System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.String)">
             <summary>
-            Gets the disc number, which is sometimes can be in the form of '1', or '1/3'.
+            Gets the track or disc number, which can be in the form of '1', or '1/3'.
             </summary>
             <param name="tags">The tags.</param>
             <param name="tagName">Name of the tag.</param>
-            <returns>System.Nullable{System.Int32}.</returns>
+            <returns>The track or disc number, or null, if missing or not parseable.</returns>
         </member>
-        <member name="M:MediaBrowser.MediaEncoding.Subtitles.AssParser.Parse(System.IO.Stream,System.Threading.CancellationToken)">
-            <inheritdoc />
+        <member name="T:MediaBrowser.MediaEncoding.Subtitles.AssParser">
+            <summary>
+            Advanced SubStation Alpha subtitle parser.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.MediaEncoding.Subtitles.AssParser.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MediaBrowser.MediaEncoding.Subtitles.AssParser"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
         </member>
         <member name="M:MediaBrowser.MediaEncoding.Subtitles.ISubtitleParser.Parse(System.IO.Stream,System.Threading.CancellationToken)">
             <summary>
@@ -691,8 +694,16 @@
         <member name="M:MediaBrowser.MediaEncoding.Subtitles.JsonWriter.Write(MediaBrowser.Model.MediaInfo.SubtitleTrackInfo,System.IO.Stream,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:MediaBrowser.MediaEncoding.Subtitles.SrtParser.Parse(System.IO.Stream,System.Threading.CancellationToken)">
-            <inheritdoc />
+        <member name="T:MediaBrowser.MediaEncoding.Subtitles.SrtParser">
+            <summary>
+            SubRip subtitle parser.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.MediaEncoding.Subtitles.SrtParser.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MediaBrowser.MediaEncoding.Subtitles.SrtParser"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
         </member>
         <member name="T:MediaBrowser.MediaEncoding.Subtitles.SrtWriter">
             <summary>
@@ -704,10 +715,28 @@
         </member>
         <member name="T:MediaBrowser.MediaEncoding.Subtitles.SsaParser">
             <summary>
-            <see href="https://github.com/SubtitleEdit/subtitleedit/blob/a299dc4407a31796364cc6ad83f0d3786194ba22/src/Logic/SubtitleFormats/SubStationAlpha.cs">Credit</see>.
+            SubStation Alpha subtitle parser.
             </summary>
         </member>
-        <member name="M:MediaBrowser.MediaEncoding.Subtitles.SsaParser.Parse(System.IO.Stream,System.Threading.CancellationToken)">
+        <member name="M:MediaBrowser.MediaEncoding.Subtitles.SsaParser.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MediaBrowser.MediaEncoding.Subtitles.SsaParser"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="T:MediaBrowser.MediaEncoding.Subtitles.SubtitleEditParser`1">
+            <summary>
+            SubStation Alpha subtitle parser.
+            </summary>
+            <typeparam name="T">The <see cref="T:Nikse.SubtitleEdit.Core.SubtitleFormats.SubtitleFormat" />.</typeparam>
+        </member>
+        <member name="M:MediaBrowser.MediaEncoding.Subtitles.SubtitleEditParser`1.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MediaBrowser.MediaEncoding.Subtitles.SubtitleEditParser`1"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:MediaBrowser.MediaEncoding.Subtitles.SubtitleEditParser`1.Parse(System.IO.Stream,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="F:MediaBrowser.MediaEncoding.Subtitles.SubtitleEncoder._semaphoreLocks">
@@ -747,12 +776,12 @@
             The <c>inputPath</c> or <c>outputPath</c> is <c>null</c>.
             </exception>
         </member>
-        <member name="M:MediaBrowser.MediaEncoding.Subtitles.SubtitleEncoder.ExtractTextSubtitle(MediaBrowser.Model.Dto.MediaSourceInfo,System.Int32,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:MediaBrowser.MediaEncoding.Subtitles.SubtitleEncoder.ExtractTextSubtitle(MediaBrowser.Model.Dto.MediaSourceInfo,MediaBrowser.Model.Entities.MediaStream,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Extracts the text subtitle.
             </summary>
             <param name="mediaSource">The mediaSource.</param>
-            <param name="subtitleStreamIndex">Index of the subtitle stream.</param>
+            <param name="subtitleStream">The subtitle stream.</param>
             <param name="outputCodec">The output codec.</param>
             <param name="outputPath">The output path.</param>
             <param name="cancellationToken">The cancellation token.</param>

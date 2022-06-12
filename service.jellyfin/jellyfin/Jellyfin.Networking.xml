@@ -197,6 +197,11 @@
             Gets or sets the known proxies. If the proxy is a network, it's added to the KnownNetworks.
             </summary>
         </member>
+        <member name="P:Jellyfin.Networking.Configuration.NetworkConfiguration.EnablePublishedServerUriByRequest">
+            <summary>
+            Gets or sets a value indicating whether the published server uri is based on information in HTTP requests.
+            </summary>
+        </member>
         <member name="T:Jellyfin.Networking.Configuration.NetworkConfigurationExtensions">
             <summary>
             Defines the <see cref="T:Jellyfin.Networking.Configuration.NetworkConfigurationExtensions" />.
@@ -219,6 +224,21 @@
             The GetConfigurations.
             </summary>
             <returns>The <see cref="T:System.Collections.Generic.IEnumerable`1"/>.</returns>
+        </member>
+        <member name="T:Jellyfin.Networking.Configuration.NetworkConfigurationStore">
+            <summary>
+            A configuration that stores network related settings.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Networking.Configuration.NetworkConfigurationStore.StoreKey">
+            <summary>
+            The name of the configuration in the storage.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Networking.Configuration.NetworkConfigurationStore.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Networking.Configuration.NetworkConfigurationStore"/> class.
+            </summary>
         </member>
         <member name="T:Jellyfin.Networking.Manager.NetworkManager">
             <summary>

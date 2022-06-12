@@ -140,6 +140,9 @@
         <member name="M:Jellyfin.Drawing.Skia.SkiaEncoder.CreateImageCollage(MediaBrowser.Controller.Drawing.ImageCollageOptions,System.String)">
             <inheritdoc/>
         </member>
+        <member name="M:Jellyfin.Drawing.Skia.SkiaEncoder.CreateSplashscreen(System.Collections.Generic.IReadOnlyList{System.String},System.Collections.Generic.IReadOnlyList{System.String})">
+            <inheritdoc />
+        </member>
         <member name="T:Jellyfin.Drawing.Skia.SkiaException">
             <summary>
             Represents errors that occur during interaction with Skia.
@@ -179,6 +182,50 @@
             </summary>
             <param name="result">The result returned by Skia.</param>
         </member>
+        <member name="M:Jellyfin.Drawing.Skia.SkiaHelper.GetNextValidImage(Jellyfin.Drawing.Skia.SkiaEncoder,System.Collections.Generic.IReadOnlyList{System.String},System.Int32,System.Int32@)">
+            <summary>
+            Gets the next valid image as a bitmap.
+            </summary>
+            <param name="skiaEncoder">The current skia encoder.</param>
+            <param name="paths">The list of image paths.</param>
+            <param name="currentIndex">The current checked indes.</param>
+            <param name="newIndex">The new index.</param>
+            <returns>A valid bitmap, or null if no bitmap exists after <c>currentIndex</c>.</returns>
+        </member>
+        <member name="T:Jellyfin.Drawing.Skia.SplashscreenBuilder">
+            <summary>
+            Used to build the splashscreen.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Drawing.Skia.SplashscreenBuilder.#ctor(Jellyfin.Drawing.Skia.SkiaEncoder)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Drawing.Skia.SplashscreenBuilder"/> class.
+            </summary>
+            <param name="skiaEncoder">The SkiaEncoder.</param>
+        </member>
+        <member name="M:Jellyfin.Drawing.Skia.SplashscreenBuilder.GenerateSplash(System.Collections.Generic.IReadOnlyList{System.String},System.Collections.Generic.IReadOnlyList{System.String},System.String)">
+            <summary>
+            Generate a splashscreen.
+            </summary>
+            <param name="posters">The poster paths.</param>
+            <param name="backdrops">The landscape paths.</param>
+            <param name="outputPath">The output path.</param>
+        </member>
+        <member name="M:Jellyfin.Drawing.Skia.SplashscreenBuilder.GenerateCollage(System.Collections.Generic.IReadOnlyList{System.String},System.Collections.Generic.IReadOnlyList{System.String})">
+            <summary>
+            Generates a collage of posters and landscape pictures.
+            </summary>
+            <param name="posters">The poster paths.</param>
+            <param name="backdrops">The landscape paths.</param>
+            <returns>The created collage as a bitmap.</returns>
+        </member>
+        <member name="M:Jellyfin.Drawing.Skia.SplashscreenBuilder.Transform3D(SkiaSharp.SKBitmap)">
+            <summary>
+            Transform the collage in 3D space.
+            </summary>
+            <param name="input">The bitmap to transform.</param>
+            <returns>The transformed image.</returns>
+        </member>
         <member name="T:Jellyfin.Drawing.Skia.StripCollageBuilder">
             <summary>
             Used to build collages of multiple images arranged in vertical strips.
@@ -197,7 +244,7 @@
             <param name="outputPath">The path to the image to get the format for.</param>
             <returns>The image format.</returns>
         </member>
-        <member name="M:Jellyfin.Drawing.Skia.StripCollageBuilder.BuildSquareCollage(System.String[],System.String,System.Int32,System.Int32)">
+        <member name="M:Jellyfin.Drawing.Skia.StripCollageBuilder.BuildSquareCollage(System.Collections.Generic.IReadOnlyList{System.String},System.String,System.Int32,System.Int32)">
             <summary>
             Create a square collage.
             </summary>
@@ -206,7 +253,7 @@
             <param name="width">The desired width of the collage.</param>
             <param name="height">The desired height of the collage.</param>
         </member>
-        <member name="M:Jellyfin.Drawing.Skia.StripCollageBuilder.BuildThumbCollage(System.String[],System.String,System.Int32,System.Int32,System.String)">
+        <member name="M:Jellyfin.Drawing.Skia.StripCollageBuilder.BuildThumbCollage(System.Collections.Generic.IReadOnlyList{System.String},System.String,System.Int32,System.Int32,System.String)">
             <summary>
             Create a thumb collage.
             </summary>

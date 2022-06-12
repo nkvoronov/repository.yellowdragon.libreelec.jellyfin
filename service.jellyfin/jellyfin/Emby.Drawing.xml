@@ -124,6 +124,9 @@
         <member name="M:Emby.Drawing.NullImageEncoder.CreateImageCollage(MediaBrowser.Controller.Drawing.ImageCollageOptions,System.String)">
             <inheritdoc />
         </member>
+        <member name="M:Emby.Drawing.NullImageEncoder.CreateSplashscreen(System.Collections.Generic.IReadOnlyList{System.String},System.Collections.Generic.IReadOnlyList{System.String})">
+            <inheritdoc />
+        </member>
         <member name="M:Emby.Drawing.NullImageEncoder.GetImageBlurHash(System.Int32,System.Int32,System.String)">
             <inheritdoc />
         </member>

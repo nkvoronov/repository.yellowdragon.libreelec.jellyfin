@@ -4,6 +4,26 @@
         <name>Jellyfin.Data</name>
     </assembly>
     <members>
+        <member name="T:Jellyfin.Data.Dtos.DeviceOptionsDto">
+            <summary>
+            A dto representing custom options for a device.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Dtos.DeviceOptionsDto.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Dtos.DeviceOptionsDto.DeviceId">
+            <summary>
+            Gets or sets the device id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Dtos.DeviceOptionsDto.CustomName">
+            <summary>
+            Gets or sets the custom name.
+            </summary>
+        </member>
         <member name="T:Jellyfin.Data.Entities.AccessSchedule">
             <summary>
             An entity representing a user's access schedule.
@@ -18,15 +38,9 @@
             <param name="endHour">The end hour.</param>
             <param name="userId">The associated user's id.</param>
         </member>
-        <member name="M:Jellyfin.Data.Entities.AccessSchedule.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.AccessSchedule"/> class.
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </summary>
-        </member>
         <member name="P:Jellyfin.Data.Entities.AccessSchedule.Id">
             <summary>
-            Gets or sets the id of this instance.
+            Gets the id of this instance.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -34,7 +48,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.AccessSchedule.UserId">
             <summary>
-            Gets or sets the id of the associated user.
+            Gets the id of the associated user.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.AccessSchedule.DayOfWeek">
@@ -55,16 +69,6 @@
             </summary>
             <value>The end hour.</value>
         </member>
-        <member name="M:Jellyfin.Data.Entities.AccessSchedule.Create(Jellyfin.Data.Enums.DynamicDayOfWeek,System.Double,System.Double,System.Guid)">
-            <summary>
-            Static create function (for use in LINQ queries, etc.)
-            </summary>
-            <param name="dayOfWeek">The day of the week.</param>
-            <param name="startHour">The start hour.</param>
-            <param name="endHour">The end hour.</param>
-            <param name="userId">The associated user's id.</param>
-            <returns>The newly created instance.</returns>
-        </member>
         <member name="T:Jellyfin.Data.Entities.ActivityLog">
             <summary>
             An entity referencing an activity log entry.
@@ -79,16 +83,9 @@
             <param name="type">The type.</param>
             <param name="userId">The user id.</param>
         </member>
-        <member name="M:Jellyfin.Data.Entities.ActivityLog.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.ActivityLog"/> class.
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </summary>
-        </member>
         <member name="P:Jellyfin.Data.Entities.ActivityLog.Id">
             <summary>
-            Gets or sets the identity of this instance.
-            This is the key in the backing database.
+            Gets the identity of this instance.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.ActivityLog.Name">
@@ -173,17 +170,12 @@
             <param name="userId">The user id.</param>
             <param name="itemId">The item id.</param>
             <param name="client">The client.</param>
-            <param name="preferenceKey">The preference key.</param>
-            <param name="preferenceValue">The preference value.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.CustomItemDisplayPreferences.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.CustomItemDisplayPreferences"/> class.
-            </summary>
+            <param name="key">The preference key.</param>
+            <param name="value">The preference value.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.CustomItemDisplayPreferences.Id">
             <summary>
-            Gets or sets the Id.
+            Gets the Id.
             </summary>
             <remarks>
             Required.
@@ -225,6 +217,9 @@
             <summary>
             Gets or sets the preference value.
             </summary>
+            <remarks>
+            Required.
+            </remarks>
         </member>
         <member name="T:Jellyfin.Data.Entities.DisplayPreferences">
             <summary>
@@ -239,14 +234,9 @@
             <param name="itemId">The item id.</param>
             <param name="client">The client string.</param>
         </member>
-        <member name="M:Jellyfin.Data.Entities.DisplayPreferences.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.DisplayPreferences"/> class.
-            </summary>
-        </member>
         <member name="P:Jellyfin.Data.Entities.DisplayPreferences.Id">
             <summary>
-            Gets or sets the Id.
+            Gets the Id.
             </summary>
             <remarks>
             Required.
@@ -349,7 +339,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.DisplayPreferences.HomeSections">
             <summary>
-            Gets or sets the home sections.
+            Gets the home sections.
             </summary>
         </member>
         <member name="T:Jellyfin.Data.Entities.Group">
@@ -363,17 +353,9 @@
             </summary>
             <param name="name">The name of the group.</param>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Group.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Group"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
-        </member>
         <member name="P:Jellyfin.Data.Entities.Group.Id">
             <summary>
-            Gets or sets the id of this group.
+            Gets the id of this group.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -392,12 +374,12 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Group.Permissions">
             <summary>
-            Gets or sets a collection containing the group's permissions.
+            Gets a collection containing the group's permissions.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Group.Preferences">
             <summary>
-            Gets or sets a collection containing the group's preferences.
+            Gets a collection containing the group's preferences.
             </summary>
         </member>
         <member name="M:Jellyfin.Data.Entities.Group.HasPermission(Jellyfin.Data.Enums.PermissionKind)">
@@ -416,7 +398,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.HomeSection.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity. Required.
@@ -457,17 +439,9 @@
             </summary>
             <param name="path">The path.</param>
         </member>
-        <member name="M:Jellyfin.Data.Entities.ImageInfo.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.ImageInfo"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
-        </member>
         <member name="P:Jellyfin.Data.Entities.ImageInfo.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -475,7 +449,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.ImageInfo.UserId">
             <summary>
-            Gets or sets the user id.
+            Gets the user id.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.ImageInfo.Path">
@@ -507,14 +481,9 @@
             <param name="itemId">The item id.</param>
             <param name="client">The client.</param>
         </member>
-        <member name="M:Jellyfin.Data.Entities.ItemDisplayPreferences.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.ItemDisplayPreferences"/> class.
-            </summary>
-        </member>
         <member name="P:Jellyfin.Data.Entities.ItemDisplayPreferences.Id">
             <summary>
-            Gets or sets the Id.
+            Gets the id.
             </summary>
             <remarks>
             Required.
@@ -594,25 +563,16 @@
             An entity representing artwork.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Artwork.#ctor(System.String,Jellyfin.Data.Enums.ArtKind,Jellyfin.Data.Interfaces.IHasArtwork)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Artwork.#ctor(System.String,Jellyfin.Data.Enums.ArtKind)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Artwork"/> class.
             </summary>
             <param name="path">The path.</param>
             <param name="kind">The kind of art.</param>
-            <param name="owner">The owner.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Artwork.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Artwork"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Artwork.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -645,14 +605,15 @@
             An entity representing a book.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Book.#ctor">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Book.#ctor(Jellyfin.Data.Entities.Libraries.Library)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Book"/> class.
             </summary>
+            <param name="library">The library.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Book.BookMetadata">
             <summary>
-            Gets or sets a collection containing the metadata for this book.
+            Gets a collection containing the metadata for this book.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Book.Releases">
@@ -663,21 +624,12 @@
             An entity containing metadata for a book.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.BookMetadata.#ctor(System.String,System.String,Jellyfin.Data.Entities.Libraries.Book)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.BookMetadata.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.BookMetadata"/> class.
             </summary>
             <param name="title">The title or name of the object.</param>
             <param name="language">ISO-639-3 3-character language codes.</param>
-            <param name="book">The book.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.BookMetadata.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.BookMetadata"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.BookMetadata.Isbn">
             <summary>
@@ -686,7 +638,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.BookMetadata.Publishers">
             <summary>
-            Gets or sets a collection of the publishers for this book.
+            Gets a collection of the publishers for this book.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.BookMetadata.Companies">
@@ -697,25 +649,16 @@
             An entity representing a chapter.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Chapter.#ctor(System.String,System.Int64,Jellyfin.Data.Entities.Libraries.Release)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Chapter.#ctor(System.String,System.Int64)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Chapter"/> class.
             </summary>
             <param name="language">ISO-639-3 3-character language codes.</param>
             <param name="startTime">The start time for this chapter.</param>
-            <param name="release">The release.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Chapter.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Chapter"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Chapter.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -769,7 +712,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Collection.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -788,7 +731,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Collection.Items">
             <summary>
-            Gets or sets a collection containing this collection's items.
+            Gets a collection containing this collection's items.
             </summary>
         </member>
         <member name="M:Jellyfin.Data.Entities.Libraries.Collection.OnSavingChanges">
@@ -799,21 +742,11 @@
             An entity representing a collection item.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.CollectionItem.#ctor(Jellyfin.Data.Entities.Libraries.Collection,Jellyfin.Data.Entities.Libraries.CollectionItem,Jellyfin.Data.Entities.Libraries.CollectionItem)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.CollectionItem.#ctor(Jellyfin.Data.Entities.Libraries.LibraryItem)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.CollectionItem"/> class.
             </summary>
-            <param name="collection">The collection.</param>
-            <param name="previous">The previous item.</param>
-            <param name="next">The next item.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.CollectionItem.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.CollectionItem"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
+            <param name="libraryItem">The library item.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.CollectionItem.Id">
             <summary>
@@ -858,23 +791,14 @@
             An entity representing a company.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Company.#ctor(Jellyfin.Data.Interfaces.IHasCompanies)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Company"/> class.
-            </summary>
-            <param name="owner">The owner of this company.</param>
-        </member>
         <member name="M:Jellyfin.Data.Entities.Libraries.Company.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Company"/> class.
             </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Company.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -885,12 +809,12 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Company.CompanyMetadata">
             <summary>
-            Gets or sets a collection containing the metadata.
+            Gets a collection containing the metadata.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Company.ChildCompanies">
             <summary>
-            Gets or sets a collection containing this company's child companies.
+            Gets a collection containing this company's child companies.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Company.Companies">
@@ -904,18 +828,12 @@
             An entity holding metadata for a <see cref="T:Jellyfin.Data.Entities.Libraries.Company"/>.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.CompanyMetadata.#ctor(System.String,System.String,Jellyfin.Data.Entities.Libraries.Company)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.CompanyMetadata.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.CompanyMetadata"/> class.
             </summary>
             <param name="title">The title or name of the object.</param>
             <param name="language">ISO-639-3 3-character language codes.</param>
-            <param name="company">The company.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.CompanyMetadata.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.CompanyMetadata"/> class.
-            </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.CompanyMetadata.Description">
             <summary>
@@ -954,14 +872,15 @@
             An entity representing a custom item.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.CustomItem.#ctor">
+        <member name="M:Jellyfin.Data.Entities.Libraries.CustomItem.#ctor(Jellyfin.Data.Entities.Libraries.Library)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.CustomItem"/> class.
             </summary>
+            <param name="library">The library.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.CustomItem.CustomItemMetadata">
             <summary>
-            Gets or sets a collection containing the metadata for this item.
+            Gets a collection containing the metadata for this item.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.CustomItem.Releases">
@@ -972,40 +891,23 @@
             An entity containing metadata for a custom item.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.CustomItemMetadata.#ctor(System.String,System.String,Jellyfin.Data.Entities.Libraries.CustomItem)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.CustomItemMetadata.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.CustomItemMetadata"/> class.
             </summary>
             <param name="title">The title or name of the object.</param>
             <param name="language">ISO-639-3 3-character language codes.</param>
-            <param name="item">The item.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.CustomItemMetadata.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.CustomItemMetadata"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="T:Jellyfin.Data.Entities.Libraries.Episode">
             <summary>
             An entity representing an episode.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Episode.#ctor(Jellyfin.Data.Entities.Libraries.Season)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Episode.#ctor(Jellyfin.Data.Entities.Libraries.Library)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Episode"/> class.
             </summary>
-            <param name="season">The season.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Episode.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Episode"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
+            <param name="library">The library.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Episode.EpisodeNumber">
             <summary>
@@ -1017,7 +919,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Episode.EpisodeMetadata">
             <summary>
-            Gets or sets a collection containing the metadata for this episode.
+            Gets a collection containing the metadata for this episode.
             </summary>
         </member>
         <member name="T:Jellyfin.Data.Entities.Libraries.EpisodeMetadata">
@@ -1025,21 +927,12 @@
             An entity containing metadata for an <see cref="T:Jellyfin.Data.Entities.Libraries.Episode"/>.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.EpisodeMetadata.#ctor(System.String,System.String,Jellyfin.Data.Entities.Libraries.Episode)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.EpisodeMetadata.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.EpisodeMetadata"/> class.
             </summary>
             <param name="title">The title or name of the object.</param>
             <param name="language">ISO-639-3 3-character language codes.</param>
-            <param name="episode">The episode.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.EpisodeMetadata.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.EpisodeMetadata"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.EpisodeMetadata.Outline">
             <summary>
@@ -1070,24 +963,15 @@
             An entity representing a genre.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Genre.#ctor(System.String,Jellyfin.Data.Entities.Libraries.ItemMetadata)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Genre.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Genre"/> class.
             </summary>
             <param name="name">The name.</param>
-            <param name="itemMetadata">The metadata.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Genre.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Genre"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Genre.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1119,17 +1003,9 @@
             <param name="title">The title or name of the object.</param>
             <param name="language">ISO-639-3 3-character language codes.</param>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.ItemMetadata.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.ItemMetadata"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to being abstract.
-            </remarks>
-        </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.ItemMetadata.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1175,7 +1051,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.ItemMetadata.DateAdded">
             <summary>
-            Gets or sets the date added.
+            Gets the date added.
             </summary>
             <remarks>
             Required.
@@ -1190,21 +1066,16 @@
             </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.ItemMetadata.RowVersion">
-            <summary>
-            Gets or sets the row version.
-            </summary>
-            <remarks>
-            Required, ConcurrencyToken.
-            </remarks>
+            <inheritdoc />
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.ItemMetadata.PersonRoles">
             <summary>
-            Gets or sets a collection containing the person roles for this item.
+            Gets a collection containing the person roles for this item.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.ItemMetadata.Genres">
             <summary>
-            Gets or sets a collection containing the genres for this item.
+            Gets a collection containing the genres for this item.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.ItemMetadata.Artwork">
@@ -1212,12 +1083,12 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.ItemMetadata.Ratings">
             <summary>
-            Gets or sets a collection containing the ratings for this item.
+            Gets a collection containing the ratings for this item.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.ItemMetadata.Sources">
             <summary>
-            Gets or sets a collection containing the metadata sources for this item.
+            Gets a collection containing the metadata sources for this item.
             </summary>
         </member>
         <member name="M:Jellyfin.Data.Entities.Libraries.ItemMetadata.OnSavingChanges">
@@ -1228,23 +1099,16 @@
             An entity representing a library.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Library.#ctor(System.String)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Library.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Library"/> class.
             </summary>
             <param name="name">The name of the library.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Library.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Library"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
+            <param name="path">The path of the library.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Library.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1283,14 +1147,9 @@
             </summary>
             <param name="library">The library of this item.</param>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.LibraryItem.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.LibraryItem"/> class.
-            </summary>
-        </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.LibraryItem.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1298,7 +1157,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.LibraryItem.DateAdded">
             <summary>
-            Gets or sets the date this library item was added.
+            Gets the date this library item was added.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.LibraryItem.RowVersion">
@@ -1320,25 +1179,16 @@
             An entity representing a file on disk.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.MediaFile.#ctor(System.String,Jellyfin.Data.Enums.MediaFileKind,Jellyfin.Data.Entities.Libraries.Release)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.MediaFile.#ctor(System.String,Jellyfin.Data.Enums.MediaFileKind)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.MediaFile"/> class.
             </summary>
             <param name="path">The path relative to the LibraryRoot.</param>
             <param name="kind">The file kind.</param>
-            <param name="release">The release.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.MediaFile.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.MediaFile"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.MediaFile.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1365,7 +1215,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.MediaFile.MediaFileStreams">
             <summary>
-            Gets or sets a collection containing the streams in this file.
+            Gets a collection containing the streams in this file.
             </summary>
         </member>
         <member name="M:Jellyfin.Data.Entities.Libraries.MediaFile.OnSavingChanges">
@@ -1376,24 +1226,15 @@
             An entity representing a stream in a media file.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.MediaFileStream.#ctor(System.Int32,Jellyfin.Data.Entities.Libraries.MediaFile)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.MediaFileStream.#ctor(System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.MediaFileStream"/> class.
             </summary>
             <param name="streamNumber">The number of this stream.</param>
-            <param name="mediaFile">The media file.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.MediaFileStream.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.MediaFileStream"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.MediaFileStream.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1424,17 +1265,9 @@
             </summary>
             <param name="name">The name of the metadata provider.</param>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.MetadataProvider.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.MetadataProvider"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
-        </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.MetadataProvider.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1459,24 +1292,16 @@
             An entity representing a unique identifier for a metadata provider.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.MetadataProviderId.#ctor(System.String,Jellyfin.Data.Entities.Libraries.ItemMetadata)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.MetadataProviderId.#ctor(System.String,Jellyfin.Data.Entities.Libraries.MetadataProvider)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.MetadataProviderId"/> class.
             </summary>
             <param name="providerId">The provider id.</param>
-            <param name="itemMetadata">The metadata entity.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.MetadataProviderId.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.MetadataProviderId"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
+            <param name="metadataProvider">The metadata provider.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.MetadataProviderId.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1509,17 +1334,18 @@
             An entity representing a movie.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Movie.#ctor">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Movie.#ctor(Jellyfin.Data.Entities.Libraries.Library)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Movie"/> class.
             </summary>
+            <param name="library">The library.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Movie.Releases">
             <inheritdoc />
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Movie.MovieMetadata">
             <summary>
-            Gets or sets a collection containing the metadata for this movie.
+            Gets a collection containing the metadata for this movie.
             </summary>
         </member>
         <member name="T:Jellyfin.Data.Entities.Libraries.MovieMetadata">
@@ -1527,21 +1353,12 @@
             An entity holding the metadata for a movie.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.MovieMetadata.#ctor(System.String,System.String,Jellyfin.Data.Entities.Libraries.Movie)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.MovieMetadata.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.MovieMetadata"/> class.
             </summary>
             <param name="title">The title or name of the movie.</param>
             <param name="language">ISO-639-3 3-character language codes.</param>
-            <param name="movie">The movie.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.MovieMetadata.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.MovieMetadata"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.MovieMetadata.Outline">
             <summary>
@@ -1577,7 +1394,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.MovieMetadata.Studios">
             <summary>
-            Gets or sets the studios that produced this movie.
+            Gets the studios that produced this movie.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.MovieMetadata.Companies">
@@ -1588,19 +1405,20 @@
             An entity representing a music album.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.MusicAlbum.#ctor">
+        <member name="M:Jellyfin.Data.Entities.Libraries.MusicAlbum.#ctor(Jellyfin.Data.Entities.Libraries.Library)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.MusicAlbum"/> class.
             </summary>
+            <param name="library">The library.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.MusicAlbum.MusicAlbumMetadata">
             <summary>
-            Gets or sets a collection containing the album metadata.
+            Gets a collection containing the album metadata.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.MusicAlbum.Tracks">
             <summary>
-            Gets or sets a collection containing the tracks.
+            Gets a collection containing the tracks.
             </summary>
         </member>
         <member name="T:Jellyfin.Data.Entities.Libraries.MusicAlbumMetadata">
@@ -1608,21 +1426,12 @@
             An entity holding the metadata for a music album.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.MusicAlbumMetadata.#ctor(System.String,System.String,Jellyfin.Data.Entities.Libraries.MusicAlbum)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.MusicAlbumMetadata.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.MusicAlbumMetadata"/> class.
             </summary>
             <param name="title">The title or name of the album.</param>
             <param name="language">ISO-639-3 3-character language codes.</param>
-            <param name="album">The music album.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.MusicAlbumMetadata.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.MusicAlbumMetadata"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.MusicAlbumMetadata.Barcode">
             <summary>
@@ -1650,7 +1459,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.MusicAlbumMetadata.Labels">
             <summary>
-            Gets or sets a collection containing the labels.
+            Gets a collection containing the labels.
             </summary>
         </member>
         <member name="T:Jellyfin.Data.Entities.Libraries.Person">
@@ -1664,17 +1473,9 @@
             </summary>
             <param name="name">The name of the person.</param>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Person.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Person"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
-        </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Person.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1698,7 +1499,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Person.DateAdded">
             <summary>
-            Gets or sets the date added.
+            Gets the date added.
             </summary>
             <remarks>
             Required.
@@ -1717,7 +1518,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Person.Sources">
             <summary>
-            Gets or sets a list of metadata sources for this person.
+            Gets a list of metadata sources for this person.
             </summary>
         </member>
         <member name="M:Jellyfin.Data.Entities.Libraries.Person.OnSavingChanges">
@@ -1728,24 +1529,16 @@
             An entity representing a person's role in media.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.PersonRole.#ctor(Jellyfin.Data.Enums.PersonRoleType,Jellyfin.Data.Entities.Libraries.ItemMetadata)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.PersonRole.#ctor(Jellyfin.Data.Enums.PersonRoleType,Jellyfin.Data.Entities.Libraries.Person)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.PersonRole"/> class.
             </summary>
             <param name="type">The role type.</param>
-            <param name="itemMetadata">The metadata.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.PersonRole.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.PersonRole"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
+            <param name="person">The person.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.PersonRole.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1783,7 +1576,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.PersonRole.Sources">
             <summary>
-            Gets or sets a collection containing the metadata sources for this person role.
+            Gets a collection containing the metadata sources for this person role.
             </summary>
         </member>
         <member name="M:Jellyfin.Data.Entities.Libraries.PersonRole.OnSavingChanges">
@@ -1794,14 +1587,15 @@
             An entity representing a photo.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Photo.#ctor">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Photo.#ctor(Jellyfin.Data.Entities.Libraries.Library)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Photo"/> class.
             </summary>
+            <param name="library">The library.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Photo.PhotoMetadata">
             <summary>
-            Gets or sets a collection containing the photo metadata.
+            Gets a collection containing the photo metadata.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Photo.Releases">
@@ -1812,45 +1606,27 @@
             An entity that holds metadata for a photo.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.PhotoMetadata.#ctor(System.String,System.String,Jellyfin.Data.Entities.Libraries.Photo)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.PhotoMetadata.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.PhotoMetadata"/> class.
             </summary>
             <param name="title">The title or name of the photo.</param>
             <param name="language">ISO-639-3 3-character language codes.</param>
-            <param name="photo">The photo.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.PhotoMetadata.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.PhotoMetadata"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="T:Jellyfin.Data.Entities.Libraries.Rating">
             <summary>
             An entity representing a rating for an entity.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Rating.#ctor(System.Double,Jellyfin.Data.Entities.Libraries.ItemMetadata)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Rating.#ctor(System.Double)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Rating"/> class.
             </summary>
             <param name="value">The value.</param>
-            <param name="itemMetadata">The metadata.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Rating.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Rating"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Rating.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1886,25 +1662,16 @@
             This is the entity to store review ratings, not age ratings.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.RatingSource.#ctor(System.Double,System.Double,Jellyfin.Data.Entities.Libraries.Rating)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.RatingSource.#ctor(System.Double,System.Double)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.RatingSource"/> class.
             </summary>
             <param name="minimumValue">The minimum value.</param>
             <param name="maximumValue">The maximum value.</param>
-            <param name="rating">The rating.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.RatingSource.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.RatingSource"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.RatingSource.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1950,24 +1717,15 @@
             An entity representing a release for a library item, eg. Director's cut vs. standard.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Release.#ctor(System.String,Jellyfin.Data.Interfaces.IHasReleases)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Release.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Release"/> class.
             </summary>
             <param name="name">The name of this release.</param>
-            <param name="owner">The owner of this release.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Release.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Release"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Release.Id">
             <summary>
-            Gets or sets the id.
+            Gets the id.
             </summary>
             <remarks>
             Identity, Indexed, Required.
@@ -1986,12 +1744,12 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Release.MediaFiles">
             <summary>
-            Gets or sets a collection containing the media files for this release.
+            Gets a collection containing the media files for this release.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Release.Chapters">
             <summary>
-            Gets or sets a collection containing the chapters for this release.
+            Gets a collection containing the chapters for this release.
             </summary>
         </member>
         <member name="M:Jellyfin.Data.Entities.Libraries.Release.OnSavingChanges">
@@ -2002,19 +1760,11 @@
             An entity representing a season.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Season.#ctor(Jellyfin.Data.Entities.Libraries.Series)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Season.#ctor(Jellyfin.Data.Entities.Libraries.Library)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Season"/> class.
             </summary>
-            <param name="series">The series.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Season.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Season"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
+            <param name="library">The library.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Season.SeasonNumber">
             <summary>
@@ -2023,12 +1773,12 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Season.SeasonMetadata">
             <summary>
-            Gets or sets the season metadata.
+            Gets the season metadata.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Season.Episodes">
             <summary>
-            Gets or sets a collection containing the number of episodes.
+            Gets a collection containing the number of episodes.
             </summary>
         </member>
         <member name="T:Jellyfin.Data.Entities.Libraries.SeasonMetadata">
@@ -2036,21 +1786,12 @@
             An entity that holds metadata for seasons.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.SeasonMetadata.#ctor(System.String,System.String,Jellyfin.Data.Entities.Libraries.Season)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.SeasonMetadata.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.SeasonMetadata"/> class.
             </summary>
             <param name="title">The title or name of the object.</param>
             <param name="language">ISO-639-3 3-character language codes.</param>
-            <param name="season">The season.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.SeasonMetadata.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.SeasonMetadata"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.SeasonMetadata.Outline">
             <summary>
@@ -2065,10 +1806,11 @@
             An entity representing a a series.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Series.#ctor">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Series.#ctor(Jellyfin.Data.Entities.Libraries.Library)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Series"/> class.
             </summary>
+            <param name="library">The library.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Series.AirsDayOfWeek">
             <summary>
@@ -2087,12 +1829,12 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Series.SeriesMetadata">
             <summary>
-            Gets or sets a collection containing the series metadata.
+            Gets a collection containing the series metadata.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Series.Seasons">
             <summary>
-            Gets or sets a collection containing the seasons.
+            Gets a collection containing the seasons.
             </summary>
         </member>
         <member name="T:Jellyfin.Data.Entities.Libraries.SeriesMetadata">
@@ -2100,21 +1842,12 @@
             An entity representing series metadata.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.SeriesMetadata.#ctor(System.String,System.String,Jellyfin.Data.Entities.Libraries.Series)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.SeriesMetadata.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.SeriesMetadata"/> class.
             </summary>
             <param name="title">The title or name of the object.</param>
             <param name="language">ISO-639-3 3-character language codes.</param>
-            <param name="series">The series.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.SeriesMetadata.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.SeriesMetadata"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.SeriesMetadata.Outline">
             <summary>
@@ -2150,7 +1883,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.SeriesMetadata.Networks">
             <summary>
-            Gets or sets a collection containing the networks.
+            Gets a collection containing the networks.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.SeriesMetadata.Companies">
@@ -2161,19 +1894,11 @@
             An entity representing a track.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Track.#ctor(Jellyfin.Data.Entities.Libraries.MusicAlbum)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.Track.#ctor(Jellyfin.Data.Entities.Libraries.Library)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Track"/> class.
             </summary>
-            <param name="album">The album.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.Track.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.Track"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
+            <param name="library">The library.</param>
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Track.TrackNumber">
             <summary>
@@ -2185,7 +1910,7 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.Libraries.Track.TrackMetadata">
             <summary>
-            Gets or sets a collection containing the track metadata.
+            Gets a collection containing the track metadata.
             </summary>
         </member>
         <member name="T:Jellyfin.Data.Entities.Libraries.TrackMetadata">
@@ -2193,21 +1918,12 @@
             An entity holding metadata for a track.
             </summary>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.TrackMetadata.#ctor(System.String,System.String,Jellyfin.Data.Entities.Libraries.Track)">
+        <member name="M:Jellyfin.Data.Entities.Libraries.TrackMetadata.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.TrackMetadata"/> class.
             </summary>
             <param name="title">The title or name of the object.</param>
             <param name="language">ISO-639-3 3-character language codes.</param>
-            <param name="track">The track.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.Libraries.TrackMetadata.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Libraries.TrackMetadata"/> class.
-            </summary>
-            <remarks>
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </remarks>
         </member>
         <member name="T:Jellyfin.Data.Entities.Permission">
             <summary>
@@ -2222,23 +1938,22 @@
             <param name="kind">The permission kind.</param>
             <param name="value">The value of this permission.</param>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Permission.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Permission"/> class.
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </summary>
-        </member>
         <member name="P:Jellyfin.Data.Entities.Permission.Id">
             <summary>
-            Gets or sets the id of this permission.
+            Gets the id of this permission.
             </summary>
             <remarks>
             Identity, Indexed, Required.
             </remarks>
         </member>
+        <member name="P:Jellyfin.Data.Entities.Permission.UserId">
+            <summary>
+            Gets or sets the id of the associated user.
+            </summary>
+        </member>
         <member name="P:Jellyfin.Data.Entities.Permission.Kind">
             <summary>
-            Gets or sets the type of this permission.
+            Gets the type of this permission.
             </summary>
             <remarks>
             Required.
@@ -2271,23 +1986,22 @@
             <param name="kind">The preference kind.</param>
             <param name="value">The value.</param>
         </member>
-        <member name="M:Jellyfin.Data.Entities.Preference.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Preference"/> class.
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </summary>
-        </member>
         <member name="P:Jellyfin.Data.Entities.Preference.Id">
             <summary>
-            Gets or sets the id of this preference.
+            Gets the id of this preference.
             </summary>
             <remarks>
             Identity, Indexed, Required.
             </remarks>
         </member>
+        <member name="P:Jellyfin.Data.Entities.Preference.UserId">
+            <summary>
+            Gets or sets the id of the associated user.
+            </summary>
+        </member>
         <member name="P:Jellyfin.Data.Entities.Preference.Kind">
             <summary>
-            Gets or sets the type of this preference.
+            Gets the type of this preference.
             </summary>
             <remarks>
             Required.
@@ -2307,6 +2021,146 @@
         <member name="M:Jellyfin.Data.Entities.Preference.OnSavingChanges">
             <inheritdoc/>
         </member>
+        <member name="T:Jellyfin.Data.Entities.Security.ApiKey">
+            <summary>
+            An entity representing an API key.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Data.Entities.Security.ApiKey.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Security.ApiKey"/> class.
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.ApiKey.Id">
+            <summary>
+            Gets the id.
+            </summary>
+            <remarks>
+            Identity, Indexed, Required.
+            </remarks>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.ApiKey.DateCreated">
+            <summary>
+            Gets or sets the date created.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.ApiKey.DateLastActivity">
+            <summary>
+            Gets or sets the date of last activity.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.ApiKey.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.ApiKey.AccessToken">
+            <summary>
+            Gets or sets the access token.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Data.Entities.Security.Device">
+            <summary>
+            An entity representing a device.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Data.Entities.Security.Device.#ctor(System.Guid,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Security.Device"/> class.
+            </summary>
+            <param name="userId">The user id.</param>
+            <param name="appName">The app name.</param>
+            <param name="appVersion">The app version.</param>
+            <param name="deviceName">The device name.</param>
+            <param name="deviceId">The device id.</param>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.Device.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.Device.UserId">
+            <summary>
+            Gets the user id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.Device.AccessToken">
+            <summary>
+            Gets or sets the access token.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.Device.AppName">
+            <summary>
+            Gets or sets the app name.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.Device.AppVersion">
+            <summary>
+            Gets or sets the app version.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.Device.DeviceName">
+            <summary>
+            Gets or sets the device name.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.Device.DeviceId">
+            <summary>
+            Gets or sets the device id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.Device.IsActive">
+            <summary>
+            Gets or sets a value indicating whether this device is active.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.Device.DateCreated">
+            <summary>
+            Gets or sets the date created.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.Device.DateModified">
+            <summary>
+            Gets or sets the date modified.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.Device.DateLastActivity">
+            <summary>
+            Gets or sets the date of last activity.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.Device.User">
+            <summary>
+            Gets the user.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Data.Entities.Security.DeviceOptions">
+            <summary>
+            An entity representing custom options for a device.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Data.Entities.Security.DeviceOptions.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.Security.DeviceOptions"/> class.
+            </summary>
+            <param name="deviceId">The device id.</param>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.DeviceOptions.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.DeviceOptions.DeviceId">
+            <summary>
+            Gets the device id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Entities.Security.DeviceOptions.CustomName">
+            <summary>
+            Gets or sets the custom name.
+            </summary>
+        </member>
         <member name="T:Jellyfin.Data.Entities.User">
             <summary>
             An entity representing a user.
@@ -2325,12 +2179,6 @@
             <param name="username">The username for the new user.</param>
             <param name="authenticationProviderId">The Id of the user's authentication provider.</param>
             <param name="passwordResetProviderId">The Id of the user's password reset provider.</param>
-        </member>
-        <member name="M:Jellyfin.Data.Entities.User.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Jellyfin.Data.Entities.User"/> class.
-            Default constructor. Protected due to required properties, but present because EF needs it.
-            </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.User.Id">
             <summary>
@@ -2544,11 +2392,8 @@
         </member>
         <member name="P:Jellyfin.Data.Entities.User.DisplayPreferences">
             <summary>
-            Gets or sets the user's display preferences.
+            Gets the user's display preferences.
             </summary>
-            <remarks>
-            Required.
-            </remarks>
         </member>
         <member name="P:Jellyfin.Data.Entities.User.SyncPlayAccess">
             <summary>
@@ -2556,31 +2401,26 @@
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.User.RowVersion">
-            <summary>
-            Gets or sets the row version.
-            </summary>
-            <remarks>
-            Required, Concurrency Token.
-            </remarks>
+            <inheritdoc />
         </member>
         <member name="P:Jellyfin.Data.Entities.User.AccessSchedules">
             <summary>
-            Gets or sets the list of access schedules this user has.
+            Gets the list of access schedules this user has.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.User.ItemDisplayPreferences">
             <summary>
-            Gets or sets the list of item display preferences.
+            Gets the list of item display preferences.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.User.Permissions">
             <summary>
-            Gets or sets the list of permissions this user has.
+            Gets the list of permissions this user has.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Entities.User.Preferences">
             <summary>
-            Gets or sets the list of preferences this user has.
+            Gets the list of preferences this user has.
             </summary>
         </member>
         <member name="M:Jellyfin.Data.Entities.User.OnSavingChanges">
@@ -2643,6 +2483,16 @@
             <param name="id">The Guid of the folder.</param>
             <returns><c>True</c> if the folder is in the user's grouped folders.</returns>
         </member>
+        <member name="M:Jellyfin.Data.Entities.User.AddDefaultPermissions">
+            <summary>
+            Initializes the default permissions for a user. Should only be called on user creation.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Data.Entities.User.AddDefaultPreferences">
+            <summary>
+            Initializes the default preferences. Should only be called on user creation.
+            </summary>
+        </member>
         <member name="T:Jellyfin.Data.Enums.ArtKind">
             <summary>
             An enum representing types of art.
@@ -2671,6 +2521,208 @@
         <member name="F:Jellyfin.Data.Enums.ArtKind.Logo">
             <summary>
             A logo.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Data.Enums.BaseItemKind">
+            <summary>
+            The base item kind.
+            </summary>
+            <remarks>
+            This enum is generated from all classes that inherit from <c>BaseItem</c>.
+            </remarks>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.AggregateFolder">
+            <summary>
+            Item is aggregate folder.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Audio">
+            <summary>
+            Item is audio.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.AudioBook">
+            <summary>
+            Item is audio book.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.BasePluginFolder">
+            <summary>
+            Item is base plugin folder.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Book">
+            <summary>
+            Item is book.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.BoxSet">
+            <summary>
+            Item is box set.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Channel">
+            <summary>
+            Item is channel.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.ChannelFolderItem">
+            <summary>
+            Item is channel folder item.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.CollectionFolder">
+            <summary>
+            Item is collection folder.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Episode">
+            <summary>
+            Item is episode.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Folder">
+            <summary>
+            Item is folder.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Genre">
+            <summary>
+            Item is genre.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.ManualPlaylistsFolder">
+            <summary>
+            Item is manual playlists folder.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Movie">
+            <summary>
+            Item is movie.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.LiveTvChannel">
+            <summary>
+            Item is a live tv channel.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.LiveTvProgram">
+            <summary>
+            Item is a live tv program.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.MusicAlbum">
+            <summary>
+            Item is music album.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.MusicArtist">
+            <summary>
+            Item is music artist.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.MusicGenre">
+            <summary>
+            Item is music genre.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.MusicVideo">
+            <summary>
+            Item is music video.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Person">
+            <summary>
+            Item is person.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Photo">
+            <summary>
+            Item is photo.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.PhotoAlbum">
+            <summary>
+            Item is photo album.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Playlist">
+            <summary>
+            Item is playlist.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.PlaylistsFolder">
+            <summary>
+            Item is playlist folder.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Program">
+            <summary>
+            Item is program.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Recording">
+            <summary>
+            Item is recording.
+            </summary>
+            <remarks>
+            Manually added.
+            </remarks>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Season">
+            <summary>
+            Item is season.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Series">
+            <summary>
+            Item is series.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Studio">
+            <summary>
+            Item is studio.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Trailer">
+            <summary>
+            Item is trailer.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.TvChannel">
+            <summary>
+            Item is live tv channel.
+            </summary>
+            <remarks>
+            Type is overridden.
+            </remarks>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.TvProgram">
+            <summary>
+            Item is live tv program.
+            </summary>
+            <remarks>
+            Type is overridden.
+            </remarks>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.UserRootFolder">
+            <summary>
+            Item is user root folder.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.UserView">
+            <summary>
+            Item is user view.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Video">
+            <summary>
+            Item is video.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.BaseItemKind.Year">
+            <summary>
+            Item is year.
             </summary>
         </member>
         <member name="T:Jellyfin.Data.Enums.ChromecastVersion">
@@ -2791,6 +2843,11 @@
         <member name="F:Jellyfin.Data.Enums.HomeSectionType.LiveTv">
             <summary>
             Live TV.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Data.Enums.HomeSectionType.ResumeBook">
+            <summary>
+            Continue Reading.
             </summary>
         </member>
         <member name="T:Jellyfin.Data.Enums.IndexingKind">
@@ -3220,7 +3277,7 @@
         </member>
         <member name="F:Jellyfin.Data.Enums.UnratedItem.LiveTvChannel">
             <summary>
-            A live TV channel
+            A live TV channel.
             </summary>
         </member>
         <member name="F:Jellyfin.Data.Enums.UnratedItem.LiveTvProgram">
@@ -3461,6 +3518,30 @@
             Called when saving changes to this entity.
             </summary>
         </member>
+        <member name="T:Jellyfin.Data.Interfaces.IHasPermissions">
+            <summary>
+            An abstraction representing an entity that has permissions.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Interfaces.IHasPermissions.Permissions">
+            <summary>
+            Gets a collection containing this entity's permissions.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Data.Interfaces.IHasPermissions.HasPermission(Jellyfin.Data.Enums.PermissionKind)">
+            <summary>
+            Checks whether this entity has the specified permission kind.
+            </summary>
+            <param name="kind">The kind of permission.</param>
+            <returns><c>true</c> if this entity has the specified permission, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Jellyfin.Data.Interfaces.IHasPermissions.SetPermission(Jellyfin.Data.Enums.PermissionKind,System.Boolean)">
+            <summary>
+            Sets the specified permission to the provided value.
+            </summary>
+            <param name="kind">The kind of permission.</param>
+            <param name="value">The value to set.</param>
+        </member>
         <member name="T:Jellyfin.Data.Interfaces.IHasReleases">
             <summary>
             An abstraction representing an entity that has releases.
@@ -3471,43 +3552,9 @@
             Gets a collection containing this entity's releases.
             </summary>
         </member>
-        <member name="T:Jellyfin.Data.IHasPermissions">
-            <summary>
-            An abstraction representing an entity that has permissions.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Data.IHasPermissions.Permissions">
-            <summary>
-            Gets a collection containing this entity's permissions.
-            </summary>
-        </member>
-        <member name="M:Jellyfin.Data.IHasPermissions.HasPermission(Jellyfin.Data.Enums.PermissionKind)">
-            <summary>
-            Checks whether this entity has the specified permission kind.
-            </summary>
-            <param name="kind">The kind of permission.</param>
-            <returns><c>true</c> if this entity has the specified permission, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:Jellyfin.Data.IHasPermissions.SetPermission(Jellyfin.Data.Enums.PermissionKind,System.Boolean)">
-            <summary>
-            Sets the specified permission to the provided value.
-            </summary>
-            <param name="kind">The kind of permission.</param>
-            <param name="value">The value to set.</param>
-        </member>
         <member name="T:Jellyfin.Data.Queries.ActivityLogQuery">
             <summary>
             A class representing a query to the activity logs.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Data.Queries.ActivityLogQuery.StartIndex">
-            <summary>
-            Gets or sets the index to start at.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Data.Queries.ActivityLogQuery.Limit">
-            <summary>
-            Gets or sets the maximum number of items to include.
             </summary>
         </member>
         <member name="P:Jellyfin.Data.Queries.ActivityLogQuery.HasUserId">
@@ -3518,6 +3565,41 @@
         <member name="P:Jellyfin.Data.Queries.ActivityLogQuery.MinDate">
             <summary>
             Gets or sets the minimum date to query for.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Data.Queries.DeviceQuery">
+            <summary>
+            A query to retrieve devices.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Queries.DeviceQuery.UserId">
+            <summary>
+            Gets or sets the user id of the device.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Queries.DeviceQuery.DeviceId">
+            <summary>
+            Gets or sets the device id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Queries.DeviceQuery.AccessToken">
+            <summary>
+            Gets or sets the access token.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Data.Queries.PaginatedQuery">
+            <summary>
+            An abstract class for paginated queries.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Queries.PaginatedQuery.Skip">
+            <summary>
+            Gets or sets the index to start at.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Data.Queries.PaginatedQuery.Limit">
+            <summary>
+            Gets or sets the maximum number of items to include.
             </summary>
         </member>
     </members>
