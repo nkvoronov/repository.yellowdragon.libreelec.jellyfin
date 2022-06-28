@@ -479,7 +479,7 @@
         <member name="M:Emby.Server.Implementations.ApplicationHost.GetSmartApiUrl(System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:Emby.Server.Implementations.ApplicationHost.GetApiUrlForLocalAccess(System.Boolean)">
+        <member name="M:Emby.Server.Implementations.ApplicationHost.GetApiUrlForLocalAccess(MediaBrowser.Common.Net.IPObject,System.Boolean)">
             <inheritdoc/>
         </member>
         <member name="M:Emby.Server.Implementations.ApplicationHost.GetLocalApiUrl(System.String,System.String,System.Nullable{System.Int32})">

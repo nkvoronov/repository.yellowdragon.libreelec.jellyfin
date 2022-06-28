@@ -135,6 +135,11 @@
             </summary>
             <value>The custom CSS.</value>
         </member>
+        <member name="P:MediaBrowser.Model.Branding.BrandingOptions.SplashscreenEnabled">
+            <summary>
+            Gets or sets a value indicating whether to enable the splashscreen.
+            </summary>
+        </member>
         <member name="P:MediaBrowser.Model.Branding.BrandingOptions.SplashscreenLocation">
             <summary>
             Gets or sets the splashscreen location on disk.
@@ -1096,7 +1101,7 @@
             <param name="height">The height.</param>
             <returns>The <see cref="T:MediaBrowser.Model.Dlna.ResponseProfile"/>.</returns>
         </member>
-        <member name="M:MediaBrowser.Model.Dlna.DeviceProfile.GetVideoMediaProfile(System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Double},System.Nullable{System.Single},System.Nullable{System.Int32},MediaBrowser.Model.MediaInfo.TransportStreamTimestamp,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean})">
+        <member name="M:MediaBrowser.Model.Dlna.DeviceProfile.GetVideoMediaProfile(System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Double},System.Nullable{System.Single},System.Nullable{System.Int32},MediaBrowser.Model.MediaInfo.TransportStreamTimestamp,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean})">
             <summary>
             Gets the video media profile.
             </summary>
@@ -1108,6 +1113,7 @@
             <param name="bitDepth">The bit depth.</param>
             <param name="videoBitrate">The video bitrate.</param>
             <param name="videoProfile">The video profile.</param>
+            <param name="videoRangeType">The video range type.</param>
             <param name="videoLevel">The video level.</param>
             <param name="videoFramerate">The video framerate.</param>
             <param name="packetLength">The packet length.</param>
@@ -1210,6 +1216,11 @@
         <member name="P:MediaBrowser.Model.Dlna.StreamInfo.TargetVideoProfile">
             <summary>
             Gets the audio sample rate that will be in the output stream.
+            </summary>
+        </member>
+        <member name="P:MediaBrowser.Model.Dlna.StreamInfo.TargetVideoRangeType">
+            <summary>
+            Gets the target video range type that will be in the output stream.
             </summary>
         </member>
         <member name="P:MediaBrowser.Model.Dlna.StreamInfo.TargetVideoCodecTag">
@@ -2987,6 +2998,54 @@
             </summary>
             <value>The color primaries.</value>
         </member>
+        <member name="P:MediaBrowser.Model.Entities.MediaStream.DvVersionMajor">
+            <summary>
+            Gets or sets the Dolby Vision version major.
+            </summary>
+            <value>The Dolby Vision version major.</value>
+        </member>
+        <member name="P:MediaBrowser.Model.Entities.MediaStream.DvVersionMinor">
+            <summary>
+            Gets or sets the Dolby Vision version minor.
+            </summary>
+            <value>The Dolby Vision version minor.</value>
+        </member>
+        <member name="P:MediaBrowser.Model.Entities.MediaStream.DvProfile">
+            <summary>
+            Gets or sets the Dolby Vision profile.
+            </summary>
+            <value>The Dolby Vision profile.</value>
+        </member>
+        <member name="P:MediaBrowser.Model.Entities.MediaStream.DvLevel">
+            <summary>
+            Gets or sets the Dolby Vision level.
+            </summary>
+            <value>The Dolby Vision level.</value>
+        </member>
+        <member name="P:MediaBrowser.Model.Entities.MediaStream.RpuPresentFlag">
+            <summary>
+            Gets or sets the Dolby Vision rpu present flag.
+            </summary>
+            <value>The Dolby Vision rpu present flag.</value>
+        </member>
+        <member name="P:MediaBrowser.Model.Entities.MediaStream.ElPresentFlag">
+            <summary>
+            Gets or sets the Dolby Vision el present flag.
+            </summary>
+            <value>The Dolby Vision el present flag.</value>
+        </member>
+        <member name="P:MediaBrowser.Model.Entities.MediaStream.BlPresentFlag">
+            <summary>
+            Gets or sets the Dolby Vision bl present flag.
+            </summary>
+            <value>The Dolby Vision bl present flag.</value>
+        </member>
+        <member name="P:MediaBrowser.Model.Entities.MediaStream.DvBlSignalCompatibilityId">
+            <summary>
+            Gets or sets the Dolby Vision bl signal compatibility id.
+            </summary>
+            <value>The Dolby Vision bl signal compatibility id.</value>
+        </member>
         <member name="P:MediaBrowser.Model.Entities.MediaStream.Comment">
             <summary>
             Gets or sets the comment.
@@ -3016,6 +3075,18 @@
             Gets the video range.
             </summary>
             <value>The video range.</value>
+        </member>
+        <member name="P:MediaBrowser.Model.Entities.MediaStream.VideoRangeType">
+            <summary>
+            Gets the video range type.
+            </summary>
+            <value>The video range type.</value>
+        </member>
+        <member name="P:MediaBrowser.Model.Entities.MediaStream.VideoDoViTitle">
+            <summary>
+            Gets the video dovi title.
+            </summary>
+            <value>The video dovi title.</value>
         </member>
         <member name="P:MediaBrowser.Model.Entities.MediaStream.IsInterlaced">
             <summary>
@@ -5480,6 +5551,11 @@
             These represent sort orders that are known by the core.
             </summary>
         </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.AiredEpisodeOrder">
+            <summary>
+            The aired episode order.
+            </summary>
+        </member>
         <member name="F:MediaBrowser.Model.Querying.ItemSortBy.Album">
             <summary>
             The album.
@@ -5515,9 +5591,19 @@
             The premiere date.
             </summary>
         </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.StartDate">
+            <summary>
+            The start date.
+            </summary>
+        </member>
         <member name="F:MediaBrowser.Model.Querying.ItemSortBy.SortName">
             <summary>
             The sort name.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.Name">
+            <summary>
+            The name.
             </summary>
         </member>
         <member name="F:MediaBrowser.Model.Querying.ItemSortBy.Random">
@@ -5548,6 +5634,71 @@
         <member name="F:MediaBrowser.Model.Querying.ItemSortBy.CriticRating">
             <summary>
             The critic rating.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.IsFolder">
+            <summary>
+            The IsFolder boolean.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.IsUnplayed">
+            <summary>
+            The IsUnplayed boolean.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.IsPlayed">
+            <summary>
+            The IsPlayed boolean.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.SeriesSortName">
+            <summary>
+            The series sort.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.VideoBitRate">
+            <summary>
+            The video bitrate.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.AirTime">
+            <summary>
+            The air time.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.Studio">
+            <summary>
+            The studio.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.IsFavoriteOrLiked">
+            <summary>
+            The IsFavouriteOrLiked boolean.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.DateLastContentAdded">
+            <summary>
+            The last content added date.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.SeriesDatePlayed">
+            <summary>
+            The series last played date.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.ParentIndexNumber">
+            <summary>
+            The parent index number.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.IndexNumber">
+            <summary>
+            The index number.
+            </summary>
+        </member>
+        <member name="F:MediaBrowser.Model.Querying.ItemSortBy.SimilarityScore">
+            <summary>
+            The similarity score.
             </summary>
         </member>
         <member name="P:MediaBrowser.Model.Querying.LatestItemsQuery.UserId">

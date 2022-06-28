@@ -465,10 +465,11 @@
             Resolves external audio files for <see cref="T:MediaBrowser.Controller.Entities.Video"/>.
             </summary>
         </member>
-        <member name="M:MediaBrowser.Providers.MediaInfo.AudioResolver.#ctor(MediaBrowser.Model.Globalization.ILocalizationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,Emby.Naming.Common.NamingOptions)">
+        <member name="M:MediaBrowser.Providers.MediaInfo.AudioResolver.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.Providers.MediaInfo.AudioResolver},MediaBrowser.Model.Globalization.ILocalizationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,Emby.Naming.Common.NamingOptions)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.Providers.MediaInfo.AudioResolver"/> class for external audio file processing.
             </summary>
+            <param name="logger">The logger.</param>
             <param name="localizationManager">The localization manager.</param>
             <param name="mediaEncoder">The media encoder.</param>
             <param name="fileSystem">The file system.</param>
@@ -575,10 +576,11 @@
             The <see cref="T:MediaBrowser.Model.Dlna.DlnaProfileType"/> of the files this resolver should resolve.
             </summary>
         </member>
-        <member name="M:MediaBrowser.Providers.MediaInfo.MediaInfoResolver.#ctor(MediaBrowser.Model.Globalization.ILocalizationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,Emby.Naming.Common.NamingOptions,MediaBrowser.Model.Dlna.DlnaProfileType)">
+        <member name="M:MediaBrowser.Providers.MediaInfo.MediaInfoResolver.#ctor(Microsoft.Extensions.Logging.ILogger,MediaBrowser.Model.Globalization.ILocalizationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,Emby.Naming.Common.NamingOptions,MediaBrowser.Model.Dlna.DlnaProfileType)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.Providers.MediaInfo.MediaInfoResolver"/> class.
             </summary>
+            <param name="logger">The logger.</param>
             <param name="localizationManager">The localization manager.</param>
             <param name="mediaEncoder">The media encoder.</param>
             <param name="fileSystem">The file system.</param>
@@ -627,10 +629,11 @@
             Resolves external subtitle files for <see cref="T:MediaBrowser.Controller.Entities.Video"/>.
             </summary>
         </member>
-        <member name="M:MediaBrowser.Providers.MediaInfo.SubtitleResolver.#ctor(MediaBrowser.Model.Globalization.ILocalizationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,Emby.Naming.Common.NamingOptions)">
+        <member name="M:MediaBrowser.Providers.MediaInfo.SubtitleResolver.#ctor(Microsoft.Extensions.Logging.ILogger{MediaBrowser.Providers.MediaInfo.SubtitleResolver},MediaBrowser.Model.Globalization.ILocalizationManager,MediaBrowser.Controller.MediaEncoding.IMediaEncoder,MediaBrowser.Model.IO.IFileSystem,Emby.Naming.Common.NamingOptions)">
             <summary>
             Initializes a new instance of the <see cref="T:MediaBrowser.Providers.MediaInfo.SubtitleResolver"/> class for external subtitle file processing.
             </summary>
+            <param name="logger">The logger.</param>
             <param name="localizationManager">The localization manager.</param>
             <param name="mediaEncoder">The media encoder.</param>
             <param name="fileSystem">The file system.</param>

@@ -694,6 +694,14 @@
             <param name="path">Path to the image file.</param>
             <returns>BlurHash.</returns>
         </member>
+        <member name="M:MediaBrowser.Controller.Drawing.IImageProcessor.GetImageBlurHash(System.String,MediaBrowser.Model.Drawing.ImageDimensions)">
+            <summary>
+            Gets the blurhash of the image.
+            </summary>
+            <param name="path">Path to the image file.</param>
+            <param name="imageDimensions">The image dimensions.</param>
+            <returns>BlurHash.</returns>
+        </member>
         <member name="M:MediaBrowser.Controller.Drawing.IImageProcessor.GetImageCacheTag(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Entities.ItemImageInfo)">
             <summary>
             Gets the image cache tag.
@@ -2701,10 +2709,11 @@
             <param name="hostname">The hostname used in the connection.</param>
             <returns>An accessible URL.</returns>
         </member>
-        <member name="M:MediaBrowser.Controller.IServerApplicationHost.GetApiUrlForLocalAccess(System.Boolean)">
+        <member name="M:MediaBrowser.Controller.IServerApplicationHost.GetApiUrlForLocalAccess(MediaBrowser.Common.Net.IPObject,System.Boolean)">
             <summary>
             Gets an URL that can be used to access the API over LAN.
             </summary>
+            <param name="hostname">An optional hostname to use.</param>
             <param name="allowHttps">A value indicating whether to allow HTTPS.</param>
             <returns>The API URL.</returns>
         </member>
@@ -5396,6 +5405,12 @@
             </summary>
             <value>The profile.</value>
         </member>
+        <member name="P:MediaBrowser.Controller.MediaEncoding.BaseEncodingJobOptions.VideoRangeType">
+            <summary>
+            Gets or sets the video range type.
+            </summary>
+            <value>The video range type.</value>
+        </member>
         <member name="P:MediaBrowser.Controller.MediaEncoding.BaseEncodingJobOptions.Level">
             <summary>
             Gets or sets the level.
@@ -5718,6 +5733,11 @@
         <member name="P:MediaBrowser.Controller.MediaEncoding.EncodingJobInfo.TargetVideoProfile">
             <summary>
             Gets the target video profile.
+            </summary>
+        </member>
+        <member name="P:MediaBrowser.Controller.MediaEncoding.EncodingJobInfo.TargetVideoRangeType">
+            <summary>
+            Gets the target video range type.
             </summary>
         </member>
         <member name="T:MediaBrowser.Controller.MediaEncoding.FilterOptionType">

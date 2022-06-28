@@ -88,7 +88,7 @@
             Request class for the <see cref="M:Jellyfin.MediaEncoding.Hls.Playlist.IDynamicHlsPlaylistGenerator.CreateMainPlaylist(Jellyfin.MediaEncoding.Hls.Playlist.CreateMainPlaylistRequest)"/> method.
             </summary>
         </member>
-        <member name="M:Jellyfin.MediaEncoding.Hls.Playlist.CreateMainPlaylistRequest.#ctor(System.String,System.Int32,System.Int64,System.String,System.String,System.String)">
+        <member name="M:Jellyfin.MediaEncoding.Hls.Playlist.CreateMainPlaylistRequest.#ctor(System.String,System.Int32,System.Int64,System.String,System.String,System.String,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.MediaEncoding.Hls.Playlist.CreateMainPlaylistRequest"/> class.
             </summary>
@@ -98,6 +98,7 @@
             <param name="segmentContainer">The desired segment container eg. "ts".</param>
             <param name="endpointPrefix">The URI prefix for the relative URL in the playlist.</param>
             <param name="queryString">The desired query string to append (must start with ?).</param>
+            <param name="isRemuxingVideo">Whether the video is being remuxed.</param>
         </member>
         <member name="P:Jellyfin.MediaEncoding.Hls.Playlist.CreateMainPlaylistRequest.FilePath">
             <summary>
@@ -127,6 +128,11 @@
         <member name="P:Jellyfin.MediaEncoding.Hls.Playlist.CreateMainPlaylistRequest.QueryString">
             <summary>
             Gets the query string.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.MediaEncoding.Hls.Playlist.CreateMainPlaylistRequest.IsRemuxingVideo">
+            <summary>
+            Gets a value indicating whether the video is being remuxed.
             </summary>
         </member>
         <member name="T:Jellyfin.MediaEncoding.Hls.Playlist.DynamicHlsPlaylistGenerator">

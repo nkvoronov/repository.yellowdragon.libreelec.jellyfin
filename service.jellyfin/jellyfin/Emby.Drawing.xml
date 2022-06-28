@@ -51,6 +51,9 @@
         <member name="M:Emby.Drawing.ImageProcessor.GetImageBlurHash(System.String)">
             <inheritdoc />
         </member>
+        <member name="M:Emby.Drawing.ImageProcessor.GetImageBlurHash(System.String,MediaBrowser.Model.Drawing.ImageDimensions)">
+            <inheritdoc />
+        </member>
         <member name="M:Emby.Drawing.ImageProcessor.GetImageCacheTag(MediaBrowser.Controller.Entities.BaseItem,MediaBrowser.Controller.Entities.ItemImageInfo)">
             <inheritdoc />
         </member>

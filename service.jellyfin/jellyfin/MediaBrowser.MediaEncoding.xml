@@ -583,6 +583,71 @@
             </summary>
             <value>The color primaries.</value>
         </member>
+        <member name="P:MediaBrowser.MediaEncoding.Probing.MediaStreamInfo.SideDataList">
+            <summary>
+            Gets or sets the side_data_list.
+            </summary>
+            <value>The side_data_list.</value>
+        </member>
+        <member name="T:MediaBrowser.MediaEncoding.Probing.MediaStreamInfoSideData">
+            <summary>
+            Class MediaStreamInfoSideData.
+            </summary>
+        </member>
+        <member name="P:MediaBrowser.MediaEncoding.Probing.MediaStreamInfoSideData.SideDataType">
+            <summary>
+            Gets or sets the SideDataType.
+            </summary>
+            <value>The SideDataType.</value>
+        </member>
+        <member name="P:MediaBrowser.MediaEncoding.Probing.MediaStreamInfoSideData.DvVersionMajor">
+            <summary>
+            Gets or sets the DvVersionMajor.
+            </summary>
+            <value>The DvVersionMajor.</value>
+        </member>
+        <member name="P:MediaBrowser.MediaEncoding.Probing.MediaStreamInfoSideData.DvVersionMinor">
+            <summary>
+            Gets or sets the DvVersionMinor.
+            </summary>
+            <value>The DvVersionMinor.</value>
+        </member>
+        <member name="P:MediaBrowser.MediaEncoding.Probing.MediaStreamInfoSideData.DvProfile">
+            <summary>
+            Gets or sets the DvProfile.
+            </summary>
+            <value>The DvProfile.</value>
+        </member>
+        <member name="P:MediaBrowser.MediaEncoding.Probing.MediaStreamInfoSideData.DvLevel">
+            <summary>
+            Gets or sets the DvLevel.
+            </summary>
+            <value>The DvLevel.</value>
+        </member>
+        <member name="P:MediaBrowser.MediaEncoding.Probing.MediaStreamInfoSideData.RpuPresentFlag">
+            <summary>
+            Gets or sets the RpuPresentFlag.
+            </summary>
+            <value>The RpuPresentFlag.</value>
+        </member>
+        <member name="P:MediaBrowser.MediaEncoding.Probing.MediaStreamInfoSideData.ElPresentFlag">
+            <summary>
+            Gets or sets the ElPresentFlag.
+            </summary>
+            <value>The ElPresentFlag.</value>
+        </member>
+        <member name="P:MediaBrowser.MediaEncoding.Probing.MediaStreamInfoSideData.BlPresentFlag">
+            <summary>
+            Gets or sets the BlPresentFlag.
+            </summary>
+            <value>The BlPresentFlag.</value>
+        </member>
+        <member name="P:MediaBrowser.MediaEncoding.Probing.MediaStreamInfoSideData.DvBlSignalCompatibilityId">
+            <summary>
+            Gets or sets the DvBlSignalCompatibilityId.
+            </summary>
+            <value>The DvBlSignalCompatibilityId.</value>
+        </member>
         <member name="M:MediaBrowser.MediaEncoding.Probing.ProbeResultNormalizer.GetMediaAttachment(MediaBrowser.MediaEncoding.Probing.MediaStreamInfo)">
             <summary>
             Converts ffprobe stream info to our MediaAttachment class.
@@ -665,6 +730,14 @@
             </summary>
             <param name="logger">The logger.</param>
         </member>
+        <member name="T:MediaBrowser.MediaEncoding.Subtitles.AssWriter">
+            <summary>
+            ASS subtitle writer.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.MediaEncoding.Subtitles.AssWriter.Write(MediaBrowser.Model.MediaInfo.SubtitleTrackInfo,System.IO.Stream,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:MediaBrowser.MediaEncoding.Subtitles.ISubtitleParser.Parse(System.IO.Stream,System.Threading.CancellationToken)">
             <summary>
             Parses the specified stream.
@@ -723,6 +796,14 @@
             Initializes a new instance of the <see cref="T:MediaBrowser.MediaEncoding.Subtitles.SsaParser"/> class.
             </summary>
             <param name="logger">The logger.</param>
+        </member>
+        <member name="T:MediaBrowser.MediaEncoding.Subtitles.SsaWriter">
+            <summary>
+            SSA subtitle writer.
+            </summary>
+        </member>
+        <member name="M:MediaBrowser.MediaEncoding.Subtitles.SsaWriter.Write(MediaBrowser.Model.MediaInfo.SubtitleTrackInfo,System.IO.Stream,System.Threading.CancellationToken)">
+            <inheritdoc />
         </member>
         <member name="T:MediaBrowser.MediaEncoding.Subtitles.SubtitleEditParser`1">
             <summary>

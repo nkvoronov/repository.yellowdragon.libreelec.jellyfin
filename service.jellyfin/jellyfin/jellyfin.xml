@@ -390,19 +390,19 @@
             Response time middleware.
             </summary>
         </member>
-        <member name="M:Jellyfin.Server.Middleware.ResponseTimeMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{Jellyfin.Server.Middleware.ResponseTimeMiddleware},MediaBrowser.Controller.Configuration.IServerConfigurationManager)">
+        <member name="M:Jellyfin.Server.Middleware.ResponseTimeMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{Jellyfin.Server.Middleware.ResponseTimeMiddleware})">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Server.Middleware.ResponseTimeMiddleware"/> class.
             </summary>
             <param name="next">Next request delegate.</param>
             <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
-            <param name="serverConfigurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Server.Middleware.ResponseTimeMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+        <member name="M:Jellyfin.Server.Middleware.ResponseTimeMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext,MediaBrowser.Controller.Configuration.IServerConfigurationManager)">
             <summary>
             Invoke request.
             </summary>
             <param name="context">Request context.</param>
+            <param name="serverConfigurationManager">Instance of the <see cref="T:MediaBrowser.Controller.Configuration.IServerConfigurationManager"/> interface.</param>
             <returns>Task.</returns>
         </member>
         <member name="T:Jellyfin.Server.Middleware.RobotsRedirectionMiddleware">

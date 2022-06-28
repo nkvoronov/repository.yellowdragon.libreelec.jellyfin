@@ -2666,12 +2666,21 @@
         <member name="M:Jellyfin.Api.Controllers.ImageController.UploadCustomSplashscreen">
             <summary>
             Uploads a custom splashscreen.
+            The body is expected to the image contents base64 encoded.
             </summary>
             <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult"/> indicating success.</returns>
             <response code="204">Successfully uploaded new splashscreen.</response>
             <response code="400">Error reading MimeType from uploaded image.</response>
             <response code="403">User does not have permission to upload splashscreen..</response>
             <exception cref="T:System.ArgumentException">Error reading the image format.</exception>
+        </member>
+        <member name="M:Jellyfin.Api.Controllers.ImageController.DeleteCustomSplashscreen">
+            <summary>
+            Delete a custom splashscreen.
+            </summary>
+            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult"/> indicating success.</returns>
+            <response code="204">Successfully deleted the custom splashscreen.</response>
+            <response code="403">User does not have permission to delete splashscreen..</response>
         </member>
         <member name="T:Jellyfin.Api.Controllers.InstantMixController">
             <summary>
@@ -6952,11 +6961,12 @@
             <param name="responseHeaders">The <see cref="T:Microsoft.AspNetCore.Http.IHeaderDictionary"/> of the response.</param>
             <param name="startTimeTicks">The start time in ticks.</param>
         </member>
-        <member name="M:Jellyfin.Api.Helpers.StreamingHelpers.GetOutputFileExtension(Jellyfin.Api.Models.StreamingDtos.StreamState)">
+        <member name="M:Jellyfin.Api.Helpers.StreamingHelpers.GetOutputFileExtension(Jellyfin.Api.Models.StreamingDtos.StreamState,MediaBrowser.Model.Dto.MediaSourceInfo)">
             <summary>
             Gets the output file extension.
             </summary>
             <param name="state">The state.</param>
+            <param name="mediaSource">The mediaSource.</param>
             <returns>System.String.</returns>
         </member>
         <member name="M:Jellyfin.Api.Helpers.StreamingHelpers.GetOutputFilePath(Jellyfin.Api.Models.StreamingDtos.StreamState,System.String,MediaBrowser.Controller.Configuration.IServerConfigurationManager,System.String,System.String)">
@@ -8421,11 +8431,6 @@
         <member name="P:Jellyfin.Api.Models.StreamingDtos.StreamState.Request">
             <summary>
             Gets or sets the request.
-            </summary>
-        </member>
-        <member name="P:Jellyfin.Api.Models.StreamingDtos.StreamState.TranscodingThrottler">
-            <summary>
-            Gets or sets the transcoding throttler.
             </summary>
         </member>
         <member name="P:Jellyfin.Api.Models.StreamingDtos.StreamState.VideoRequest">

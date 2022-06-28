@@ -101,9 +101,7 @@
         </member>
         <member name="M:Jellyfin.Drawing.Skia.SkiaEncoder.GetImageSize(System.String)">
             <inheritdoc />
-            <exception cref="T:System.ArgumentNullException">The path is null.</exception>
             <exception cref="T:System.IO.FileNotFoundException">The path is not valid.</exception>
-            <exception cref="T:Jellyfin.Drawing.Skia.SkiaCodecException">The file at the specified path could not be used to generate a codec.</exception>
         </member>
         <member name="M:Jellyfin.Drawing.Skia.SkiaEncoder.GetImageBlurHash(System.Int32,System.Int32,System.String)">
             <inheritdoc />
@@ -174,13 +172,6 @@
             <summary>
             Class containing helper methods for working with SkiaSharp.
             </summary>
-        </member>
-        <member name="M:Jellyfin.Drawing.Skia.SkiaHelper.EnsureSuccess(SkiaSharp.SKCodecResult)">
-            <summary>
-            Ensures the result is a success
-            by throwing an exception when that's not the case.
-            </summary>
-            <param name="result">The result returned by Skia.</param>
         </member>
         <member name="M:Jellyfin.Drawing.Skia.SkiaHelper.GetNextValidImage(Jellyfin.Drawing.Skia.SkiaEncoder,System.Collections.Generic.IReadOnlyList{System.String},System.Int32,System.Int32@)">
             <summary>

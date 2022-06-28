@@ -369,6 +369,14 @@
             <typeparam name="T">The type of item to find.</typeparam>
             <returns>Index if found, else -1.</returns>
         </member>
+        <member name="M:Jellyfin.Extensions.ReadOnlyListExtension.FirstOrDefault``1(System.Collections.Generic.IReadOnlyList{``0})">
+            <summary>
+            Get the first or default item from a list.
+            </summary>
+            <param name="source">The source list.</param>
+            <typeparam name="T">The type of item.</typeparam>
+            <returns>The first item or default if list is empty.</returns>
+        </member>
         <member name="T:Jellyfin.Extensions.ShuffleExtensions">
             <summary>
             Provides <c>Shuffle</c> extensions methods for <see cref="T:System.Collections.Generic.IList`1" />.
