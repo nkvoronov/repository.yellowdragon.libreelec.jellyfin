@@ -3316,6 +3316,14 @@
             <param name="parent">The parent.</param>
             <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         </member>
+        <member name="M:MediaBrowser.Controller.Library.ILibraryManager.QueueLibraryScan">
+            <summary>
+            Queue a library scan.
+            </summary>
+            <remarks>
+            This exists so plugins can trigger a library scan.
+            </remarks>
+        </member>
         <member name="M:MediaBrowser.Controller.Library.ILibraryMonitor.Start">
             <summary>
             Starts this instance.

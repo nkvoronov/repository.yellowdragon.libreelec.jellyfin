@@ -497,6 +497,12 @@
             </summary>
             <param name="dispose"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         </member>
+        <member name="M:Emby.Server.Implementations.ApplicationHost.DisposeAsyncCore">
+            <summary>
+            Used to perform asynchronous cleanup of managed resources or for cascading calls to <see cref="M:Emby.Server.Implementations.ApplicationHost.DisposeAsync"/>.
+            </summary>
+            <returns>A ValueTask.</returns>
+        </member>
         <member name="T:Emby.Server.Implementations.Archiving.ZipClient">
             <summary>
             Class DotNetZipClient.
@@ -1479,6 +1485,15 @@
             </summary>
             <param name="dispose"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         </member>
+        <member name="M:Emby.Server.Implementations.HttpServer.WebSocketConnection.DisposeAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Emby.Server.Implementations.HttpServer.WebSocketConnection.DisposeAsyncCore">
+            <summary>
+            Used to perform asynchronous cleanup of managed resources or for cascading calls to <see cref="M:Emby.Server.Implementations.HttpServer.WebSocketConnection.DisposeAsync"/>.
+            </summary>
+            <returns>A ValueTask.</returns>
+        </member>
         <member name="M:Emby.Server.Implementations.HttpServer.WebSocketManager.WebSocketRequestHandler(Microsoft.AspNetCore.Http.HttpContext)">
             <inheritdoc />
         </member>
@@ -2208,6 +2223,9 @@
             </summary>
             <param name="id">The id.</param>
             <returns>BaseItem.</returns>
+        </member>
+        <member name="M:Emby.Server.Implementations.Library.LibraryManager.QueueLibraryScan">
+            <inheritdoc />
         </member>
         <member name="M:Emby.Server.Implementations.Library.LibraryManager.GetSeasonNumberFromPath(System.String)">
             <inheritdoc />
