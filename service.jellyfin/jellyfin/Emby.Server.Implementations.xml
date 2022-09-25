@@ -1224,12 +1224,13 @@
             Attaches the user specific info.
             </summary>
         </member>
-        <member name="M:Emby.Server.Implementations.Dto.DtoService.AttachPeople(MediaBrowser.Model.Dto.BaseItemDto,MediaBrowser.Controller.Entities.BaseItem)">
+        <member name="M:Emby.Server.Implementations.Dto.DtoService.AttachPeople(MediaBrowser.Model.Dto.BaseItemDto,MediaBrowser.Controller.Entities.BaseItem,Jellyfin.Data.Entities.User)">
             <summary>
             Attaches People DTO's to a DTOBaseItem.
             </summary>
             <param name="dto">The dto.</param>
             <param name="item">The item.</param>
+            <param name="user">The requesting user.</param>
         </member>
         <member name="M:Emby.Server.Implementations.Dto.DtoService.AttachStudios(MediaBrowser.Model.Dto.BaseItemDto,MediaBrowser.Controller.Entities.BaseItem)">
             <summary>

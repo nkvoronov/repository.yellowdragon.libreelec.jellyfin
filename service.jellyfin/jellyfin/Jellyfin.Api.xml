@@ -8167,7 +8167,7 @@
             Transcoding throttler.
             </summary>
         </member>
-        <member name="M:Jellyfin.Api.Models.PlaybackDtos.TranscodingThrottler.#ctor(Jellyfin.Api.Models.PlaybackDtos.TranscodingJobDto,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Models.PlaybackDtos.TranscodingThrottler},MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Model.IO.IFileSystem)">
+        <member name="M:Jellyfin.Api.Models.PlaybackDtos.TranscodingThrottler.#ctor(Jellyfin.Api.Models.PlaybackDtos.TranscodingJobDto,Microsoft.Extensions.Logging.ILogger{Jellyfin.Api.Models.PlaybackDtos.TranscodingThrottler},MediaBrowser.Common.Configuration.IConfigurationManager,MediaBrowser.Model.IO.IFileSystem,MediaBrowser.Controller.MediaEncoding.IMediaEncoder)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Api.Models.PlaybackDtos.TranscodingThrottler"/> class.
             </summary>
@@ -8175,6 +8175,7 @@
             <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
             <param name="config">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IConfigurationManager"/> interface.</param>
             <param name="fileSystem">Instance of the <see cref="T:MediaBrowser.Model.IO.IFileSystem"/> interface.</param>
+            <param name="mediaEncoder">Instance of the <see cref="T:MediaBrowser.Controller.MediaEncoding.IMediaEncoder"/> interface.</param>
         </member>
         <member name="M:Jellyfin.Api.Models.PlaybackDtos.TranscodingThrottler.Start">
             <summary>

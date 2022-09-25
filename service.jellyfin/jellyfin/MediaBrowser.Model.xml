@@ -3281,6 +3281,11 @@
             The embedded image.
             </summary>
         </member>
+        <member name="F:MediaBrowser.Model.Entities.MediaStreamType.Data">
+            <summary>
+            The data.
+            </summary>
+        </member>
         <member name="T:MediaBrowser.Model.Entities.MediaType">
             <summary>
             Class MediaType.

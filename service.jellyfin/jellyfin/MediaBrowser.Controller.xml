@@ -5813,6 +5813,12 @@
             </summary>
             <returns>The version of encoder.</returns>
         </member>
+        <member name="P:MediaBrowser.Controller.MediaEncoding.IMediaEncoder.IsPkeyPauseSupported">
+            <summary>
+            Whether p key pausing is supported.
+            </summary>
+            <value><c>true</c> if p key pausing is supported, <c>false</c> otherwise.</value>
+        </member>
         <member name="P:MediaBrowser.Controller.MediaEncoding.IMediaEncoder.IsVaapiDeviceAmd">
             <summary>
             Gets a value indicating whether the configured Vaapi device is from AMD(radeonsi/r600 Mesa driver).
