@@ -1802,6 +1802,16 @@
             <param name="cancellationToken">The cancellation token.</param>
             <returns>Task.</returns>
         </member>
+        <member name="P:MediaBrowser.Controller.Entities.InternalItemsQuery.MinParentAndIndexNumber">
+            <summary>
+            Gets or sets the minimum ParentIndexNumber and IndexNumber.
+            </summary>
+            <remarks>
+            It produces this where clause:
+            <para>(ParentIndexNumber = X and IndexNumber >= Y) or ParentIndexNumber > X.
+            </para>
+            </remarks>
+        </member>
         <member name="P:MediaBrowser.Controller.Entities.InternalItemsQuery.DisplayAlbumFolders">
             <summary>
             Gets or sets a value indicating whether album sub-folders should be returned if they exist.
@@ -5607,6 +5617,14 @@
             Gets the map args.
             </summary>
             <param name="state">The state.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:MediaBrowser.Controller.MediaEncoding.EncodingHelper.GetNegativeMapArgsByFilters(MediaBrowser.Controller.MediaEncoding.EncodingJobInfo,System.String)">
+            <summary>
+            Gets the negative map args by filters.
+            </summary>
+            <param name="state">The state.</param>
+            <param name="videoProcessFilters">The videoProcessFilters.</param>
             <returns>System.String.</returns>
         </member>
         <member name="M:MediaBrowser.Controller.MediaEncoding.EncodingHelper.GetMediaStream(System.Collections.Generic.IEnumerable{MediaBrowser.Model.Entities.MediaStream},System.Nullable{System.Int32},MediaBrowser.Model.Entities.MediaStreamType,System.Boolean)">

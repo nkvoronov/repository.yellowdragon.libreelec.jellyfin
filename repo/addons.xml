@@ -2,13 +2,13 @@
 <addons>
 <addon id="service.jellyfin"
        name="Jellyfin Server"
-       version="10.0.0.156"
+       version="11.0.0.158"
        provider-name="Team LibreELEC">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
 
-    <import addon="tools.ffmpeg-tools" version="10.0.0.0" />
-    <import addon="tools.dotnet-runtime6" version="10.0.0.0" />
+    <import addon="tools.ffmpeg-tools" version="11.0.0.0" />
+    <import addon="tools.dotnet-runtime6" version="11.0.0.0" />
   </requires>
   <extension point="xbmc.service" library="default.py">
     <provides></provides>
@@ -16,24 +16,14 @@
   <extension point="xbmc.addon.metadata">
     <summary>Jellyfin Server: The Free Software Media System</summary>
     <description>
-Jellyfin Server (10.8.5) is the Free Software Media System that puts you in control of managing and streaming your media.There are no strings attached, no premium licenses or features, and no hidden agendas.
+Jellyfin Server (10.8.10) is the Free Software Media System that puts you in control of managing and streaming your media.There are no strings attached, no premium licenses or features, and no hidden agendas.
     </description>
     <disclaimer>
 
     </disclaimer>
     <platform>all</platform>
     <news>
-150
-- Update build web 10.7.7
-
-149
-- Update build server 10.7.7
-
-140
-- Update to deb version 10.7.7
-
-100
-- Initial addon
+initial release
     </news>
     <assets>
       <icon>resources/icon.png</icon>
@@ -43,14 +33,14 @@ Jellyfin Server (10.8.5) is the Free Software Media System that puts you in cont
   </extension>
 </addon>
 
-<addon id="repository.yellowdragon.libreelec.jellyfin" name="LibreELEC Jellyfin Yellow Dragon Repository" version="10.0.0" provider-name="YLLOW_DRAGON">
+<addon id="repository.yellowdragon.libreelec.jellyfin" name="LibreELEC Jellyfin Yellow Dragon Repository" version="11.0.0" provider-name="YLLOW_DRAGON">
 	<requires>
 		<import addon="xbmc.addon" version="12.0.0"/>
 	</requires>
 	<extension point="xbmc.addon.repository" name="LibreELEC Jellyfin Yellow Dragon Repository">
-		<info compressed="false">https://raw.githubusercontent.com/nkvoronov/repository.yellowdragon.libreelec.jellyfin/10.0.0/repo/addons.xml</info>
-		<checksum>https://raw.githubusercontent.com/nkvoronov/repository.yellowdragon.libreelec.jellyfin/10.0.0/repo/addons.xml.md5</checksum>
-		<datadir zip="true">https://raw.githubusercontent.com/nkvoronov/repository.yellowdragon.libreelec.jellyfin/10.0.0/repo/</datadir>
+		<info compressed="false">https://raw.githubusercontent.com/nkvoronov/repository.yellowdragon.libreelec.jellyfin/11.0.0/repo/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/nkvoronov/repository.yellowdragon.libreelec.jellyfin/11.0.0/repo/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/nkvoronov/repository.yellowdragon.libreelec.jellyfin/11.0.0/repo/</datadir>
 		<hashes>false</hashes>
 	</extension>
 	<extension point="xbmc.addon.metadata">

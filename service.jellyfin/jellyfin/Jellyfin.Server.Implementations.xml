@@ -546,6 +546,14 @@
             <param name="modelBuilder">The model builder to extend.</param>
             <param name="kind">The <see cref="T:System.DateTimeKind"/> to specify.</param>
         </member>
+        <member name="T:Jellyfin.Server.Implementations.ModelConfiguration.ActivityLogConfiguration">
+            <summary>
+            FluentAPI configuration for the ActivityLog entity.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Server.Implementations.ModelConfiguration.ActivityLogConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Jellyfin.Data.Entities.ActivityLog})">
+            <inheritdoc/>
+        </member>
         <member name="T:Jellyfin.Server.Implementations.ModelConfiguration.ApiKeyConfiguration">
             <summary>
             FluentAPI configuration for the ApiKey entity.

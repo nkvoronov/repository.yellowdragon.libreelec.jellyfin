@@ -165,7 +165,7 @@
             <param name="networkManager">Instance of the <see cref="T:MediaBrowser.Common.Net.INetworkManager"/> interface.</param>
             <param name="httpContextAccessor">Instance of the <see cref="T:Microsoft.AspNetCore.Http.IHttpContextAccessor"/> interface.</param>
         </member>
-        <member name="M:Jellyfin.Api.Auth.BaseAuthorizationHandler`1.ValidateClaims(System.Security.Claims.ClaimsPrincipal,System.Boolean,System.Boolean,System.Boolean)">
+        <member name="M:Jellyfin.Api.Auth.BaseAuthorizationHandler`1.ValidateClaims(System.Security.Claims.ClaimsPrincipal,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Validate authenticated claims.
             </summary>
@@ -173,6 +173,8 @@
             <param name="ignoreSchedule">Whether to ignore parental control.</param>
             <param name="localAccessOnly">Whether access is to be allowed locally only.</param>
             <param name="requiredDownloadPermission">Whether validation requires download permission.</param>
+            <param name="requireLiveTvManagementPermission">Whether validation requires LiveTV management permission.</param>
+            <param name="requireLiveTvAccessPermission">Whether validation requires LiveTV management permission.</param>
             <returns>Validated claim status.</returns>
         </member>
         <member name="T:Jellyfin.Api.Auth.CustomAuthenticationHandler">
@@ -320,6 +322,48 @@
         <member name="T:Jellyfin.Api.Auth.IgnoreParentalControlPolicy.IgnoreParentalControlRequirement">
             <summary>
             Escape schedule controls requirement.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Api.Auth.LiveTvAccessPolicy.LiveTvAccessHandler">
+            <summary>
+            Authorization handler for LiveTV access.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Api.Auth.LiveTvAccessPolicy.LiveTvAccessHandler.#ctor(MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Common.Net.INetworkManager,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Api.Auth.LiveTvAccessPolicy.LiveTvAccessHandler"/> class.
+            </summary>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="networkManager">Instance of the <see cref="T:MediaBrowser.Common.Net.INetworkManager"/> interface.</param>
+            <param name="httpContextAccessor">Instance of the <see cref="T:Microsoft.AspNetCore.Http.IHttpContextAccessor"/> interface.</param>
+        </member>
+        <member name="M:Jellyfin.Api.Auth.LiveTvAccessPolicy.LiveTvAccessHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Jellyfin.Api.Auth.LiveTvAccessPolicy.LiveTvAccessRequirement)">
+            <inheritdoc />
+        </member>
+        <member name="T:Jellyfin.Api.Auth.LiveTvAccessPolicy.LiveTvAccessRequirement">
+            <summary>
+            The LiveTV access requirement.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Api.Auth.LiveTvManagementPolicy.LiveTvManagementHandler">
+            <summary>
+            Authorization handler for LiveTV management access.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Api.Auth.LiveTvManagementPolicy.LiveTvManagementHandler.#ctor(MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Common.Net.INetworkManager,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Api.Auth.LiveTvManagementPolicy.LiveTvManagementHandler"/> class.
+            </summary>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="networkManager">Instance of the <see cref="T:MediaBrowser.Common.Net.INetworkManager"/> interface.</param>
+            <param name="httpContextAccessor">Instance of the <see cref="T:Microsoft.AspNetCore.Http.IHttpContextAccessor"/> interface.</param>
+        </member>
+        <member name="M:Jellyfin.Api.Auth.LiveTvManagementPolicy.LiveTvManagementHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Jellyfin.Api.Auth.LiveTvManagementPolicy.LiveTvManagementRequirement)">
+            <inheritdoc />
+        </member>
+        <member name="T:Jellyfin.Api.Auth.LiveTvManagementPolicy.LiveTvManagementRequirement">
+            <summary>
+            The LiveTV management requirement.
             </summary>
         </member>
         <member name="T:Jellyfin.Api.Auth.LocalAccessOrRequiresElevationPolicy.LocalAccessOrRequiresElevationHandler">
@@ -546,6 +590,16 @@
         <member name="F:Jellyfin.Api.Constants.Policies.SyncPlayIsInGroup">
             <summary>
             Policy name for accessing a SyncPlay group.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Api.Constants.Policies.LiveTvAccess">
+            <summary>
+            Policy name for accessing LiveTV.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Api.Constants.Policies.LiveTvManagement">
+            <summary>
+            Policy name for managing LiveTV.
             </summary>
         </member>
         <member name="T:Jellyfin.Api.Constants.UserRoles">
@@ -6657,6 +6711,11 @@
             Codec name for ALAC.
             </summary>
         </member>
+        <member name="F:Jellyfin.Api.Helpers.HlsCodecStringHelpers.OPUS">
+            <summary>
+            Codec name for OPUS.
+            </summary>
+        </member>
         <member name="M:Jellyfin.Api.Helpers.HlsCodecStringHelpers.GetMP3String">
             <summary>
             Gets a MP3 codec string.
@@ -6693,6 +6752,12 @@
             Gets an ALAC codec string.
             </summary>
             <returns>ALAC codec string.</returns>
+        </member>
+        <member name="M:Jellyfin.Api.Helpers.HlsCodecStringHelpers.GetOPUSString">
+            <summary>
+            Gets an OPUS codec string.
+            </summary>
+            <returns>OPUS codec string.</returns>
         </member>
         <member name="M:Jellyfin.Api.Helpers.HlsCodecStringHelpers.GetH264String(System.String,System.Int32)">
             <summary>
